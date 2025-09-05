@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Script from "next/script";
+// Google Maps types are available globally after loading the Maps JS API
+// No need to import types; use window.google.maps.* directly
 
 const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
@@ -21,20 +23,15 @@ export default function AddBillboard() {
     latitude: ""
   });
   const [mapLoaded, setMapLoaded] = useState(false);
-  const [map, setMap] = useState<any>(null);
-  const [marker, setMarker] = useState<any>(null);
+  const [map, setMap] = useState<google.maps.Map | null>(null);
+  const [marker, setMarker] = useState<google.maps.Marker | null>(null);
   const mapRef = useRef<HTMLDivElement>(null);
   const [searching, setSearching] = useState(false);
   const [error, setError] = useState("");
-  // Static list of Indian cities, union territories, and state capitals
-  const indianCities = [
-    "Delhi", "Mumbai", "Kolkata", "Chennai", "Bengaluru", "Hyderabad", "Ahmedabad", "Pune", "Jaipur", "Lucknow", "Kanpur", "Nagpur", "Indore", "Bhopal", "Visakhapatnam", "Patna", "Vadodara", "Ghaziabad", "Ludhiana", "Agra", "Nashik", "Faridabad", "Meerut", "Rajkot", "Kalyan-Dombivli", "Vasai-Virar", "Varanasi", "Srinagar", "Aurangabad", "Dhanbad", "Amritsar", "Navi Mumbai", "Allahabad", "Ranchi", "Howrah", "Coimbatore", "Jabalpur", "Gwalior", "Vijayawada", "Jodhpur", "Madurai", "Raipur", "Kota", "Guwahati", "Chandigarh", "Solapur", "Hubballi-Dharwad", "Bareilly", "Mysuru", "Tiruchirappalli", "Gurgaon", "Aligarh", "Jalandhar", "Bhubaneswar", "Salem", "Warangal", "Moradabad", "Thiruvananthapuram", "Bhiwandi", "Saharanpur", "Guntur", "Amravati", "Bikaner", "Noida", "Jamshedpur", "Bhilai", "Cuttack", "Firozabad", "Kochi", "Nellore", "Bhavnagar", "Dehradun", "Durgapur", "Asansol", "Rourkela", "Nanded", "Kolhapur", "Ajmer", "Akola", "Gulbarga", "Jamnagar", "Ujjain", "Loni", "Siliguri", "Jhansi", "Ulhasnagar", "Nellore", "Jammu", "Sangli-Miraj & Kupwad", "Belgaum", "Mangalore", "Ambattur", "Tirunelveli", "Malegaon", "Gaya", "Jalgaon", "Udaipur", "Maheshtala", "Davanagere", "Kozhikode", "Kurnool", "Rajpur Sonarpur", "Bokaro", "South Dumdum", "Gandhinagar", "Shimla", "Panaji", "Itanagar", "Imphal", "Aizawl", "Agartala", "Shillong", "Gangtok", "Port Blair", "Daman", "Diu", "Kavaratti", "Puducherry", "Chandigarh", "Leh", "Kargil"
-  ];
-  const [addressSuggestions, setAddressSuggestions] = useState<string[]>([]);
   const cityInputRef = useRef<HTMLInputElement>(null);
   const addressInputRef = useRef<HTMLInputElement>(null);
   // Places Autocomplete instance
-  const autocompleteRef = useRef<any>(null);
+  const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -45,18 +42,18 @@ export default function AddBillboard() {
   useEffect(() => {
     if (
       typeof window !== "undefined" &&
-      window.google &&
-      (window.google as any).maps &&
+  window.google &&
+  window.google.maps &&
       addressInputRef.current &&
       !autocompleteRef.current
     ) {
-      const googleMaps = (window.google as any).maps;
-      autocompleteRef.current = new googleMaps.places.Autocomplete(addressInputRef.current, {
+  const googleMaps = window.google.maps;
+  autocompleteRef.current = new googleMaps.places.Autocomplete(addressInputRef.current!, {
         types: ["geocode"],
         componentRestrictions: { country: "in" },
       });
       autocompleteRef.current.addListener("place_changed", () => {
-        const place = autocompleteRef.current.getPlace();
+        const place = autocompleteRef.current!.getPlace();
         if (place && place.formatted_address) {
           // Extract city and pincode from address components
           let city = "";
@@ -76,7 +73,7 @@ export default function AddBillboard() {
           }
           setForm((prev) => ({
             ...prev,
-            address: place.formatted_address,
+            address: place.formatted_address ?? prev.address,
             city: city || prev.city,
             pincode: pincode || prev.pincode,
             latitude: place.geometry?.location?.lat() ? place.geometry.location.lat().toString() : prev.latitude,
@@ -93,7 +90,8 @@ export default function AddBillboard() {
               draggable: true,
             });
             setMarker(newMarker);
-            newMarker.addListener("dragend", async (e: any) => {
+            newMarker.addListener("dragend", async (e: google.maps.MapMouseEvent) => {
+              if (!e.latLng) return;
               const lat = e.latLng.lat();
               const lng = e.latLng.lng();
               // Reverse geocode to get address, city, pincode
@@ -119,7 +117,7 @@ export default function AddBillboard() {
                 }
                 setForm((prev) => ({
                   ...prev,
-                  address: data.results[0].formatted_address,
+                  address: data.results[0].formatted_address ?? prev.address,
                   city: city || prev.city,
                   pincode: pincode || prev.pincode,
                   latitude: lat.toString(),
@@ -131,7 +129,7 @@ export default function AddBillboard() {
         }
       });
     }
-  }, [map]);
+  }, [map, marker]);
 
   // Load Google Map after script loads
   // Robust map initialization: run when script loads, ref is ready, or form changes
@@ -139,37 +137,37 @@ export default function AddBillboard() {
     if (
       mapRef.current &&
       typeof window !== "undefined" &&
-      window.google &&
-      (window.google as any).maps &&
+  window.google &&
+  window.google.maps &&
       !map
     ) {
       const center = {
         lat: form.latitude ? Number(form.latitude) : 28.6139,
         lng: form.longitude ? Number(form.longitude) : 77.209,
       };
-      const googleMaps = (window.google as any).maps;
-      const m = new googleMaps.Map(mapRef.current, {
+  const googleMaps = window.google.maps;
+  const m = new googleMaps.Map(mapRef.current!, {
         center,
         zoom: 13,
       });
       setMap(m);
     }
-  }, [mapLoaded, mapRef.current]);
+  }, [mapLoaded, mapRef, form.latitude, form.longitude, map]);
 
   // Update marker when coordinates change
   useEffect(() => {
     if (
-      map &&
-      form.latitude &&
-      form.longitude &&
-      typeof window !== "undefined" &&
-      window.google &&
-      (window.google as any).maps
+  map &&
+  form.latitude &&
+  form.longitude &&
+  typeof window !== "undefined" &&
+  window.google &&
+  window.google.maps
     ) {
       if (marker) {
         marker.setMap(null);
       }
-      const googleMaps = (window.google as any).maps;
+      const googleMaps = window.google.maps;
       const newMarker = new googleMaps.Marker({
         position: { lat: Number(form.latitude), lng: Number(form.longitude) },
         map,
@@ -177,7 +175,8 @@ export default function AddBillboard() {
       });
       setMarker(newMarker);
       // Update coordinates when marker is dragged
-      newMarker.addListener("dragend", async (e: any) => {
+      newMarker.addListener("dragend", async (e: google.maps.MapMouseEvent) => {
+        if (!e.latLng) return;
         const lat = e.latLng.lat();
         const lng = e.latLng.lng();
         setForm((prev) => ({ ...prev, latitude: lat.toString(), longitude: lng.toString() }));
@@ -187,23 +186,24 @@ export default function AddBillboard() {
         );
         const data = await res.json();
         if (data.status === "OK" && data.results.length > 0) {
-          setForm((prev) => ({ ...prev, address: data.results[0].formatted_address }));
+          setForm((prev) => ({ ...prev, address: data.results[0].formatted_address ?? prev.address }));
         }
       });
     }
-  }, [map, form.latitude, form.longitude]);
+  }, [map, marker, form.latitude, form.longitude]);
 
   // Allow user to click on map to set marker
   useEffect(() => {
     if (
       map &&
       typeof window !== "undefined" &&
-      window.google &&
-      (window.google as any).maps
+  window.google &&
+  window.google.maps
     ) {
-      const googleMaps = (window.google as any).maps;
+  const googleMaps = window.google.maps;
       googleMaps.event.clearListeners(map, "click");
-      map.addListener("click", async (e: any) => {
+      map.addListener("click", async (e: google.maps.MapMouseEvent) => {
+        if (!e.latLng) return;
         const lat = e.latLng.lat();
         const lng = e.latLng.lng();
         setForm((prev) => ({ ...prev, latitude: lat.toString(), longitude: lng.toString() }));
@@ -213,11 +213,11 @@ export default function AddBillboard() {
         );
         const data = await res.json();
         if (data.status === "OK" && data.results.length > 0) {
-          setForm((prev) => ({ ...prev, address: data.results[0].formatted_address }));
+          setForm((prev) => ({ ...prev, address: data.results[0].formatted_address ?? prev.address }));
         }
       });
     }
-  }, [map]);
+  }, [map, marker]);
 
   const handleAddressSearch = async () => {
     setSearching(true);
@@ -231,8 +231,8 @@ export default function AddBillboard() {
         const location = data.results[0].geometry.location;
         setForm({ ...form, longitude: location.lng, latitude: location.lat });
         // Center and zoom the map to the found location
-        if (map && typeof window !== "undefined" && window.google && (window.google as any).maps) {
-          const googleMaps = (window.google as any).maps;
+        if (map && typeof window !== "undefined" && window.google && window.google.maps) {
+          const googleMaps = window.google.maps;
           map.setCenter({ lat: location.lat, lng: location.lng });
           map.setZoom(16);
           // Place marker
@@ -243,7 +243,8 @@ export default function AddBillboard() {
             draggable: true,
           });
           setMarker(newMarker);
-          newMarker.addListener("dragend", async (e: any) => {
+          newMarker.addListener("dragend", async (e: google.maps.MapMouseEvent) => {
+            if (!e.latLng) return;
             const lat = e.latLng.lat();
             const lng = e.latLng.lng();
             setForm((prev) => ({ ...prev, latitude: lat.toString(), longitude: lng.toString() }));
@@ -253,7 +254,7 @@ export default function AddBillboard() {
             );
             const data = await res.json();
             if (data.status === "OK" && data.results.length > 0) {
-              setForm((prev) => ({ ...prev, address: data.results[0].formatted_address }));
+              setForm((prev) => ({ ...prev, address: data.results[0].formatted_address ?? prev.address }));
             }
           });
         }

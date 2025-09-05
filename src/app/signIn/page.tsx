@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
+
 
 // API utility
 const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
@@ -19,25 +20,18 @@ export default function SignIn() {
 	const handleLogout = () => {
 		localStorage.removeItem("accessToken");
 		localStorage.removeItem("refreshToken");
-		localStorage.removeItem("userType");
-		localStorage.removeItem("token");
 		window.location.reload();
 	};
 
-	const handleGoogleLogin = async (response: unknown) => {
+	interface GoogleCredentialResponse {
+		credential: string;
+	}
+
+	const handleGoogleLogin = useCallback(async (response: GoogleCredentialResponse) => {
 		try {
-			let credential = "";
-			if (
-				typeof response === "object" &&
-				response !== null &&
-				"credential" in response &&
-				typeof (response as { credential?: unknown }).credential === "string"
-			) {
-				credential = (response as { credential: string }).credential;
-			}
 			const res = await fetch(apiUrl("/users/googleLogin/"), {
 				method: "POST",
-				body: JSON.stringify({ token: credential }),
+				body: JSON.stringify({ token: response.credential }),
 				headers: {
 					"Content-Type": "application/json",
 				},
@@ -46,9 +40,6 @@ export default function SignIn() {
 			if (res.ok && data.access) {
 				localStorage.setItem("accessToken", data.access);
 				localStorage.setItem("refreshToken", data.refresh);
-				if (data.usertype) {
-					localStorage.setItem("userType", data.usertype);
-				}
 				window.location.href = "/";
 			} else {
 				setError("Google login failed");
@@ -56,23 +47,34 @@ export default function SignIn() {
 		} catch {
 			setError("Server error. Please try again later.");
 		}
-	};
+	}, []);
 
 	useEffect(() => {
-		if (window.google && window.google.accounts && googleBtnRef.current) {
-			window.google.accounts.id.initialize({
-				client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
-				callback: handleGoogleLogin,
-			});
-			window.google.accounts.id.renderButton(googleBtnRef.current, {
-				theme: "outline",
-				size: "large",
-				text: "continue_with",
-				shape: "pill",
-				logo_alignment: "left",
-			});
+		if (
+			typeof window !== "undefined" &&
+			window.google &&
+			googleBtnRef.current
+		) {
+			type GoogleId = {
+				initialize: (options: { client_id: string; callback: (response: GoogleCredentialResponse) => void }) => void;
+				renderButton: (parent: HTMLElement, options: { theme: string; size: string; text: string; shape: string; logo_alignment: string }) => void;
+			};
+			const googleAccounts = (window.google as { accounts?: { id: GoogleId } }).accounts;
+			if (googleAccounts && googleAccounts.id) {
+				googleAccounts.id.initialize({
+					client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
+					callback: handleGoogleLogin,
+				});
+				googleAccounts.id.renderButton(googleBtnRef.current, {
+					theme: "outline",
+					size: "large",
+					text: "continue_with",
+					shape: "pill",
+					logo_alignment: "left",
+				});
+			}
 		}
-	}, []);
+	}, [handleGoogleLogin]);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -89,9 +91,6 @@ export default function SignIn() {
 			if (response.ok && data.access) {
 				localStorage.setItem("accessToken", data.access);
 				localStorage.setItem("refreshToken", data.refresh);
-				if (data.usertype) {
-					localStorage.setItem("userType", data.usertype);
-				}
 				window.location.href = "/";
 			} else {
 				setError("Invalid username or password");
@@ -137,12 +136,12 @@ export default function SignIn() {
 							Log Out
 						</button>
 					) : (
-						<a
+						<Link
 							href="/signUp"
 							className="px-5 py-2 rounded-md border border-gray-300 text-white font-medium hover:shadow-md transition bg-green-600 hover:bg-green-700"
 						>
 							Sign Up
-						</a>
+						</Link>
 					)}
 				</div>
 			</header>

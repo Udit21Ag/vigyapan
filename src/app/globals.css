@@ -5,7 +5,7 @@
 	--foreground: #171717;
 }
 
-@theme inline {
+:root {
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 }
@@ -18,5 +18,7 @@
 }
 
 body {
-	@apply bg-background text-foreground font-sans;
+	background-color: var(--color-background);
+	color: var(--color-foreground);
+	font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }

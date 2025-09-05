@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 const isLoggedIn =
 	typeof window !== "undefined" && !!localStorage.getItem("accessToken");
-const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
 
 export default function CreateAccount() {
 	const googleBtnRef = useRef<HTMLDivElement | null>(null);
@@ -21,36 +20,25 @@ export default function CreateAccount() {
 	const handleLogout = () => {
 		localStorage.removeItem("accessToken");
 		localStorage.removeItem("refreshToken");
-		localStorage.removeItem("userType");
-		localStorage.removeItem("token");
 		window.location.reload();
 	};
 
-	const handleGoogleLogin = async (response: unknown) => {
+	type GoogleCredentialResponse = {
+		credential: string;
+	};
+
+
+
+	const handleGoogleLogin = useCallback(async (response: GoogleCredentialResponse) => {
 		try {
-			let credential = "";
-			if (
-				typeof response === "object" &&
-				response !== null &&
-				"credential" in response &&
-				typeof (response as { credential?: unknown }).credential === "string"
-			) {
-				credential = (response as { credential: string }).credential;
-			}
-			const res = await fetch(apiUrl("/users/googleLogin/"), {
+			const res = await fetch("/api/users/googleLogin", {
 				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({ token: credential }),
+				body: JSON.stringify({ token: response.credential }),
 			});
 			const data = await res.json();
 			if (res.ok && data.access) {
 				localStorage.setItem("accessToken", data.access);
 				localStorage.setItem("refreshToken", data.refresh);
-				if (data.usertype) {
-					localStorage.setItem("userType", data.usertype);
-				}
 				window.location.href = "/";
 			} else {
 				alert("Google login failed");
@@ -58,62 +46,42 @@ export default function CreateAccount() {
 		} catch {
 			alert("Server error. Please try again later.");
 		}
-	};
+	}, []);
 
 	useEffect(() => {
-		if (window.google && window.google.accounts && googleBtnRef.current) {
-			window.google.accounts.id.initialize({
-				client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
-				callback: handleGoogleLogin,
-			});
-			window.google.accounts.id.renderButton(googleBtnRef.current, {
-				theme: "outline",
-				size: "large",
-				text: "continue_with",
-				shape: "pill",
-				logo_alignment: "left",
-			});
+		if (
+			typeof window !== "undefined" &&
+			window.google &&
+			googleBtnRef.current
+		) {
+			type GoogleId = {
+				initialize: (options: { client_id: string; callback: (response: GoogleCredentialResponse) => void }) => void;
+				renderButton: (parent: HTMLElement, options: { theme: string; size: string; text: string; shape: string; logo_alignment: string }) => void;
+			};
+			const googleAccounts = (window.google as { accounts?: { id: GoogleId } }).accounts;
+			if (googleAccounts && googleAccounts.id) {
+				googleAccounts.id.initialize({
+					client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
+					callback: handleGoogleLogin,
+				});
+				googleAccounts.id.renderButton(googleBtnRef.current, {
+					theme: "outline",
+					size: "large",
+					text: "continue_with",
+					shape: "pill",
+					logo_alignment: "left",
+				});
+			}
 		}
-	}, []);
+	}, [handleGoogleLogin]);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setForm({ ...form, [e.target.name]: e.target.value });
 	};
 
-	const handleSubmit = async (e: React.FormEvent) => {
+	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		if (form.password !== form.confirm) {
-			alert("Passwords do not match!");
-			return;
-		}
-		try {
-			const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-			const res = await fetch(`${apiBase}/users/create_account/`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					password: form.password,
-					username: form.company,
-					email: form.email,
-					usertype: role,
-				}),
-			});
-			const data = await res.json();
-			if (res.ok && data.access) {
-				localStorage.setItem("accessToken", data.access);
-				localStorage.setItem("refreshToken", data.refresh);
-				if (data.usertype) {
-					localStorage.setItem("userType", data.usertype);
-				}
-				window.location.href = "/";
-			} else {
-				alert(data.error || "Account creation failed.");
-			}
-		} catch {
-			alert("Server error. Please try again later.");
-		}
+		alert("Account created!");
 	};
 
 	return (
@@ -130,18 +98,18 @@ export default function CreateAccount() {
 					/>
 				</Link>
 				<nav className="flex gap-8 text-gray-800 font-medium">
-					<a href="/#features" className="hover:text-green-600">
+					<Link href="/#features" className="hover:text-green-600">
 						Find Ad Spaces
-					</a>
-					<a href="/#how-it-works" className="hover:text-green-600">
+					</Link>
+					<Link href="/#how-it-works" className="hover:text-green-600">
 						How It Works
-					</a>
-					<a href="/#solutions" className="hover:text-green-600">
+					</Link>
+					<Link href="/#solutions" className="hover:text-green-600">
 						For Vendors
-					</a>
-					<a href="/#solutions" className="hover:text-green-600">
+					</Link>
+					<Link href="/#solutions" className="hover:text-green-600">
 						For Advertisers
-					</a>
+					</Link>
 				</nav>
 				<div>
 					{isLoggedIn ? (
@@ -152,12 +120,12 @@ export default function CreateAccount() {
 							Log Out
 						</button>
 					) : (
-						<a
+						<Link
 							href="/signIn"
 							className="px-5 py-2 rounded-md border border-gray-300 text-white font-medium hover:shadow-md transition bg-green-600 hover:bg-green-700"
 						>
 							Sign In
-						</a>
+						</Link>
 					)}
 				</div>
 			</header>
