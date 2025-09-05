@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 // API utility
-const apiUrl = (path: string) => `http://localhost:8000${path}`;
+const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
 
 export default function SignIn() {
 	const [username, setUsername] = useState("");
