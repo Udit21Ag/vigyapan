@@ -22,11 +22,20 @@ export default function SignIn() {
 		window.location.reload();
 	};
 
-	const handleGoogleLogin = async (response: any) => {
+	const handleGoogleLogin = async (response: unknown) => {
 		try {
+			let credential = "";
+			if (
+				typeof response === "object" &&
+				response !== null &&
+				"credential" in response &&
+				typeof (response as any).credential === "string"
+			) {
+				credential = (response as any).credential;
+			}
 			const res = await fetch(apiUrl("/users/googleLogin/"), {
 				method: "POST",
-				body: JSON.stringify({ token: response.credential }),
+				body: JSON.stringify({ token: credential }),
 				headers: {
 					"Content-Type": "application/json",
 				},

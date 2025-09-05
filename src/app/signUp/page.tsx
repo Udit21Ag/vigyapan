@@ -23,11 +23,20 @@ export default function CreateAccount() {
 		window.location.reload();
 	};
 
-	const handleGoogleLogin = async (response: any) => {
+	const handleGoogleLogin = async (response: unknown) => {
 		try {
+			let credential = "";
+			if (
+				typeof response === "object" &&
+				response !== null &&
+				"credential" in response &&
+				typeof (response as any).credential === "string"
+			) {
+				credential = (response as any).credential;
+			}
 			const res = await fetch("/api/users/googleLogin", {
 				method: "POST",
-				body: JSON.stringify({ token: response.credential }),
+				body: JSON.stringify({ token: credential }),
 			});
 			const data = await res.json();
 			if (res.ok && data.access) {
@@ -37,7 +46,7 @@ export default function CreateAccount() {
 			} else {
 				alert("Google login failed");
 			}
-		} catch (err) {
+		} catch {
 			alert("Server error. Please try again later.");
 		}
 	};

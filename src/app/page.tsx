@@ -134,14 +134,14 @@ export default function LandingPage() {
 							<div>⏰ Mon-Fri: 10AM-7PM (IST)</div>
 						</div>
 						<div className="flex gap-4 pt-4">
-							<img
+							<Image
 								src="/Download_on_the_App_Store_Badge.svg"
 								alt="App Store"
 								width={140}
 								height={40}
 								className="h-10 w-auto"
 							/>
-							<img
+							<Image
 								src="/Google_Play_Store_badge_EN.svg"
 								alt="Google Play"
 								width={140}
