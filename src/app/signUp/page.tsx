@@ -30,9 +30,9 @@ export default function CreateAccount() {
 				typeof response === "object" &&
 				response !== null &&
 				"credential" in response &&
-				typeof (response as any).credential === "string"
+				typeof (response as { credential?: unknown }).credential === "string"
 			) {
-				credential = (response as any).credential;
+				credential = (response as { credential: string }).credential;
 			}
 			const res = await fetch("/api/users/googleLogin", {
 				method: "POST",
@@ -90,18 +90,18 @@ export default function CreateAccount() {
 					/>
 				</Link>
 				<nav className="flex gap-8 text-gray-800 font-medium">
-					<a href="/#features" className="hover:text-green-600">
+					<Link href="/#features" className="hover:text-green-600">
 						Find Ad Spaces
-					</a>
-					<a href="/#how-it-works" className="hover:text-green-600">
+					</Link>
+					<Link href="/#how-it-works" className="hover:text-green-600">
 						How It Works
-					</a>
-					<a href="/#solutions" className="hover:text-green-600">
+					</Link>
+					<Link href="/#solutions" className="hover:text-green-600">
 						For Vendors
-					</a>
-					<a href="/#solutions" className="hover:text-green-600">
+					</Link>
+					<Link href="/#solutions" className="hover:text-green-600">
 						For Advertisers
-					</a>
+					</Link>
 				</nav>
 				<div>
 					{isLoggedIn ? (
