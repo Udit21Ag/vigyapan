@@ -45,7 +45,7 @@ export default function CreateAccount() {
 	useEffect(() => {
 		if (window.google && window.google.accounts && googleBtnRef.current) {
 			window.google.accounts.id.initialize({
-				client_id: process.env.NEXT_PUBLIC_GOOGLE_OAUTH2_CLIENT_ID!,
+				client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
 				callback: handleGoogleLogin,
 			});
 			window.google.accounts.id.renderButton(googleBtnRef.current, {
