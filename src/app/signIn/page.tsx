@@ -19,6 +19,8 @@ export default function SignIn() {
 	const handleLogout = () => {
 		localStorage.removeItem("accessToken");
 		localStorage.removeItem("refreshToken");
+		localStorage.removeItem("userType");
+		localStorage.removeItem("token");
 		window.location.reload();
 	};
 
@@ -44,6 +46,9 @@ export default function SignIn() {
 			if (res.ok && data.access) {
 				localStorage.setItem("accessToken", data.access);
 				localStorage.setItem("refreshToken", data.refresh);
+				if (data.usertype) {
+					localStorage.setItem("userType", data.usertype);
+				}
 				window.location.href = "/";
 			} else {
 				setError("Google login failed");
@@ -84,6 +89,9 @@ export default function SignIn() {
 			if (response.ok && data.access) {
 				localStorage.setItem("accessToken", data.access);
 				localStorage.setItem("refreshToken", data.refresh);
+				if (data.usertype) {
+					localStorage.setItem("userType", data.usertype);
+				}
 				window.location.href = "/";
 			} else {
 				setError("Invalid username or password");

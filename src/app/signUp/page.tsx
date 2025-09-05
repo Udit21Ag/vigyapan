@@ -6,6 +6,7 @@ import Link from "next/link";
 
 const isLoggedIn =
 	typeof window !== "undefined" && !!localStorage.getItem("accessToken");
+const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
 
 export default function CreateAccount() {
 	const googleBtnRef = useRef<HTMLDivElement | null>(null);
@@ -20,6 +21,8 @@ export default function CreateAccount() {
 	const handleLogout = () => {
 		localStorage.removeItem("accessToken");
 		localStorage.removeItem("refreshToken");
+		localStorage.removeItem("userType");
+		localStorage.removeItem("token");
 		window.location.reload();
 	};
 
@@ -34,14 +37,20 @@ export default function CreateAccount() {
 			) {
 				credential = (response as { credential: string }).credential;
 			}
-			const res = await fetch("/api/users/googleLogin", {
+			const res = await fetch(apiUrl("/users/googleLogin/"), {
 				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
 				body: JSON.stringify({ token: credential }),
 			});
 			const data = await res.json();
 			if (res.ok && data.access) {
 				localStorage.setItem("accessToken", data.access);
 				localStorage.setItem("refreshToken", data.refresh);
+				if (data.usertype) {
+					localStorage.setItem("userType", data.usertype);
+				}
 				window.location.href = "/";
 			} else {
 				alert("Google login failed");
@@ -71,9 +80,40 @@ export default function CreateAccount() {
 		setForm({ ...form, [e.target.name]: e.target.value });
 	};
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		alert("Account created!");
+		if (form.password !== form.confirm) {
+			alert("Passwords do not match!");
+			return;
+		}
+		try {
+			const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+			const res = await fetch(`${apiBase}/users/create_account/`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					password: form.password,
+					username: form.company,
+					email: form.email,
+					usertype: role,
+				}),
+			});
+			const data = await res.json();
+			if (res.ok && data.access) {
+				localStorage.setItem("accessToken", data.access);
+				localStorage.setItem("refreshToken", data.refresh);
+				if (data.usertype) {
+					localStorage.setItem("userType", data.usertype);
+				}
+				window.location.href = "/";
+			} else {
+				alert(data.error || "Account creation failed.");
+			}
+		} catch {
+			alert("Server error. Please try again later.");
+		}
 	};
 
 	return (
@@ -90,18 +130,18 @@ export default function CreateAccount() {
 					/>
 				</Link>
 				<nav className="flex gap-8 text-gray-800 font-medium">
-					<Link href="/#features" className="hover:text-green-600">
+					<a href="/#features" className="hover:text-green-600">
 						Find Ad Spaces
-					</Link>
-					<Link href="/#how-it-works" className="hover:text-green-600">
+					</a>
+					<a href="/#how-it-works" className="hover:text-green-600">
 						How It Works
-					</Link>
-					<Link href="/#solutions" className="hover:text-green-600">
+					</a>
+					<a href="/#solutions" className="hover:text-green-600">
 						For Vendors
-					</Link>
-					<Link href="/#solutions" className="hover:text-green-600">
+					</a>
+					<a href="/#solutions" className="hover:text-green-600">
 						For Advertisers
-					</Link>
+					</a>
 				</nav>
 				<div>
 					{isLoggedIn ? (

@@ -19,8 +19,17 @@ export default function LandingPage() {
 		localStorage.removeItem("token");
 		localStorage.removeItem("accessToken");
 		localStorage.removeItem("refreshToken");
+		localStorage.removeItem("userType");
 		window.location.reload();
 	};
+
+	// Get userType from localStorage (client only)
+	const [userType, setUserType] = useState<string | null>(null);
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			setUserType(localStorage.getItem("userType"));
+		}
+	}, [isLoggedIn]);
 
 	return (
 		<div className="font-inter bg-[#f8fcfa] min-h-screen text-[#111] flex flex-col">
@@ -48,18 +57,36 @@ export default function LandingPage() {
 						>
 							How It Works
 						</Link>
-						<Link
-							href="#"
-							className="text-[#222] hover:text-[#1db954]"
-						>
-							For Vendors
-						</Link>
-						<Link
-							href="#"
-							className="text-[#1db954] font-semibold hover:text-[#159c43]"
-						>
-							For Advertisers
-						</Link>
+						{userType === "vendor" ? (
+							<Link
+								href="/dashboard/vendor"
+								className="text-[#1db954] font-semibold hover:text-[#159c43]"
+							>
+								Dashboard
+							</Link>
+						) : userType === "advertiser" ? (
+							<Link
+								href="/dashboard/advertiser"
+								className="text-[#1db954] font-semibold hover:text-[#159c43]"
+							>
+								Dashboard
+							</Link>
+						) : (
+							<>
+								<Link
+									href="#"
+									className="text-[#222] hover:text-[#1db954]"
+								>
+									For Vendors
+								</Link>
+								<Link
+									href="#"
+									className="text-[#1db954] font-semibold hover:text-[#159c43]"
+								>
+									For Advertisers
+								</Link>
+							</>
+						)}
 					</nav>
 
 					<div className="flex gap-4">
