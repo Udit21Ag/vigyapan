@@ -24,7 +24,7 @@ export default function AddBillboard() {
   });
   const [mapLoaded, setMapLoaded] = useState(false);
   const [map, setMap] = useState<google.maps.Map | null>(null);
-  const [marker, setMarker] = useState<google.maps.Marker | null>(null);
+  const markerRef = useRef<google.maps.Marker | null>(null);
   const mapRef = useRef<HTMLDivElement>(null);
   const [searching, setSearching] = useState(false);
   const [error, setError] = useState("");
@@ -83,13 +83,13 @@ export default function AddBillboard() {
           if (map && place.geometry?.location) {
             map.setCenter(place.geometry.location);
             map.setZoom(16);
-            if (marker) marker.setMap(null);
+            if (markerRef.current) markerRef.current.setMap(null);
             const newMarker = new googleMaps.Marker({
               position: place.geometry.location,
               map,
               draggable: true,
             });
-            setMarker(newMarker);
+            markerRef.current = newMarker;
             newMarker.addListener("dragend", async (e: google.maps.MapMouseEvent) => {
               if (!e.latLng) return;
               const lat = e.latLng.lat();
@@ -129,7 +129,7 @@ export default function AddBillboard() {
         }
       });
     }
-  }, [map, marker]);
+  }, [map]);
 
   // Load Google Map after script loads
   // Robust map initialization: run when script loads, ref is ready, or form changes
@@ -157,15 +157,16 @@ export default function AddBillboard() {
   // Update marker when coordinates change
   useEffect(() => {
     if (
-  map &&
-  form.latitude &&
-  form.longitude &&
-  typeof window !== "undefined" &&
-  window.google &&
-  window.google.maps
+      map &&
+      form.latitude &&
+      form.longitude &&
+      typeof window !== "undefined" &&
+      window.google &&
+      window.google.maps
     ) {
-      if (marker) {
-        marker.setMap(null);
+      // Remove previous marker
+      if (markerRef.current) {
+        markerRef.current.setMap(null);
       }
       const googleMaps = window.google.maps;
       const newMarker = new googleMaps.Marker({
@@ -173,7 +174,7 @@ export default function AddBillboard() {
         map,
         draggable: true,
       });
-      setMarker(newMarker);
+      markerRef.current = newMarker;
       // Update coordinates when marker is dragged
       newMarker.addListener("dragend", async (e: google.maps.MapMouseEvent) => {
         if (!e.latLng) return;
@@ -190,7 +191,7 @@ export default function AddBillboard() {
         }
       });
     }
-  }, [map, marker, form.latitude, form.longitude]);
+  }, [map, form.latitude, form.longitude]);
 
   // Allow user to click on map to set marker
   useEffect(() => {
@@ -217,7 +218,7 @@ export default function AddBillboard() {
         }
       });
     }
-  }, [map, marker]);
+  }, [map]);
 
   const handleAddressSearch = async () => {
     setSearching(true);
@@ -236,13 +237,13 @@ export default function AddBillboard() {
           map.setCenter({ lat: location.lat, lng: location.lng });
           map.setZoom(16);
           // Place marker
-          if (marker) marker.setMap(null);
+          if (markerRef.current) markerRef.current.setMap(null);
           const newMarker = new googleMaps.Marker({
             position: { lat: location.lat, lng: location.lng },
             map,
             draggable: true,
           });
-          setMarker(newMarker);
+          markerRef.current = newMarker;
           newMarker.addListener("dragend", async (e: google.maps.MapMouseEvent) => {
             if (!e.latLng) return;
             const lat = e.latLng.lat();
@@ -272,7 +273,8 @@ export default function AddBillboard() {
     setError("");
     try {
       const accessToken = typeof window !== "undefined" ? localStorage.getItem("accessToken") : "";
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/add_billboard/`, {
+      const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
+      const res = await fetch(apiUrl("/users/add_billboard/"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

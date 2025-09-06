@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 export default function VendorDashboard() {
     const router = useRouter();
     const handleLogout = () => {
-        localStorage.removeItem("token");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         localStorage.removeItem("userType");

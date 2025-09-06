@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
 const isLoggedIn =
 	typeof window !== "undefined" && !!localStorage.getItem("accessToken");
 
@@ -11,7 +12,7 @@ export default function CreateAccount() {
 	const googleBtnRef = useRef<HTMLDivElement | null>(null);
 	const [role, setRole] = useState("vendor");
 	const [form, setForm] = useState({
-		company: "",
+		username: "",
 		email: "",
 		password: "",
 		confirm: "",
@@ -31,8 +32,11 @@ export default function CreateAccount() {
 
 	const handleGoogleLogin = useCallback(async (response: GoogleCredentialResponse) => {
 		try {
-			const res = await fetch("/api/users/googleLogin", {
+			const res = await fetch(apiUrl("/users/googleLogin/"), {
 				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
 				body: JSON.stringify({ token: response.credential }),
 			});
 			const data = await res.json();
@@ -79,9 +83,38 @@ export default function CreateAccount() {
 		setForm({ ...form, [e.target.name]: e.target.value });
 	};
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		alert("Account created!");
+		if (form.password !== form.confirm) {
+			alert("Passwords do not match.");
+			return;
+		}
+		try {
+			const res = await fetch(apiUrl("/users/create_account/"), {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					username: form.username,
+					password: form.password,
+					usertype: role,
+					email: form.email,
+				}),
+			});
+			const data = await res.json();
+			if (res.ok && data.access && data.refresh) {
+				localStorage.setItem("accessToken", data.access);
+				localStorage.setItem("refreshToken", data.refresh);
+				localStorage.setItem("userType", role);
+				alert("Account created successfully!");
+				window.location.href = "/";
+			} else {
+				alert(data.error || "Account creation failed.");
+			}
+		} catch {
+			alert("Server error. Please try again later.");
+		}
 	};
 
 	return (
@@ -171,9 +204,9 @@ export default function CreateAccount() {
 
 					{/* Inputs */}
 					<input
-						name="company"
-						placeholder="Your company name"
-						value={form.company}
+						name="username"
+						placeholder="Username"
+						value={form.username}
 						onChange={handleChange}
 						required
 						className="mb-3 w-full p-3 border border-gray-400 rounded-lg bg-[#f8fcfa] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-700"

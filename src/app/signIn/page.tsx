@@ -37,44 +37,75 @@ export default function SignIn() {
 				},
 			});
 			const data = await res.json();
-			if (res.ok && data.access) {
-				localStorage.setItem("accessToken", data.access);
-				localStorage.setItem("refreshToken", data.refresh);
-				window.location.href = "/";
-			} else {
-				setError("Google login failed");
-			}
+					if (res.ok && data.access) {
+						localStorage.setItem("accessToken", data.access);
+						localStorage.setItem("refreshToken", data.refresh);
+						localStorage.setItem("userType", "vendor"); // or set dynamically if available
+						window.location.href = "/";
+					} else {
+						setError("Google login failed");
+					}
 		} catch {
 			setError("Server error. Please try again later.");
 		}
 	}, []);
 
-	useEffect(() => {
-		if (
-			typeof window !== "undefined" &&
-			window.google &&
-			googleBtnRef.current
-		) {
-			type GoogleId = {
-				initialize: (options: { client_id: string; callback: (response: GoogleCredentialResponse) => void }) => void;
-				renderButton: (parent: HTMLElement, options: { theme: string; size: string; text: string; shape: string; logo_alignment: string }) => void;
-			};
-			const googleAccounts = (window.google as { accounts?: { id: GoogleId } }).accounts;
-			if (googleAccounts && googleAccounts.id) {
-				googleAccounts.id.initialize({
-					client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
-					callback: handleGoogleLogin,
-				});
-				googleAccounts.id.renderButton(googleBtnRef.current, {
-					theme: "outline",
-					size: "large",
-					text: "continue_with",
-					shape: "pill",
-					logo_alignment: "left",
-				});
+		useEffect(() => {
+			// Check for required env variable
+			const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+			if (!clientId) {
+				setError("Google Client ID is not set. Contact support.");
+				return;
 			}
-		}
-	}, [handleGoogleLogin]);
+
+			// Dynamically load Google Identity Services script if not present
+			if (typeof window !== "undefined" && googleBtnRef.current) {
+				if (!window.google || !window.google.accounts) {
+					const script = document.createElement("script");
+					script.src = "https://accounts.google.com/gsi/client";
+					script.async = true;
+					script.onload = () => {
+						if (window.google && window.google.accounts && googleBtnRef.current) {
+							try {
+								window.google.accounts.id.initialize({
+									client_id: clientId,
+									callback: handleGoogleLogin,
+								});
+								window.google.accounts.id.renderButton(googleBtnRef.current, {
+									theme: "outline",
+									size: "large",
+									text: "continue_with",
+									shape: "pill",
+									logo_alignment: "left",
+								});
+							} catch (err) {
+								setError("Google login setup failed.");
+							}
+						}
+					};
+					script.onerror = () => {
+						setError("Failed to load Google login script.");
+					};
+					document.body.appendChild(script);
+				} else {
+					try {
+						window.google.accounts.id.initialize({
+							client_id: clientId,
+							callback: handleGoogleLogin,
+						});
+						window.google.accounts.id.renderButton(googleBtnRef.current, {
+							theme: "outline",
+							size: "large",
+							text: "continue_with",
+							shape: "pill",
+							logo_alignment: "left",
+						});
+					} catch (err) {
+						setError("Google login setup failed.");
+					}
+				}
+			}
+		}, [handleGoogleLogin]);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -88,13 +119,14 @@ export default function SignIn() {
 				body: new URLSearchParams({ username, password }).toString(),
 			});
 			const data = await response.json();
-			if (response.ok && data.access) {
-				localStorage.setItem("accessToken", data.access);
-				localStorage.setItem("refreshToken", data.refresh);
-				window.location.href = "/";
-			} else {
-				setError("Invalid username or password");
-			}
+					if (response.ok && data.access) {
+						localStorage.setItem("accessToken", data.access);
+						localStorage.setItem("refreshToken", data.refresh);
+						localStorage.setItem("userType", data.usertype); // or set dynamically if available
+						window.location.href = "/";
+					} else {
+						setError("Invalid username or password");
+					}
 		} catch {
 			setError("Server error. Please try again later.");
 		}
