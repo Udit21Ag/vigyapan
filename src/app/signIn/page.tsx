@@ -78,7 +78,7 @@ export default function SignIn() {
 									shape: "pill",
 									logo_alignment: "left",
 								});
-							} catch (err) {
+							} catch{
 								setError("Google login setup failed.");
 							}
 						}
@@ -100,7 +100,7 @@ export default function SignIn() {
 							shape: "pill",
 							logo_alignment: "left",
 						});
-					} catch (err) {
+					} catch {
 						setError("Google login setup failed.");
 					}
 				}

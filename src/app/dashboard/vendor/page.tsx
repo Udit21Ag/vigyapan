@@ -16,7 +16,7 @@ export default function VendorDashboard() {
             <aside className="w-64 bg-green-700 text-white flex flex-col py-8 px-6 shadow-lg rounded-r-3xl">
                 <h2 className="text-2xl font-bold mb-8 text-center">Vendor Panel</h2>
                 <nav className="flex flex-col gap-6">
-                    <Link href="/dashboard/vendor" className="py-2 px-4 rounded-lg bg-green-600 hover:bg-green-800 font-semibold transition">Dashboard Home</Link>
+                    <Link href="/" className="py-2 px-4 rounded-lg bg-green-600 hover:bg-green-800 font-semibold transition">Home</Link>
                     <Link href="/dashboard/vendor/addBillboard" className="py-2 px-4 rounded-lg bg-green-600 hover:bg-green-800 font-semibold transition">Add Billboard</Link>
                 </nav>
                 <div className="mt-auto pt-8">

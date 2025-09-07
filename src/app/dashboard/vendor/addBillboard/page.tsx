@@ -274,7 +274,7 @@ export default function AddBillboard() {
     try {
       const accessToken = typeof window !== "undefined" ? localStorage.getItem("accessToken") : "";
       const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
-      const res = await fetch(apiUrl("/users/add_billboard/"), {
+      const res = await fetch(apiUrl("/users/vendor/billboard/add/"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
