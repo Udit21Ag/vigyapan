@@ -7,6 +7,7 @@ import { useRouter, useParams } from "next/navigation";
 const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
 
 type BookingDetail = {
+  static_id: string;
   billboard: string;
   status: string;
   start_date: string;
@@ -81,35 +82,35 @@ function BookingDetailContent() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-8 bg-white rounded-2xl shadow border border-green-100">
-      <h1 className="text-3xl font-bold mb-6 text-green-800">Booking Details</h1>
-      <div className="space-y-4 text-lg">
+    <div className="max-w-full w-[70vw] mx-auto p-10 bg-white rounded-2xl shadow border border-green-100">
+      <h1 className="text-3xl font-bold mb-8 text-black">Booking Details</h1>
+      <div className="space-y-4 text-lg text-black">
         <div className="flex justify-between items-center py-2 border-b border-gray-100">
-          <span className="font-semibold text-green-700">Billboard Title:</span>
+          <span className="font-semibold">Billboard Title:</span>
           <span>{booking.title}</span>
         </div>
         <div className="flex justify-between items-center py-2 border-b border-gray-100">
-          <span className="font-semibold text-green-700">Status:</span>
+          <span className="font-semibold">Status:</span>
           <span>{booking.status}</span>
         </div>
         <div className="flex justify-between items-center py-2 border-b border-gray-100">
-          <span className="font-semibold text-green-700">Start Date:</span>
+          <span className="font-semibold">Start Date:</span>
           <span>{booking.start_date}</span>
         </div>
         <div className="flex justify-between items-center py-2 border-b border-gray-100">
-          <span className="font-semibold text-green-700">End Date:</span>
+          <span className="font-semibold">End Date:</span>
           <span>{booking.end_date}</span>
         </div>
         <div className="flex justify-between items-center py-2 border-b border-gray-100">
-          <span className="font-semibold text-green-700">Total Duration:</span>
+          <span className="font-semibold">Total Duration:</span>
           <span>{getDuration(booking.start_date, booking.end_date)}</span>
         </div>
         <div className="flex justify-between items-center py-2 border-b border-gray-100">
-          <span className="font-semibold text-green-700">Booking Creation Date:</span>
+          <span className="font-semibold">Booking Creation Date:</span>
           <span>{new Date(booking.created_at).toLocaleString()}</span>
         </div>
         <div className="flex justify-between items-center py-2 border-b border-gray-100">
-          <span className="font-semibold text-green-700">Is Active:</span>
+          <span className="font-semibold">Is Active:</span>
           <span>{booking.is_active ? "Yes" : "No"}</span>
         </div>
       </div>
@@ -119,6 +120,46 @@ function BookingDetailContent() {
           onClick={() => router.back()}
         >
           ← Back to List
+        </button>
+        <button
+          className={`px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition text-lg ${(booking.status === "confirmed" || booking.status === "cancelled") ? "opacity-50 cursor-not-allowed" : ""}`}
+          disabled={booking.status === "confirmed" || booking.status === "cancelled"}
+          onClick={async () => {
+            if (booking.status === "confirmed") return;
+            const accessToken = typeof window !== "undefined" ? localStorage.getItem("accessToken") : "";
+            try {
+              await fetch(apiUrl(`/users/vendor/bookings/update/?status=confirmed&id=${booking.static_id}`), {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+                },
+              });
+              window.location.reload();
+            } catch {}
+          }}
+        >
+          Confirm
+        </button>
+        <button
+          className={`px-6 py-3 bg-red-600 text-white rounded-xl font-semibold hover:bg-red-700 transition text-lg ${(booking.status === "confirmed" || booking.status === "cancelled") ? "opacity-50 cursor-not-allowed" : ""}`}
+          disabled={booking.status === "confirmed" || booking.status === "cancelled"}
+          onClick={async () => {
+            if (booking.status === "confirmed") return;
+            const accessToken = typeof window !== "undefined" ? localStorage.getItem("accessToken") : "";
+            try {
+              await fetch(apiUrl(`/users/vendor/bookings/update/?status=cancelled&id=${booking.static_id}`), {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+                },
+              });
+              window.location.reload();
+            } catch {}
+          }}
+        >
+          Cancel
         </button>
       </div>
     </div>

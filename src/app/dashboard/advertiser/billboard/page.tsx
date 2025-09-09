@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Sidebar from "../Sidebar";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
@@ -232,12 +233,16 @@ function BillboardContent() {
 			</div>
 		</div>
 	);
-}
-
+	}
 export default function BillboardDetail() {
 	return (
-		<React.Suspense fallback={<div className="flex justify-center items-center min-h-screen text-lg">Loading...</div>}>
-			<BillboardContent />
-		</React.Suspense>
+		<div className="min-h-screen flex bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
+			<Sidebar />
+			<main className="flex-1 flex items-center justify-center">
+				<React.Suspense fallback={<div className="flex justify-center items-center min-h-screen text-lg">Loading...</div>}>
+					<BillboardContent />
+				</React.Suspense>
+			</main>
+		</div>
 	);
 }

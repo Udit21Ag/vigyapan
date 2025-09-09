@@ -75,8 +75,8 @@ function BillboardDetailContent() {
 	}
 
 	return (
-		<div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#e6f7ee] to-[#c3e6d6] p-8 overflow-hidden">
-			<div className="bg-white rounded-2xl shadow-2xl p-10 max-w-screen-xl w-full border border-green-100 flex flex-row gap-10 items-start">
+			<div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#e6f7ee] to-[#c3e6d6] p-8 overflow-hidden">
+				<div className="bg-white rounded-2xl shadow-2xl p-10 max-w-full w-[75vw] border border-green-100 flex flex-row gap-14 items-start">
 				{/* Left: Map and Location */}
 				<div className="w-1/2 flex flex-col items-start">
 					<h2 className="text-2xl font-bold text-green-700 mb-4">Location</h2>
@@ -144,11 +144,11 @@ function BillboardDetailContent() {
 
 export default function VendorBillboardDetail() {
 	return (
-		<div className="min-h-screen flex bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
-			<Sidebar />
-			<main className="flex-1 flex items-center justify-center">
-				<BillboardDetailContent />
-			</main>
-		</div>
+			<div className="min-h-screen flex" style={{ background: 'linear-gradient(to bottom, #e6f7ee 0%, #c3e6d6 100%)' }}>
+				<Sidebar />
+				<main className="flex-1 flex items-center justify-center">
+					<BillboardDetailContent />
+				</main>
+			</div>
 	);
 }
