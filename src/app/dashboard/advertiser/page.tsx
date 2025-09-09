@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import Fuse from "fuse.js";
+import Sidebar from "./Sidebar";
 
 const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
 
@@ -35,14 +35,6 @@ export default function AdvertiserDashboard() {
     // Pagination state
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        localStorage.removeItem("userType");
-        router.push("/");
-    };
 
     // Fetch billboards with filters
     useEffect(() => {
@@ -134,16 +126,7 @@ export default function AdvertiserDashboard() {
     return (
         <div className="min-h-screen flex bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
             {/* Sidebar */}
-            <aside className="w-64 bg-green-700 text-white flex flex-col py-8 px-6 shadow-lg rounded-r-3xl">
-                <h2 className="text-2xl font-bold mb-8 text-center">Advertiser Panel</h2>
-                <nav className="flex flex-col gap-6">
-                    <Link href="/" className="py-2 px-4 rounded-lg bg-green-600 hover:bg-green-800 font-semibold transition">Home</Link>
-                    <Link href="/dashboard/advertiser" className="py-2 px-4 rounded-lg bg-green-100 text-green-700 font-semibold transition border border-green-600">Billboards</Link>
-                </nav>
-                <div className="mt-auto pt-8">
-                    <button onClick={handleLogout} className="w-full py-2 px-4 rounded-lg bg-red-500 hover:bg-red-700 font-semibold transition">Log Out</button>
-                </div>
-            </aside>
+            <Sidebar />
             {/* Main Dashboard Content */}
             <main className="flex-1 flex flex-col items-center justify-center p-12" style={{ color: '#222' }}>
                 <h1 className="text-4xl font-bold text-green-700 mb-4">Billboard List</h1>

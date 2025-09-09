@@ -1,29 +1,10 @@
 "use client";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import Sidebar from "./Sidebar";
 
 export default function VendorDashboard() {
-    const router = useRouter();
-    const handleLogout = () => {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        localStorage.removeItem("userType");
-        router.push("/");
-    };
     return (
         <div className="min-h-screen flex bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
-            {/* Sidebar */}
-            <aside className="w-64 bg-green-700 text-white flex flex-col py-8 px-6 shadow-lg rounded-r-3xl">
-                <h2 className="text-2xl font-bold mb-8 text-center">Vendor Panel</h2>
-                <nav className="flex flex-col gap-6">
-                    <Link href="/" className="py-2 px-4 rounded-lg bg-green-600 hover:bg-green-800 font-semibold transition">Home</Link>
-                    <Link href="/dashboard/vendor/addBillboard" className="py-2 px-4 rounded-lg bg-green-600 hover:bg-green-800 font-semibold transition">Add Billboard</Link>
-                </nav>
-                <div className="mt-auto pt-8">
-                    <button onClick={handleLogout} className="w-full py-2 px-4 rounded-lg bg-red-500 hover:bg-red-700 font-semibold transition">Log Out</button>
-                </div>
-            </aside>
-            {/* Main Dashboard Content */}
+            <Sidebar />
             <main className="flex-1 flex flex-col items-center justify-center p-12">
                 <h1 className="text-4xl font-bold text-green-700 mb-4">Welcome, Vendor!</h1>
                 <p className="text-lg text-gray-700 mb-8 text-center max-w-xl">

@@ -1,7 +1,9 @@
+
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import Sidebar from "../../../Sidebar";
+import { useRouter } from "next/navigation";
 
 const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
 
@@ -20,29 +22,19 @@ type Billboard = {
 	vendor?: { static_id: string; name: string };
 };
 
-function BillboardContent() {
-	const router = useRouter();
-	const searchParams = useSearchParams();
-	const staticId = searchParams.get("id");
+import { useParams } from "next/navigation";
 
-	// Get today's date in yyyy-mm-dd format for min attribute
-	const today = new Date();
-	const yyyy = today.getFullYear();
-	const mm = String(today.getMonth() + 1).padStart(2, '0');
-	const dd = String(today.getDate()).padStart(2, '0');
-	const minDate = `${yyyy}-${mm}-${dd}`;
+function BillboardDetailContent() {
+	const router = useRouter();
+	const params = useParams();
+	const id = params?.id as string;
 
 	const [billboard, setBillboard] = useState<Billboard | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState("");
-	const [showBooking, setShowBooking] = useState(false);
-	const [startDate, setStartDate] = useState("");
-	const [endDate, setEndDate] = useState("");
-	const [bookingConfirmed, setBookingConfirmed] = useState(false);
-	const [dateError, setDateError] = useState("");
 
 	useEffect(() => {
-		if (!staticId) {
+		if (!id) {
 			setError("No billboard ID provided.");
 			setLoading(false);
 			return;
@@ -52,7 +44,7 @@ function BillboardContent() {
 			setError("");
 			const accessToken = typeof window !== "undefined" ? localStorage.getItem("accessToken") : "";
 			try {
-				const res = await fetch(apiUrl(`/users/advertiser/billboard/detail/?id=${staticId}`), {
+				const res = await fetch(apiUrl(`/users/vendor/billboard/detail/?id=${id}`), {
 					method: "GET",
 					headers: {
 						...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
@@ -70,7 +62,7 @@ function BillboardContent() {
 			setLoading(false);
 		};
 		fetchBillboard();
-	}, [staticId]);
+	}, [id]);
 
 	if (loading) {
 		return <div className="flex justify-center items-center min-h-screen text-lg">Loading...</div>;
@@ -143,101 +135,20 @@ function BillboardContent() {
 						>
 							← Back to List
 						</button>
-						<button
-							className={`px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition text-lg ${!billboard.is_available ? 'opacity-50 cursor-not-allowed' : ''}`}
-							onClick={() => billboard.is_available && setShowBooking(true)}
-							disabled={!billboard.is_available}
-						>
-							Book Billboard
-						</button>
 					</div>
-					{showBooking && (
-						<div className="mt-8 p-6 bg-blue-50 rounded-xl shadow flex flex-col md:flex-row gap-6 items-center">
-							<div className="flex flex-col gap-2">
-								<label className="font-semibold text-blue-700">Start Date</label>
-								<input
-									type="date"
-									value={startDate}
-									min={minDate}
-									onChange={e => {
-										setStartDate(e.target.value);
-										setDateError("");
-									}}
-									className="border border-blue-300 rounded-lg px-3 py-2"
-								/>
-							</div>
-							<div className="flex flex-col gap-2">
-								<label className="font-semibold text-blue-700">End Date</label>
-								<input
-									type="date"
-									value={endDate}
-									min={startDate || minDate}
-									onChange={e => {
-										setEndDate(e.target.value);
-										setDateError("");
-									}}
-									className="border border-blue-300 rounded-lg px-3 py-2"
-								/>
-							</div>
-							<button
-								className="px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition text-lg"
-								onClick={async () => {
-									if (!startDate || !endDate) {
-										setDateError("Please select both start and end dates.");
-										return;
-									}
-									if (billboard?.is_available) {
-										const accessToken = typeof window !== "undefined" ? localStorage.getItem("accessToken") : "";
-										try {
-											const res = await fetch(apiUrl("/users/advertiser/bookings/create/"), {
-												method: "POST",
-												headers: {
-													"Content-Type": "application/json",
-													...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
-												},
-												body: JSON.stringify({
-													start_date: startDate,
-													end_date: endDate,
-													id: staticId,
-												}),
-											});
-											if (res.ok) {
-												setBookingConfirmed(true);
-												setShowBooking(false);
-												setDateError("");
-											} else {
-												const data = await res.json();
-												setError(data?.message || "Booking failed. Please try again.");
-											}
-										} catch {
-											setError("Booking failed. Please try again.");
-										}
-									}
-								}}
-								disabled={!startDate || !endDate}
-							>
-								Confirm Booking
-							</button>
-							{dateError && (
-								<div className="mt-2 text-red-600 text-sm font-semibold">{dateError}</div>
-							)}
-						</div>
-					)}
-					{bookingConfirmed && (
-						<div className="mt-6 p-4 bg-green-50 rounded-xl text-green-700 text-center font-semibold shadow">
-							Booking confirmed from {startDate} to {endDate}!
-						</div>
-					)}
 				</div>
 			</div>
 		</div>
 	);
 }
 
-export default function BillboardDetail() {
+export default function VendorBillboardDetail() {
 	return (
-		<React.Suspense fallback={<div className="flex justify-center items-center min-h-screen text-lg">Loading...</div>}>
-			<BillboardContent />
-		</React.Suspense>
+		<div className="min-h-screen flex bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
+			<Sidebar />
+			<main className="flex-1 flex items-center justify-center">
+				<BillboardDetailContent />
+			</main>
+		</div>
 	);
 }
