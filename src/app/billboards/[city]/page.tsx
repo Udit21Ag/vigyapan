@@ -239,13 +239,22 @@ export default function CityBillboardsPage() {
                         onClick={() => {
                           // Check if user is logged in
                           const token = localStorage.getItem("token") || localStorage.getItem("accessToken");
-                          if (token) {
-                            // User is logged in, redirect to billboard details
-                            window.location.href = `/billboard/${billboard.static_id}`;
-                          } else {
+                          const userType = localStorage.getItem("userType");
+                          
+                          if (!token) {
                             // User is not logged in, redirect to sign in
                             window.location.href = '/signIn';
+                            return;
                           }
+                          
+                          if (userType === "vendor") {
+                            // User is a vendor, show alert
+                            alert("Vendor bookings are disabled right now");
+                            return;
+                          }
+                          
+                          // User is logged in and not a vendor, redirect to billboard details
+                          window.location.href = `/billboard/${billboard.static_id}`;
                         }}
                         className="w-full py-2 px-4 rounded-lg font-medium transition bg-[#1db954] text-white hover:bg-[#159c43]"
                       >
