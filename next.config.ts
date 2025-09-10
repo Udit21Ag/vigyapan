@@ -25,6 +25,11 @@ const nextConfig: NextConfig = {
         hostname: 'vigyapan.digital',
         pathname: '/backend/media/**',
       },
+            {
+        protocol: 'https',
+        hostname: 'www.vigyapan.digital',
+        pathname: '/backend/media/**',
+      },
     ],
   },
 };
