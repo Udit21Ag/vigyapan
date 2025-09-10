@@ -11,6 +11,7 @@ const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
 export default function AddBillboard() {
   const [form, setForm] = useState({
+    title: "",
     type: "",
     city: "",
     address: "",
@@ -23,6 +24,8 @@ export default function AddBillboard() {
     longitude: "",
     latitude: ""
   });
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const markerRef = useRef<google.maps.Marker | null>(null);
@@ -36,6 +39,39 @@ export default function AddBillboard() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Validate file type
+      const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+      if (!validTypes.includes(file.type)) {
+        setError('Please select a valid image file (JPEG, PNG, GIF, or WebP)');
+        return;
+      }
+      
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        setError('Image size should be less than 5MB');
+        return;
+      }
+      
+      setSelectedImage(file);
+      setError('');
+      
+      // Create preview
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeImage = () => {
+    setSelectedImage(null);
+    setImagePreview(null);
   };
 
 
@@ -275,29 +311,38 @@ export default function AddBillboard() {
     try {
       const accessToken = typeof window !== "undefined" ? localStorage.getItem("accessToken") : "";
       const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
+      
+      // Create FormData for file upload
+      const formData = new FormData();
+      formData.append('title', form.title);
+      formData.append('type', form.type);
+      formData.append('city', form.city);
+      formData.append('address', form.address);
+      formData.append('pincode', form.pincode);
+      formData.append('dimensionLen', form.length);
+      formData.append('dimensionWid', form.width);
+      formData.append('price', form.price);
+      formData.append('status', form.status);
+      formData.append('available', form.available === "yes" ? "true" : "false");
+      formData.append('longitude', form.longitude);
+      formData.append('latitude', form.latitude);
+      
+      if (selectedImage) {
+        formData.append('photo', selectedImage);
+      }
+      
       const res = await fetch(apiUrl("/users/vendor/billboard/add/"), {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {})
+          // Don't set Content-Type header for FormData, let browser set it with boundary
         },
-        body: JSON.stringify({
-          type: form.type,
-          city: form.city,
-          address: form.address,
-          pincode: form.pincode,
-          dimensionLen: form.length,
-          dimensionWid: form.width,
-          price: form.price,
-          status: form.status,
-          available: form.available === "yes",
-          longitude: form.longitude,
-          latitude: form.latitude
-        })
+        body: formData
       });
       if (res.ok) {
         alert("Billboard added successfully!");
         setForm({
+          title: "",
           type: "",
           city: "",
           address: "",
@@ -310,6 +355,8 @@ export default function AddBillboard() {
           longitude: "",
           latitude: ""
         });
+        setSelectedImage(null);
+        setImagePreview(null);
       } else {
         setError("Failed to add billboard.");
       }
@@ -335,6 +382,61 @@ export default function AddBillboard() {
             </div>
             <h2 className="text-3xl font-bold text-green-600 mb-6 text-center">Add Billboard</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Title Field */}
+              <input 
+                name="title" 
+                value={form.title} 
+                onChange={handleChange} 
+                required 
+                placeholder="Billboard Title" 
+                className="w-full p-3 border border-gray-300 rounded-lg text-black" 
+              />
+              
+              {/* Image Upload Section */}
+              <div className="space-y-3">
+                <label className="block text-sm font-semibold text-gray-700">Billboard Image</label>
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4">
+                  {imagePreview ? (
+                    <div className="relative">
+                      <img 
+                        src={imagePreview} 
+                        alt="Preview" 
+                        className="w-full h-32 object-cover rounded-lg"
+                      />
+                      <button
+                        type="button"
+                        onClick={removeImage}
+                        className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600 transition"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="text-center">
+                      <div className="mb-2">
+                        <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                          <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </div>
+                      <label className="cursor-pointer">
+                        <span className="mt-2 block text-sm font-medium text-gray-900">
+                          Click to upload an image
+                        </span>
+                        <span className="mt-1 block text-xs text-gray-500">
+                          PNG, JPG, GIF up to 5MB
+                        </span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageChange}
+                          className="hidden"
+                        />
+                      </label>
+                    </div>
+                  )}
+                </div>
+              </div>
+              
               <input name="type" value={form.type} onChange={handleChange} required placeholder="Type" className="w-full p-3 border border-gray-300 rounded-lg text-black" />
               {/* City field auto-filled from address, read-only */}
               <input

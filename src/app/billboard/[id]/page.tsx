@@ -244,7 +244,7 @@ export default function BillboardDetailsPage() {
             <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden">
               {billboard.photo ? (
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${billboard.photo}`}
+                  src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${billboard.photo}`}
                   alt={billboard.title}
                   width={600}
                   height={400}

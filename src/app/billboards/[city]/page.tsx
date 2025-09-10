@@ -198,7 +198,7 @@ export default function CityBillboardsPage() {
                   <div className="h-48 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center relative overflow-hidden">
                     {billboard.photo ? (
                       <Image
-                        src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${billboard.photo}`}
+                        src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${billboard.photo}`}
                         alt={billboard.title}
                         fill
                         className="object-cover"
