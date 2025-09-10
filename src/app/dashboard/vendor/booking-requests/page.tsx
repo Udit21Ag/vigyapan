@@ -81,13 +81,38 @@ function BookingRequestsContent() {
 	}
 
 	if (loading) {
-		return <div className="flex justify-center items-center min-h-screen text-lg">Loading...</div>;
+		return (
+			<div className="text-center py-12">
+				<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1db954] mx-auto mb-4"></div>
+				<p className="text-lg font-medium text-[#666]">Loading booking requests...</p>
+			</div>
+		);
 	}
 	if (error) {
-		return <div className="flex justify-center items-center min-h-screen text-red-600 text-lg">{error}</div>;
+		return (
+			<div className="text-center py-12">
+				<div className="text-6xl mb-4">⚠️</div>
+				<h3 className="text-xl font-semibold text-[#222] mb-2">Error Loading Booking Requests</h3>
+				<p className="text-red-600 mb-4">{error}</p>
+				<button
+					onClick={() => window.location.reload()}
+					className="bg-[#1db954] text-white px-6 py-2 rounded-full font-medium hover:bg-[#159c43] transition"
+				>
+					Retry
+				</button>
+			</div>
+		);
 	}
 	if (!bookingsData || !bookingsData.results.length) {
-		return <div className="p-8 text-center text-lg">No bookings found.</div>;
+		return (
+			<div className="text-center py-12">
+				<div className="text-6xl mb-4">📋</div>
+				<h3 className="text-xl font-semibold text-[#222] mb-2">No booking requests found</h3>
+				<p className="text-[#666] mb-4">
+					You haven&apos;t received any booking requests yet. When advertisers book your billboards, they&apos;ll appear here.
+				</p>
+			</div>
+		);
 	}
 
 	// Filter and sort bookings
@@ -102,7 +127,7 @@ function BookingRequestsContent() {
 	});
 
 	return (
-	<div className="max-w-full w-[80vw] mx-auto p-10 bg-white rounded-2xl shadow border border-green-100">
+		<div className="max-w-full w-[80vw] mx-auto p-10 bg-white rounded-2xl shadow border border-green-100">
 			<h1 className="text-3xl font-bold mb-8 text-black">Active Bookings</h1>
 			{/* Filters */}
 			<div className="flex flex-wrap gap-6 mb-6 items-center">

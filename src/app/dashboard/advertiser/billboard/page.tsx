@@ -9,7 +9,10 @@ const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}
 type Billboard = {
 	title: string;
 	address: string;
-	city: string;
+	city: {
+		static_id: string;
+		city_name: string;
+	};
 	status: string;
 	is_available: boolean;
 	type: string;
@@ -167,7 +170,7 @@ function BillboardContent() {
 				</div>
 				<div className="flex justify-between items-center py-2 border-b border-gray-100">
 					<span className="font-semibold text-green-700">City:</span>
-					<span>{billboard.city}</span>
+					<span>{billboard.city.city_name}</span>
 				</div>
 				<div className="flex justify-between items-center py-2 border-b border-gray-100">
 					<span className="font-semibold text-green-700">Type:</span>

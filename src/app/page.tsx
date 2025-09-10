@@ -6,7 +6,10 @@ import { useEffect, useState } from "react";
 
 type CityData = {
 	static_id: string;
-	city_name: string;
+	city_name: {
+		static_id: string;
+		city: string;
+	};
 	photo: string | null;
 	billboardCount: number;
 };
@@ -284,6 +287,14 @@ export default function LandingPage() {
 							</div>
 						))}
 					</div>
+				) : cities.length === 0 ? (
+					<div className="text-center py-12">
+						<div className="text-6xl mb-4">🏙️</div>
+						<h3 className="text-xl font-semibold text-[#222] mb-2">No cities available</h3>
+						<p className="text-[#666] mb-4">
+							We&apos;re working on adding more cities. Check back soon!
+						</p>
+					</div>
 				) : (
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
 						{cities.slice(0, 5).map((city, index) => {
@@ -306,7 +317,7 @@ export default function LandingPage() {
 											<>
 												<Image
 													src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${city.photo}`}
-													alt={city.city_name}
+													alt={city.city_name.city}
 													fill
 													className="object-cover"
 													sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 20vw"
@@ -331,7 +342,7 @@ export default function LandingPage() {
 										)}
 									</div>
 									<h3 className="font-semibold text-lg text-[#222] group-hover:text-[#1db954] transition-colors capitalize">
-										{city.city_name}
+										{city.city_name.city}
 									</h3>
 									<p className="text-sm text-[#666]">
 										{city.billboardCount} billboard{city.billboardCount !== 1 ? 's' : ''} available

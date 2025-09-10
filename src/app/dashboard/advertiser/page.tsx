@@ -9,7 +9,10 @@ const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}
 type Billboard = {
     id: number;
     title: string;
-    city: string;
+    city: {
+        static_id: string;
+        city_name: string;
+    };
     type: string;
     price: number;
     status: "active" | "inactive";
@@ -83,7 +86,7 @@ export default function AdvertiserDashboard() {
     // Fetch all cities from billboards for fuzzy search
     useEffect(() => {
         if (billboards.length > 0) {
-            const uniqueCities = Array.from(new Set(billboards.map(b => b.city).filter(Boolean)));
+            const uniqueCities = Array.from(new Set(billboards.map(b => b.city.city_name).filter(Boolean)));
             setCityOptions(uniqueCities);
         }
     }, [billboards]);
@@ -218,9 +221,29 @@ export default function AdvertiserDashboard() {
                 </div>
                                 <div className="bg-white rounded-lg shadow p-4 w-full max-w-4xl">
                                         {loading ? (
-                                                <div className="text-center text-lg py-8">Loading billboards...</div>
+                                                <div className="text-center py-12">
+                                                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1db954] mx-auto mb-4"></div>
+                                                        <p className="text-lg font-medium text-[#666]">Loading billboards...</p>
+                                                </div>
                                         ) : billboards.length === 0 ? (
-                                                <div className="text-center text-lg py-8">No billboards found.</div>
+                                                <div className="text-center py-12">
+                                                        <div className="text-6xl mb-4">📊</div>
+                                                        <h3 className="text-xl font-semibold text-[#222] mb-2">No billboards found</h3>
+                                                        <p className="text-[#666] mb-4">
+                                                                {Object.values(filters).some(f => f) 
+                                                                        ? "Try adjusting your filters to see more results."
+                                                                        : "There are no billboards available at the moment."
+                                                                }
+                                                        </p>
+                                                        {Object.values(filters).some(f => f) && (
+                                                                <button
+                                                                        onClick={clearFilters}
+                                                                        className="bg-[#1db954] text-white px-6 py-2 rounded-full font-medium hover:bg-[#159c43] transition"
+                                                                >
+                                                                        Clear Filters
+                                                                </button>
+                                                        )}
+                                                </div>
                                         ) : (
                                                 <>
                                                 <table className="w-full table-auto text-black">
@@ -237,7 +260,7 @@ export default function AdvertiserDashboard() {
                                                         <tbody>
                                                                 {sortedBillboards.map((b, idx) => (
                                                                     <tr
-                                                                        key={b.id ? b.id : `${b.title}-${b.city}-${b.type}-${b.price}-${idx}`}
+                                                                        key={b.id ? b.id : `${b.title}-${b.city.city_name}-${b.type}-${b.price}-${idx}`}
                                                                         className="hover:bg-green-50 cursor-pointer"
                                                                         onClick={() => {
                                                                             if (b.id) {
@@ -246,7 +269,7 @@ export default function AdvertiserDashboard() {
                                                                         }}
                                                                     >
                                                                         <td className="px-4 py-2 font-medium">{b.title}</td>
-                                                                        <td className="px-4 py-2">{b.city}</td>
+                                                                        <td className="px-4 py-2">{b.city.city_name}</td>
                                                                         <td className="px-4 py-2">{b.type}</td>
                                                                         <td className="px-4 py-2">₹{b.price}</td>
                                                                         <td className="px-4 py-2 capitalize">{b.status}</td>

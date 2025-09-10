@@ -6,7 +6,10 @@ import Image from "next/image";
 
 type CityData = {
   static_id: string;
-  city_name: string;
+  city_name: {
+    static_id: string;
+    city: string;
+  };
   photo: string | null;
   billboardCount: number;
 };
@@ -36,10 +39,11 @@ export default function CitiesPage() {
   }, []);
 
   // Filter cities based on search query
-  const filteredCities = useMemo(() => {
+    const filteredCities = useMemo(() => {
     if (!searchQuery.trim()) return cities;
-    return cities.filter(city => 
-      city.city_name.toLowerCase().includes(searchQuery.toLowerCase())
+    
+    return cities.filter((city) =>
+      city.city_name.city.toLowerCase().includes(searchQuery.toLowerCase())
     );
   }, [cities, searchQuery]);
 
@@ -145,7 +149,7 @@ export default function CitiesPage() {
                       <>
                         <Image
                           src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${city.photo}`}
-                          alt={city.city_name}
+                          alt={city.city_name.city}
                           fill
                           className="object-cover"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
@@ -174,7 +178,7 @@ export default function CitiesPage() {
                     )}
                   </div>
                   <h3 className="font-semibold text-lg text-[#222] group-hover:text-[#1db954] transition-colors capitalize">
-                    {city.city_name}
+                    {city.city_name.city}
                   </h3>
                   <p className="text-sm text-black">
                     {city.billboardCount} advertising space{city.billboardCount !== 1 ? 's' : ''} available

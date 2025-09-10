@@ -102,9 +102,24 @@ export default function BookingsPage() {
                 <h1 className="text-3xl font-bold text-green-700 mb-6">Your Bookings</h1>
                 <div className="bg-white rounded-lg shadow p-6 w-full max-w-3xl">
                     {loading ? (
-                        <div className="text-center text-lg py-8">Loading bookings...</div>
+                        <div className="text-center py-12">
+                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1db954] mx-auto mb-4"></div>
+                            <p className="text-lg font-medium text-[#666]">Loading your bookings...</p>
+                        </div>
                     ) : bookings.length === 0 ? (
-                        <div className="text-center text-lg py-8">No bookings found.</div>
+                        <div className="text-center py-12">
+                            <div className="text-6xl mb-4">📅</div>
+                            <h3 className="text-xl font-semibold text-[#222] mb-2">No bookings found</h3>
+                            <p className="text-[#666] mb-4">
+                                You haven&apos;t made any billboard bookings yet. Start exploring and book your first billboard!
+                            </p>
+                            <a
+                                href="/cities"
+                                className="bg-[#1db954] text-white px-6 py-2 rounded-full font-medium hover:bg-[#159c43] transition"
+                            >
+                                Browse Billboards
+                            </a>
+                        </div>
                     ) : (
                         <>
                             {/* Filters */}

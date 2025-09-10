@@ -9,7 +9,10 @@ type Billboard = {
   static_id: string;
   title: string;
   address: string;
-  city: string;
+  city: {
+    static_id: string;
+    city_name: string;
+  };
   status: string;
   is_available: boolean;
   type: string;
@@ -289,7 +292,7 @@ export default function BillboardDetailsPage() {
               <div className="space-y-4">
                 <div className="flex justify-between items-center py-3 border-b border-gray-100">
                   <span className="font-semibold text-[#666]">City</span>
-                  <span className="text-[#222] capitalize">{billboard.city}</span>
+                  <span className="text-[#222] capitalize">{billboard.city.city_name}</span>
                 </div>
                 
                 <div className="flex justify-between items-center py-3 border-b border-gray-100">
@@ -365,7 +368,7 @@ export default function BillboardDetailsPage() {
                               setStartDate(e.target.value);
                               setDateError("");
                             }}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1db954] focus:border-transparent"
+                            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-[#1db954] focus:border-transparent"
                           />
                         </div>
                         <div>
@@ -378,7 +381,7 @@ export default function BillboardDetailsPage() {
                               setEndDate(e.target.value);
                               setDateError("");
                             }}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1db954] focus:border-transparent"
+                            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-[#1db954] focus:border-transparent"
                           />
                         </div>
                       </div>

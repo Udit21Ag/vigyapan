@@ -12,6 +12,7 @@ export default function CreateAccount() {
 	const googleBtnRef = useRef<HTMLDivElement | null>(null);
 	const [role, setRole] = useState("vendor");
 	const [userType, setUserType] = useState<string | null>(null);
+	const [error, setError] = useState("");
 	const [form, setForm] = useState({
 		username: "",
 		email: "",
@@ -52,10 +53,10 @@ export default function CreateAccount() {
 				localStorage.setItem("refreshToken", data.refresh);
 				window.location.href = "/";
 			} else {
-				alert("Google login failed");
+				setError("Google login failed");
 			}
 		} catch {
-			alert("Server error. Please try again later.");
+			setError("Server error. Please try again later.");
 		}
 	}, []);
 
@@ -88,12 +89,14 @@ export default function CreateAccount() {
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setForm({ ...form, [e.target.name]: e.target.value });
+		setError(""); // Clear error when user starts typing
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setError(""); // Clear any existing errors
 		if (form.password !== form.confirm) {
-			alert("Passwords do not match.");
+			setError("Passwords do not match.");
 			return;
 		}
 		try {
@@ -114,13 +117,12 @@ export default function CreateAccount() {
 				localStorage.setItem("accessToken", data.access);
 				localStorage.setItem("refreshToken", data.refresh);
 				localStorage.setItem("userType", role);
-				alert("Account created successfully!");
 				window.location.href = "/";
 			} else {
-				alert(data.error || "Account creation failed.");
+				setError(data.error || "Account creation failed.");
 			}
 		} catch {
-			alert("Server error. Please try again later.");
+			setError("Server error. Please try again later.");
 		}
 	};
 
@@ -276,6 +278,13 @@ export default function CreateAccount() {
 						>
 							Create Account
 						</button>
+					)}
+
+					{/* Error Message */}
+					{error && (
+						<div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+							<p className="text-red-700 text-sm text-center">{error}</p>
+						</div>
 					)}
 
 					{/* Already have account */}
