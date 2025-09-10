@@ -4,13 +4,14 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../../../Sidebar";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
 
 type Billboard = {
 	title: string;
 	address: string;
-	city: string;
+	city: string | { static_id: string; city_name: string };
 	status: string;
 	is_available: boolean;
 	type: string;
@@ -20,6 +21,7 @@ type Billboard = {
 	latitude?: number;
 	longitude?: number;
 	vendor?: { static_id: string; name: string };
+	photo?: string;
 };
 
 import { useParams } from "next/navigation";
@@ -77,8 +79,8 @@ function BillboardDetailContent() {
 	return (
 			<div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#e6f7ee] to-[#c3e6d6] p-8 overflow-hidden">
 				<div className="bg-white rounded-2xl shadow-2xl p-10 max-w-full w-[75vw] border border-green-100 flex flex-row gap-14 items-start">
-				{/* Left: Map and Location */}
-				<div className="w-1/2 flex flex-col items-start">
+				{/* Left: Map, Photo and Location */}
+				<div className="w-1/2 flex flex-col items-start space-y-6">
 					<h2 className="text-2xl font-bold text-green-700 mb-4">Location</h2>
 					<div className="mb-2 text-gray-700 text-base">
 						<span className="font-semibold">Address:</span> {billboard.address}
@@ -96,6 +98,19 @@ function BillboardDetailContent() {
 							/>
 						</div>
 					)}
+					
+					{/* Billboard Photo */}
+					{billboard.photo && (
+						<div className="w-full rounded-lg overflow-hidden border border-green-200 shadow">
+							<Image
+								src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${billboard.photo}`}
+								alt={billboard.title}
+								width={600}
+								height={400}
+								className="w-full h-64 object-cover"
+							/>
+						</div>
+					)}
 				</div>
 				{/* Right: Details */}
 				<div className="w-1/2 space-y-6 text-[1.15rem] text-gray-900">
@@ -106,7 +121,7 @@ function BillboardDetailContent() {
 					</div>
 					<div className="flex justify-between items-center py-2 border-b border-gray-100">
 						<span className="font-semibold text-green-700">City:</span>
-						<span>{billboard.city}</span>
+						<span>{typeof billboard.city === 'object' ? billboard.city.city_name : billboard.city}</span>
 					</div>
 					<div className="flex justify-between items-center py-2 border-b border-gray-100">
 						<span className="font-semibold text-green-700">Type:</span>

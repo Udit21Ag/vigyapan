@@ -345,7 +345,7 @@ export default function LandingPage() {
 										{city.city_name.city}
 									</h3>
 									<p className="text-sm text-[#666]">
-										{city.billboardCount} billboard{city.billboardCount !== 1 ? 's' : ''} available
+										{city.billboardCount} billboard{city.billboardCount !== 1 ? "s" : ""} available
 									</p>
 								</div>
 							);

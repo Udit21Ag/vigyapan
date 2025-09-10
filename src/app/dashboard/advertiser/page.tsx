@@ -131,183 +131,352 @@ export default function AdvertiserDashboard() {
             {/* Sidebar */}
             <Sidebar />
             {/* Main Dashboard Content */}
-            <main className="flex-1 flex flex-col items-center justify-center p-12" style={{ color: '#222' }}>
-                <h1 className="text-4xl font-bold text-green-700 mb-4">Billboard List</h1>
-                <div className="mb-6 flex flex-wrap gap-4 bg-white p-4 rounded-lg shadow">
-                    {/* Fuzzy city/state search */}
-                    <div className="flex flex-col">
-                        <input
-                            type="text"
-                            name="citySearch"
-                            value={citySearch}
-                            onChange={e => setCitySearch(e.target.value)}
-                            placeholder="Search State/City"
-                            className="border px-3 py-2 rounded text-black bg-gray-50 mb-1"
-                        />
-                        {citySearch && (
-                            <div className="bg-white border rounded shadow p-2 max-h-32 overflow-y-auto">
-                                {filteredCities.length === 0 ? (
-                                    <div className="text-gray-500">No matches</div>
-                                ) : (
-                                    filteredCities.map(city => (
-                                        <div
-                                            key={city}
-                                            className="cursor-pointer px-2 py-1 hover:bg-green-100"
-                                            onClick={() => {
-                                                setFilters(f => ({ ...f, city }));
-                                                setCitySearch("");
-                                            }}
-                                        >
-                                            {city}
-                                        </div>
-                                    ))
+            <main className="flex-1 p-8">
+                <div className="max-w-7xl mx-auto">
+                    {/* Header */}
+                    <div className="mb-8">
+                        <h1 className="text-4xl font-bold text-green-800 mb-2">Billboard Directory</h1>
+                        <p className="text-lg text-gray-600">
+                            Browse and book billboards from our extensive network of premium locations
+                        </p>
+                    </div>
+
+                    {/* Stats Overview */}
+                    {!loading && billboards.length > 0 && (
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <p className="text-sm font-medium text-gray-600">Total Available</p>
+                                        <p className="text-2xl font-bold text-gray-900">{billboards.length}</p>
+                                    </div>
+                                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                        <span className="text-2xl">📺</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <p className="text-sm font-medium text-gray-600">Active Billboards</p>
+                                        <p className="text-2xl font-bold text-green-600">
+                                            {billboards.filter(b => b.status === 'active').length}
+                                        </p>
+                                    </div>
+                                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                        <span className="text-2xl">✅</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <p className="text-sm font-medium text-gray-600">Available Now</p>
+                                        <p className="text-2xl font-bold text-blue-600">
+                                            {billboards.filter(b => b.is_available).length}
+                                        </p>
+                                    </div>
+                                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                        <span className="text-2xl">🚀</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <p className="text-sm font-medium text-gray-600">Cities</p>
+                                        <p className="text-2xl font-bold text-purple-600">
+                                            {new Set(billboards.map(b => b.city.city_name)).size}
+                                        </p>
+                                    </div>
+                                    <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                                        <span className="text-2xl">🏙️</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Advanced Filters */}
+                    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+                        <h3 className="text-lg font-semibold text-gray-900 mb-4">Search & Filter Billboards</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                            {/* City Search with Fuzzy Search */}
+                            <div className="relative">
+                                <label className="block text-sm font-medium text-gray-700 mb-1">City/State</label>
+                                <div className="relative">
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                    </div>
+                                    <input
+                                        type="text"
+                                        name="citySearch"
+                                        value={citySearch}
+                                        onChange={e => setCitySearch(e.target.value)}
+                                        placeholder="Search city or state..."
+                                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-black"
+                                    />
+                                </div>
+                                {citySearch && (
+                                    <div className="absolute z-10 w-full bg-white border border-gray-200 rounded-lg shadow-lg mt-1 max-h-48 overflow-y-auto">
+                                        {filteredCities.length === 0 ? (
+                                            <div className="px-4 py-3 text-gray-500 text-sm">No cities found</div>
+                                        ) : (
+                                            filteredCities.map(city => (
+                                                <div
+                                                    key={city}
+                                                    className="px-4 py-3 hover:bg-green-50 cursor-pointer text-gray-900 border-b border-gray-100 last:border-b-0"
+                                                    onClick={() => {
+                                                        setFilters(f => ({ ...f, city }));
+                                                        setCitySearch("");
+                                                    }}
+                                                >
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="text-gray-400">📍</span>
+                                                        {city}
+                                                    </div>
+                                                </div>
+                                            ))
+                                        )}
+                                    </div>
                                 )}
                             </div>
-                        )}
+
+                            {/* Billboard Type */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Billboard Type</label>
+                                <input
+                                    type="text"
+                                    name="type"
+                                    value={filters.type}
+                                    onChange={handleFilterChange}
+                                    placeholder="e.g., Digital, LED, Traditional"
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-black"
+                                />
+                            </div>
+
+                            {/* Max Price */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Max Price (₹)</label>
+                                <input
+                                    type="number"
+                                    name="price"
+                                    value={filters.price}
+                                    onChange={handleFilterChange}
+                                    placeholder="Enter maximum price"
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-black"
+                                />
+                            </div>
+
+                            {/* Sort by Price */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Sort by Price</label>
+                                <select
+                                    name="orderBy"
+                                    value={orderBy}
+                                    onChange={e => setOrderBy(e.target.value)}
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-black"
+                                >
+                                    <option value="">Default Order</option>
+                                    <option value="min-max">Price: Low to High</option>
+                                    <option value="max-min">Price: High to Low</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            {/* Status Filter */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                                <select
+                                    name="status"
+                                    value={filters.status}
+                                    onChange={handleFilterChange}
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-black"
+                                >
+                                    <option value="">All Status</option>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                </select>
+                            </div>
+
+                            {/* Availability Filter */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Availability</label>
+                                <select
+                                    name="is_available"
+                                    value={filters.is_available}
+                                    onChange={handleFilterChange}
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-black"
+                                >
+                                    <option value="">All Billboards</option>
+                                    <option value="true">Available for Booking</option>
+                                    <option value="false">Currently Booked</option>
+                                </select>
+                            </div>
+
+                            {/* Clear Filters Button */}
+                            <div className="flex items-end">
+                                <button
+                                    type="button"
+                                    onClick={clearFilters}
+                                    className="w-full px-4 py-3 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition border border-gray-300"
+                                >
+                                    Clear All Filters
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <input
-                        type="text"
-                        name="type"
-                        value={filters.type}
-                        onChange={handleFilterChange}
-                        placeholder="Type"
-                        className="border px-3 py-2 rounded text-black bg-gray-50"
-                    />
-                    <input
-                        type="number"
-                        name="price"
-                        value={filters.price}
-                        onChange={handleFilterChange}
-                        placeholder="Max Price"
-                        className="border px-3 py-2 rounded text-black bg-gray-50"
-                    />
-                    <select
-                        name="status"
-                        value={filters.status}
-                        onChange={handleFilterChange}
-                        className="border px-3 py-2 rounded text-black bg-gray-50"
-                    >
-                        <option value="">Status</option>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                    </select>
-                    <select
-                        name="is_available"
-                        value={filters.is_available}
-                        onChange={handleFilterChange}
-                        className="border px-3 py-2 rounded text-black bg-gray-50"
-                    >
-                        <option value="">Availability</option>
-                        <option value="true">Available</option>
-                        <option value="false">Not Available</option>
-                    </select>
-                    <select
-                        name="orderBy"
-                        value={orderBy}
-                        onChange={e => setOrderBy(e.target.value)}
-                        className="border px-3 py-2 rounded text-black bg-gray-50"
-                    >
-                        <option value="">Order by Price</option>
-                        <option value="min-max">Min to Max</option>
-                        <option value="max-min">Max to Min</option>
-                    </select>
-                    <button
-                        type="button"
-                        onClick={clearFilters}
-                        className="px-4 py-2 bg-gray-200 text-black rounded-lg font-semibold hover:bg-gray-300 transition"
-                    >
-                        Clear Filters
-                    </button>
-                </div>
-                                <div className="bg-white rounded-lg shadow p-4 w-full max-w-4xl">
-                                        {loading ? (
-                                                <div className="text-center py-12">
-                                                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1db954] mx-auto mb-4"></div>
-                                                        <p className="text-lg font-medium text-[#666]">Loading billboards...</p>
+
+                    {/* Results */}
+                    {loading ? (
+                        <div className="text-center py-16">
+                            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-600 mx-auto mb-6"></div>
+                            <h3 className="text-xl font-semibold text-gray-700 mb-2">Loading Billboards</h3>
+                            <p className="text-gray-500">Searching for the best billboard options...</p>
+                        </div>
+                    ) : billboards.length === 0 ? (
+                        <div className="text-center py-16">
+                            <div className="text-8xl mb-6">📊</div>
+                            <h3 className="text-2xl font-bold text-gray-700 mb-4">No Billboards Found</h3>
+                            <p className="text-gray-500 mb-6 max-w-md mx-auto">
+                                {Object.values(filters).some(f => f) 
+                                    ? "No billboards match your current filters. Try adjusting your search criteria."
+                                    : "There are no billboards available at the moment. Please check back later."
+                                }
+                            </p>
+                            {Object.values(filters).some(f => f) && (
+                                <button
+                                    onClick={clearFilters}
+                                    className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition transform hover:scale-105"
+                                >
+                                    Clear All Filters
+                                </button>
+                            )}
+                        </div>
+                    ) : (
+                        <>
+                            {/* Results Count */}
+                            <div className="mb-6">
+                                <p className="text-gray-600">
+                                    Showing <span className="font-semibold">{sortedBillboards.length}</span> billboard{sortedBillboards.length !== 1 ? 's' : ''} 
+                                    {Object.values(filters).some(f => f) && (
+                                        <span className="ml-1">matching your criteria</span>
+                                    )}
+                                </p>
+                            </div>
+
+                            {/* Billboard Cards */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {sortedBillboards.map((billboard, idx) => (
+                                    <div
+                                        key={billboard.id ? billboard.id : `${billboard.title}-${billboard.city.city_name}-${billboard.type}-${billboard.price}-${idx}`}
+                                        className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg transition-all cursor-pointer transform hover:scale-[1.02]"
+                                        onClick={() => {
+                                            if (billboard.id) {
+                                                router.push(`/dashboard/advertiser/billboard?id=${billboard.id}`);
+                                            }
+                                        }}
+                                    >
+                                        <div className="p-6">
+                                            <div className="flex items-start justify-between mb-4">
+                                                <div className="flex-1">
+                                                    <h3 className="text-lg font-semibold text-gray-900 mb-2">{billboard.title}</h3>
+                                                    <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
+                                                        <span className="text-gray-400">📍</span>
+                                                        <span className="capitalize">{billboard.city.city_name}</span>
+                                                    </div>
                                                 </div>
-                                        ) : billboards.length === 0 ? (
-                                                <div className="text-center py-12">
-                                                        <div className="text-6xl mb-4">📊</div>
-                                                        <h3 className="text-xl font-semibold text-[#222] mb-2">No billboards found</h3>
-                                                        <p className="text-[#666] mb-4">
-                                                                {Object.values(filters).some(f => f) 
-                                                                        ? "Try adjusting your filters to see more results."
-                                                                        : "There are no billboards available at the moment."
-                                                                }
-                                                        </p>
-                                                        {Object.values(filters).some(f => f) && (
-                                                                <button
-                                                                        onClick={clearFilters}
-                                                                        className="bg-[#1db954] text-white px-6 py-2 rounded-full font-medium hover:bg-[#159c43] transition"
-                                                                >
-                                                                        Clear Filters
-                                                                </button>
-                                                        )}
+                                                <div className="flex flex-col items-end gap-2">
+                                                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                                        billboard.type.toLowerCase() === 'digital' ? 'bg-blue-100 text-blue-800' :
+                                                        billboard.type.toLowerCase() === 'led' ? 'bg-purple-100 text-purple-800' :
+                                                        'bg-green-100 text-green-800'
+                                                    }`}>
+                                                        {billboard.type}
+                                                    </span>
                                                 </div>
-                                        ) : (
-                                                <>
-                                                <table className="w-full table-auto text-black">
-                                                        <thead>
-                                                                <tr className="bg-green-100">
-                                                                        <th className="px-4 py-2">Title</th>
-                                                                        <th className="px-4 py-2">City</th>
-                                                                        <th className="px-4 py-2">Type</th>
-                                                                        <th className="px-4 py-2">Price</th>
-                                                                        <th className="px-4 py-2">Status</th>
-                                                                        <th className="px-4 py-2">Available</th>
-                                                                </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                                {sortedBillboards.map((b, idx) => (
-                                                                    <tr
-                                                                        key={b.id ? b.id : `${b.title}-${b.city.city_name}-${b.type}-${b.price}-${idx}`}
-                                                                        className="hover:bg-green-50 cursor-pointer"
-                                                                        onClick={() => {
-                                                                            if (b.id) {
-                                                                                router.push(`/dashboard/advertiser/billboard?id=${b.id}`);
-                                                                            }
-                                                                        }}
-                                                                    >
-                                                                        <td className="px-4 py-2 font-medium">{b.title}</td>
-                                                                        <td className="px-4 py-2">{b.city.city_name}</td>
-                                                                        <td className="px-4 py-2">{b.type}</td>
-                                                                        <td className="px-4 py-2">₹{b.price}</td>
-                                                                        <td className="px-4 py-2 capitalize">{b.status}</td>
-                                                                        <td className="px-4 py-2">{b.is_available ? "Yes" : "No"}</td>
-                                                                    </tr>
-                                                                ))}
-                                                        </tbody>
-                                                </table>
-                                                {/* Pagination Controls */}
-                                                                        <div className="flex justify-center items-center gap-2 mt-6">
-                                                                            <button
-                                                                                className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-                                                                                onClick={() => setPage(page - 1)}
-                                                                                disabled={page <= 1}
-                                                                            >
-                                                                                Prev
-                                                                            </button>
-                                                                            {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
-                                                                                <button
-                                                                                    key={p}
-                                                                                    className={`px-3 py-1 rounded ${p === page ? 'bg-green-500 text-white' : 'bg-gray-100 hover:bg-gray-300'}`}
-                                                                                    onClick={() => setPage(p)}
-                                                                                    disabled={p === page}
-                                                                                >
-                                                                                    {p}
-                                                                                </button>
-                                                                            ))}
-                                                                            <button
-                                                                                className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-                                                                                onClick={() => setPage(page + 1)}
-                                                                                disabled={page >= totalPages}
-                                                                            >
-                                                                                Next
-                                                                            </button>
-                                                                        </div>
-                                                </>
-                                        )}
+                                            </div>
+
+                                            <div className="space-y-3">
+                                                <div className="flex justify-between items-center">
+                                                    <span className="text-sm font-medium text-gray-600">Price per day:</span>
+                                                    <span className="text-xl font-bold text-green-600">₹{billboard.price.toLocaleString()}</span>
+                                                </div>
+
+                                                <div className="flex justify-between items-center">
+                                                    <span className="text-sm font-medium text-gray-600">Status:</span>
+                                                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                                        billboard.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                                                    }`}>
+                                                        {billboard.status}
+                                                    </span>
+                                                </div>
+
+                                                <div className="flex justify-between items-center">
+                                                    <span className="text-sm font-medium text-gray-600">Availability:</span>
+                                                    <div className="flex items-center gap-2">
+                                                        <div className={`w-2 h-2 rounded-full ${billboard.is_available ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                                                        <span className={`text-xs font-medium ${billboard.is_available ? 'text-green-700' : 'text-red-700'}`}>
+                                                            {billboard.is_available ? 'Available' : 'Booked'}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="mt-4 pt-4 border-t border-gray-100">
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-sm text-gray-500">Click to view details</span>
+                                                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Pagination */}
+                            {totalPages > 1 && (
+                                <div className="flex justify-center items-center gap-2 mt-8">
+                                    <button
+                                        className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                                        onClick={() => setPage(page - 1)}
+                                        disabled={page <= 1}
+                                    >
+                                        Previous
+                                    </button>
+                                    <div className="flex items-center gap-1">
+                                        {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
+                                            <button
+                                                key={p}
+                                                className={`px-4 py-2 rounded-lg font-medium transition ${
+                                                    p === page 
+                                                        ? 'bg-green-600 text-white shadow-md' 
+                                                        : 'bg-white text-green-600 border border-gray-200 hover:bg-green-50'
+                                                }`}
+                                                onClick={() => setPage(p)}
+                                            >
+                                                {p}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <button
+                                        className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                                        onClick={() => setPage(page + 1)}
+                                        disabled={page >= totalPages}
+                                    >
+                                        Next
+                                    </button>
                                 </div>
+                            )}
+                        </>
+                    )}
+                </div>
             </main>
         </div>
     );

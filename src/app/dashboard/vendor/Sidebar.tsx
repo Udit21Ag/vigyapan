@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 const SIDEBAR_LINKS = [
     { href: "/", label: "Home" },
+    { href: "/dashboard/vendor/your-billboards", label: "Your Billboards" },
     { href: "/dashboard/vendor/addBillboard", label: "Add Billboard" },
 ];
 

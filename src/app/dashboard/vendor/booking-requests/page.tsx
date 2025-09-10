@@ -82,35 +82,48 @@ function BookingRequestsContent() {
 
 	if (loading) {
 		return (
-			<div className="text-center py-12">
-				<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1db954] mx-auto mb-4"></div>
-				<p className="text-lg font-medium text-[#666]">Loading booking requests...</p>
+			<div className="max-w-6xl mx-auto p-8">
+				<div className="text-center py-16">
+					<div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-600 mx-auto mb-6"></div>
+					<h3 className="text-xl font-semibold text-gray-700 mb-2">Loading Booking Requests</h3>
+					<p className="text-gray-500">Please wait while we fetch your booking requests...</p>
+				</div>
 			</div>
 		);
 	}
 	if (error) {
 		return (
-			<div className="text-center py-12">
-				<div className="text-6xl mb-4">⚠️</div>
-				<h3 className="text-xl font-semibold text-[#222] mb-2">Error Loading Booking Requests</h3>
-				<p className="text-red-600 mb-4">{error}</p>
-				<button
-					onClick={() => window.location.reload()}
-					className="bg-[#1db954] text-white px-6 py-2 rounded-full font-medium hover:bg-[#159c43] transition"
-				>
-					Retry
-				</button>
+			<div className="max-w-6xl mx-auto p-8">
+				<div className="text-center py-16">
+					<div className="text-6xl mb-6">⚠️</div>
+					<h3 className="text-2xl font-bold text-red-600 mb-4">Error Loading Booking Requests</h3>
+					<p className="text-gray-600 mb-6 max-w-md mx-auto">{error}</p>
+					<button
+						onClick={() => window.location.reload()}
+						className="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition transform hover:scale-105"
+					>
+						Retry
+					</button>
+				</div>
 			</div>
 		);
 	}
 	if (!bookingsData || !bookingsData.results.length) {
 		return (
-			<div className="text-center py-12">
-				<div className="text-6xl mb-4">📋</div>
-				<h3 className="text-xl font-semibold text-[#222] mb-2">No booking requests found</h3>
-				<p className="text-[#666] mb-4">
-					You haven&apos;t received any booking requests yet. When advertisers book your billboards, they&apos;ll appear here.
-				</p>
+			<div className="max-w-6xl mx-auto p-8">
+				<div className="text-center py-16">
+					<div className="text-8xl mb-6">📋</div>
+					<h3 className="text-2xl font-bold text-gray-700 mb-4">No Booking Requests Yet</h3>
+					<p className="text-gray-500 mb-6 max-w-md mx-auto">
+						You haven&apos;t received any booking requests yet. When advertisers book your billboards, they&apos;ll appear here.
+					</p>
+					<div className="bg-blue-50 border border-blue-200 rounded-lg p-6 max-w-lg mx-auto">
+						<h4 className="font-semibold text-blue-800 mb-2">💡 Tip</h4>
+						<p className="text-blue-700 text-sm">
+							Make sure your billboards are marked as available and have competitive pricing to attract more bookings.
+						</p>
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -127,83 +140,193 @@ function BookingRequestsContent() {
 	});
 
 	return (
-		<div className="max-w-full w-[80vw] mx-auto p-10 bg-white rounded-2xl shadow border border-green-100">
-			<h1 className="text-3xl font-bold mb-8 text-black">Active Bookings</h1>
-			{/* Filters */}
-			<div className="flex flex-wrap gap-6 mb-6 items-center">
-				<div>
-					<label className="font-semibold text-green-700 mr-2">Status:</label>
-					<select
-						value={statusFilter}
-						onChange={e => setStatusFilter(e.target.value)}
-						className="border rounded px-3 py-2 text-black bg-green-50"
-					>
-						<option value="all">All</option>
-						<option value="pending">Pending</option>
-						<option value="cancelled">Cancelled</option>
-						<option value="confirmed">Confirmed</option>
-					</select>
+		<div className="max-w-6xl mx-auto p-8">
+			{/* Header */}
+			<div className="mb-8">
+				<h1 className="text-4xl font-bold text-green-800 mb-2">Booking Requests</h1>
+				<p className="text-lg text-gray-600">
+					Manage and respond to billboard booking requests from advertisers
+				</p>
+			</div>
+
+			{/* Stats Cards */}
+			<div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+				<div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+					<div className="flex items-center justify-between">
+						<div>
+							<p className="text-sm font-medium text-gray-600">Total Requests</p>
+							<p className="text-2xl font-bold text-gray-900">{bookingsData.count}</p>
+						</div>
+						<div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+							<span className="text-2xl">📋</span>
+						</div>
+					</div>
 				</div>
-				<div>
-					<label className="font-semibold text-green-700 mr-2">Sort by Time:</label>
-					<select
-						value={sortOrder}
-						onChange={e => setSortOrder(e.target.value)}
-						className="border rounded px-3 py-2 text-black bg-green-50"
-					>
-						<option value="latest">Latest - Oldest</option>
-						<option value="oldest">Oldest - Latest</option>
-					</select>
+				<div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+					<div className="flex items-center justify-between">
+						<div>
+							<p className="text-sm font-medium text-gray-600">Pending</p>
+							<p className="text-2xl font-bold text-yellow-600">
+								{filteredBookings.filter(b => b.status === 'pending').length}
+							</p>
+						</div>
+						<div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+							<span className="text-2xl">⏳</span>
+						</div>
+					</div>
+				</div>
+				<div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+					<div className="flex items-center justify-between">
+						<div>
+							<p className="text-sm font-medium text-gray-600">Confirmed</p>
+							<p className="text-2xl font-bold text-green-600">
+								{filteredBookings.filter(b => b.status === 'confirmed').length}
+							</p>
+						</div>
+						<div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+							<span className="text-2xl">✅</span>
+						</div>
+					</div>
+				</div>
+				<div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+					<div className="flex items-center justify-between">
+						<div>
+							<p className="text-sm font-medium text-gray-600">Active</p>
+							<p className="text-2xl font-bold text-blue-600">
+								{filteredBookings.filter(b => b.is_active).length}
+							</p>
+						</div>
+						<div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+							<span className="text-2xl">🚀</span>
+						</div>
+					</div>
 				</div>
 			</div>
-			<table className="w-full text-left border-collapse">
-				<thead>
-					<tr className="bg-green-50">
-						<th className="py-3 px-4 font-semibold text-green-700">Billboard Title</th>
-						<th className="py-3 px-4 font-semibold text-green-700">Status</th>
-						<th className="py-3 px-4 font-semibold text-green-700">Created At</th>
-						<th className="py-3 px-4 font-semibold text-green-700">Is Active</th>
-					</tr>
-				</thead>
-				<tbody>
-					{filteredBookings.map((booking, idx) => (
-						<tr
-							key={booking.static_id}
-							className="border-b cursor-pointer hover:bg-green-50 transition"
-							onClick={e => {
-								if ((e.target as HTMLElement).tagName !== "A") {
-									router.push(`/dashboard/vendor/booking-requests/details/${booking.static_id}`);
-								}
-							}}
+
+			{/* Filters */}
+			<div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+				<h3 className="text-lg font-semibold text-gray-900 mb-4">Filters & Sorting</h3>
+				<div className="flex flex-wrap gap-6 items-center">
+					<div className="flex items-center gap-2">
+						<label className="font-medium text-gray-700">Status:</label>
+						<select
+							value={statusFilter}
+							onChange={e => setStatusFilter(e.target.value)}
+							className="border border-gray-300 rounded-lg px-4 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
 						>
-							<td className="py-2 px-4 text-black">
-								<Link
-									href={`/dashboard/vendor/billboard/details/${booking.billboard}`}
-									className="text-green-700 underline font-semibold hover:text-green-900"
-									onClick={(e: React.MouseEvent<HTMLAnchorElement>) => e.stopPropagation()}
-								>
-									{titles[idx]}
-								</Link>
-							</td>
-							<td className="py-2 px-4 text-black">{booking.status}</td>
-							<td className="py-2 px-4 text-black">{new Date(booking.created_at).toLocaleString()}</td>
-							<td className="py-2 px-4 text-black">{booking.is_active ? "Yes" : "No"}</td>
-						</tr>
-					))}
-				</tbody>
-			</table>
-			{/* Pagination */}
-			<div className="flex justify-center items-center gap-2 mt-8">
-				{Array.from({ length: bookingsData.total_pages }, (_, i) => (
-					<button
-						key={i + 1}
-						className={`px-4 py-2 rounded ${bookingsData.current_page === i + 1 ? "bg-green-600 text-white" : "bg-green-50 text-green-700 hover:bg-green-100"}`}
-						onClick={() => router.push(`/dashboard/vendor/booking-requests?page=${i + 1}`)}
+							<option value="all">All Status</option>
+							<option value="pending">Pending</option>
+							<option value="cancelled">Cancelled</option>
+							<option value="confirmed">Confirmed</option>
+						</select>
+					</div>
+					<div className="flex items-center gap-2">
+						<label className="font-medium text-gray-700">Sort by:</label>
+						<select
+							value={sortOrder}
+							onChange={e => setSortOrder(e.target.value)}
+							className="border border-gray-300 rounded-lg px-4 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
+						>
+							<option value="latest">Latest First</option>
+							<option value="oldest">Oldest First</option>
+						</select>
+					</div>
+				</div>
+			</div>
+
+			{/* Booking Requests Cards */}
+			<div className="space-y-4">
+				{filteredBookings.map((booking, idx) => (
+					<div
+						key={booking.static_id}
+						className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all cursor-pointer"
+						onClick={() => router.push(`/dashboard/vendor/booking-requests/details/${booking.static_id}`)}
 					>
-						{i + 1}
-					</button>
+						<div className="p-6">
+							<div className="flex items-start justify-between">
+								<div className="flex-1">
+									<div className="flex items-center gap-3 mb-3">
+										<h3 className="text-xl font-semibold text-gray-900">
+											{titles[idx] || 'Loading...'}
+										</h3>
+										<span className={`px-3 py-1 rounded-full text-sm font-medium ${
+											booking.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+											booking.status === 'confirmed' ? 'bg-green-100 text-green-800' :
+											booking.status === 'cancelled' ? 'bg-red-100 text-red-800' :
+											'bg-gray-100 text-gray-800'
+										}`}>
+											{booking.status}
+										</span>
+										{booking.is_active && (
+											<span className="px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+												Active
+											</span>
+										)}
+									</div>
+									<div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-600">
+										<div>
+											<span className="font-medium">Request Date:</span>
+											<p className="text-gray-900 mt-1">
+												{new Date(booking.created_at).toLocaleDateString()}
+											</p>
+										</div>
+										<div>
+											<span className="font-medium">Request Time:</span>
+											<p className="text-gray-900 mt-1">
+												{new Date(booking.created_at).toLocaleTimeString()}
+											</p>
+										</div>
+										<div>
+											<span className="font-medium">Billboard:</span>
+											<Link
+												href={`/dashboard/vendor/billboard/details/${booking.billboard}`}
+												className="text-green-600 hover:text-green-800 font-medium mt-1 block"
+												onClick={(e: React.MouseEvent<HTMLAnchorElement>) => e.stopPropagation()}
+											>
+												View Details →
+											</Link>
+										</div>
+										<div>
+											<span className="font-medium">Status:</span>
+											<p className={`mt-1 font-medium ${
+												booking.is_active ? 'text-green-600' : 'text-gray-500'
+											}`}>
+												{booking.is_active ? 'Currently Active' : 'Inactive'}
+											</p>
+										</div>
+									</div>
+								</div>
+								<div className="flex items-center text-gray-400">
+									<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+									</svg>
+								</div>
+							</div>
+						</div>
+					</div>
 				))}
 			</div>
+
+			{/* Pagination */}
+			{bookingsData.total_pages > 1 && (
+				<div className="flex justify-center items-center gap-2 mt-8">
+					<div className="flex items-center gap-1">
+						{Array.from({ length: bookingsData.total_pages }, (_, i) => (
+							<button
+								key={i + 1}
+								className={`px-4 py-2 rounded-lg font-medium transition ${
+									bookingsData.current_page === i + 1 
+										? "bg-green-600 text-white shadow-md" 
+										: "bg-white text-green-600 border border-gray-200 hover:bg-green-50"
+								}`}
+								onClick={() => router.push(`/dashboard/vendor/booking-requests?page=${i + 1}`)}
+							>
+								{i + 1}
+							</button>
+						))}
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }
@@ -214,8 +337,16 @@ export default function VendorBookingRequests() {
 	return (
 		<div className="min-h-screen flex bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
 			<Sidebar />
-			<main className="flex-1 flex items-center justify-center">
-				<Suspense fallback={<div className="flex justify-center items-center min-h-screen text-lg">Loading...</div>}>
+			<main className="flex-1 p-8">
+				<Suspense fallback={
+					<div className="max-w-6xl mx-auto p-8">
+						<div className="text-center py-16">
+							<div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-600 mx-auto mb-6"></div>
+							<h3 className="text-xl font-semibold text-gray-700 mb-2">Loading</h3>
+							<p className="text-gray-500">Please wait...</p>
+						</div>
+					</div>
+				}>
 					<BookingRequestsContent />
 				</Suspense>
 			</main>

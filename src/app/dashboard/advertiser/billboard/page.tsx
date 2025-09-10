@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../Sidebar";
 import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
 
@@ -22,6 +23,7 @@ type Billboard = {
 	latitude?: number;
 	longitude?: number;
 	vendor?: { static_id: string; name: string };
+	photo?: string;
 };
 
 function BillboardContent() {
@@ -68,8 +70,8 @@ function BillboardContent() {
 
 	return (
 		<div className="w-full flex flex-row gap-10 px-10 py-12">
-			{/* Left: Map */}
-			<div className="w-1/2 flex flex-col items-center">
+			{/* Left: Map and Photo */}
+			<div className="w-1/2 flex flex-col items-center space-y-6">
 				<div className="mt-2 rounded-lg overflow-hidden border border-green-200 shadow w-full">
 					<iframe
 						title="Google Map"
@@ -81,6 +83,19 @@ function BillboardContent() {
 						src={`https://www.google.com/maps?q=${billboard.latitude},${billboard.longitude}&z=16&output=embed`}
 					/>
 				</div>
+				
+				{/* Billboard Photo */}
+				{billboard.photo && (
+					<div className="w-full rounded-lg overflow-hidden border border-green-200 shadow">
+						<Image
+							src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${billboard.photo}`}
+							alt={billboard.title}
+							width={600}
+							height={400}
+							className="w-full h-64 object-cover"
+						/>
+					</div>
+				)}
 				{showBooking && (
 					<div className="mt-8 p-6 bg-blue-50 rounded-xl shadow flex flex-col gap-6 items-center w-full max-w-xl">
 						<div className="w-full flex flex-col md:flex-row gap-6">
@@ -198,13 +213,6 @@ function BillboardContent() {
 						onClick={() => router.back()}
 					>
 						← Back to List
-					</button>
-					<button
-						className={`px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition text-lg ${!billboard.is_available ? 'opacity-50 cursor-not-allowed' : ''}`}
-						onClick={() => billboard.is_available && setShowBooking(true)}
-						disabled={!billboard.is_available}
-					>
-						Request Booking
 					</button>
 				</div>
 			</div>
