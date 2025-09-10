@@ -12,10 +12,17 @@ export default function SignIn() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
+	const [userType, setUserType] = useState<string | null>(null);
 	const googleBtnRef = useRef<HTMLDivElement | null>(null);
 
 	const isLoggedIn =
 		typeof window !== "undefined" && !!localStorage.getItem("accessToken");
+
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			setUserType(localStorage.getItem("userType"));
+		}
+	}, [isLoggedIn]);
 
 	const handleLogout = () => {
 		localStorage.removeItem("accessToken");
@@ -146,18 +153,40 @@ export default function SignIn() {
 					/>
 				</Link>
 				<nav className="flex gap-8 text-gray-800 font-medium">
-					<Link href="/#features" className="hover:text-green-600">
+					<Link href="/cities" className="hover:text-green-600">
 						Find Ad Spaces
 					</Link>
 					<Link href="/#how-it-works" className="hover:text-green-600">
 						How It Works
 					</Link>
-					<Link href="/#solutions" className="hover:text-green-600">
-						For Vendors
-					</Link>
-					<Link href="/#solutions" className="hover:text-green-600">
-						For Advertisers
-					</Link>
+					{userType === "vendor" ? (
+						<>
+							<Link href="/for-vendors" className="text-green-600 font-semibold hover:text-green-700">
+								For Vendors
+							</Link>
+							<Link href="/dashboard/vendor" className="hover:text-green-600">
+								Dashboard
+							</Link>
+						</>
+					) : userType === "advertiser" ? (
+						<>
+							<Link href="/for-advertisers" className="text-green-600 font-semibold hover:text-green-700">
+								For Advertisers
+							</Link>
+							<Link href="/dashboard/advertiser" className="hover:text-green-600">
+								Dashboard
+							</Link>
+						</>
+					) : (
+						<>
+							<Link href="/for-vendors" className="hover:text-green-600">
+								For Vendors
+							</Link>
+							<Link href="/for-advertisers" className="hover:text-green-600">
+								For Advertisers
+							</Link>
+						</>
+					)}
 				</nav>
 				<div>
 					{isLoggedIn ? (

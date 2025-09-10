@@ -63,54 +63,72 @@ export default function LandingPage() {
 	return (
 		<div className="font-inter bg-[#f8fcfa] min-h-screen text-[#111] flex flex-col">
 			{/* Header */}
-			<header className="w-full border-b-1 pb-5">
+			<header className="w-full border-b-1 pb-5 relative z-10">
 				<div className="flex items-center justify-between px-12 pt-5 max-w-6xl mx-auto w-full flex-wrap gap-4">
-					<Image
-						src="/vigyapan.png"
-						alt="Vigyapan"
-						width={160}
-						height={60}
-						className="h-[38px] w-auto"
-					/>
+					<Link href="/" className="cursor-pointer">
+						<Image
+							src="/vigyapan.png"
+							alt="Vigyapan"
+							width={160}
+							height={60}
+							className="h-[38px] w-auto"
+						/>
+					</Link>
 
-					<nav className="flex gap-9 text-[1.08rem] font-medium">
+					<nav className="flex gap-9 text-[1.08rem] font-medium items-center z-10 relative">
 						<Link
-							href="#"
-							className="text-[#222] hover:text-[#1db954]"
+							href="/cities"
+							className="text-[#222] hover:text-[#1db954] transition-colors px-2 py-1"
 						>
 							Find Ad Spaces
 						</Link>
 						<Link
-							href="#"
-							className="text-[#222] hover:text-[#1db954]"
+							href="#how-it-works"
+							className="text-[#222] hover:text-[#1db954] transition-colors px-2 py-1"
 						>
 							How It Works
 						</Link>
 						{userType === "vendor" ? (
-							<Link
-								href="/dashboard/vendor"
-								className="text-[#1db954] font-semibold hover:text-[#159c43]"
-							>
-								Dashboard
-							</Link>
-						) : userType === "advertiser" ? (
-							<Link
-								href="/dashboard/advertiser"
-								className="text-[#1db954] font-semibold hover:text-[#159c43]"
-							>
-								Dashboard
-							</Link>
-						) : (
 							<>
 								<Link
-									href="#"
-									className="text-[#222] hover:text-[#1db954]"
+									href="/for-vendors"
+									className="text-[#1db954] font-semibold hover:text-[#159c43] cursor-pointer transition-colors block px-2 py-1"
 								>
 									For Vendors
 								</Link>
 								<Link
-									href="#"
-									className="text-[#1db954] font-semibold hover:text-[#159c43]"
+									href="/dashboard/vendor"
+									className="text-[#222] hover:text-[#1db954] cursor-pointer transition-colors block px-2 py-1"
+								>
+									Dashboard
+								</Link>
+							</>
+						) : userType === "advertiser" ? (
+							<>
+								<Link
+									href="/for-advertisers"
+									className="text-[#1db954] font-semibold hover:text-[#159c43] cursor-pointer transition-colors block px-2 py-1"
+								>
+									For Advertisers
+								</Link>
+								<Link
+									href="/dashboard/advertiser"
+									className="text-[#222] hover:text-[#1db954] cursor-pointer transition-colors block px-2 py-1"
+								>
+									Dashboard
+								</Link>
+							</>
+						) : (
+							<>
+								<Link
+									href="/for-vendors"
+									className="text-[#222] hover:text-[#1db954] cursor-pointer transition-colors block px-2 py-1"
+								>
+									For Vendors
+								</Link>
+								<Link
+									href="/for-advertisers"
+									className="text-[#1db954] font-semibold hover:text-[#159c43] cursor-pointer transition-colors block px-2 py-1"
 								>
 									For Advertisers
 								</Link>
@@ -326,7 +344,7 @@ export default function LandingPage() {
 			</section>
 
 			{/* How It Works Section */}
-			<section className="max-w-6xl mx-auto w-full px-6 md:px-12 py-16">
+			<section id="how-it-works" className="max-w-6xl mx-auto w-full px-6 md:px-12 py-16">
 				<div className="text-center mb-16">
 					<h2 className="text-4xl font-bold text-[#222] mb-4">
 						How It Works
@@ -383,10 +401,13 @@ export default function LandingPage() {
 				</div>
 
 				<div className="text-center">
-					<button className="bg-[#1db954] text-white px-8 py-3 rounded-full font-medium hover:bg-[#159c43] transition inline-flex items-center gap-2">
+					<Link 
+						href="#how-it-works" 
+						className="bg-[#1db954] text-white px-8 py-3 rounded-full font-medium hover:bg-[#159c43] transition inline-flex items-center gap-2"
+					>
 						Learn More About The Process
 						<span>&rarr;</span>
-					</button>
+					</Link>
 				</div>
 			</section>
 
@@ -601,19 +622,19 @@ export default function LandingPage() {
 						</div>
 						<div className="space-y-2 flex flex-col">
 							<h4 className="font-semibold mb-2">Advertisers</h4>
-							<Link href="#">How It Works</Link>
-							<Link href="#">Pricing</Link>
-							<Link href="#">Case Studies</Link>
-							<Link href="#">Success Stories</Link>
-							<Link href="#">Resources</Link>
+							<Link href="#how-it-works">How It Works</Link>
+							<Link href="/for-advertisers">Pricing</Link>
+							<Link href="/for-advertisers">Case Studies</Link>
+							<Link href="/for-advertisers">Success Stories</Link>
+							<Link href="/for-advertisers">Resources</Link>
 						</div>
 						<div className="space-y-2 flex flex-col">
 							<h4 className="font-semibold mb-2">Vendors</h4>
-							<Link href="#">List Your Space</Link>
-							<Link href="#">Vendor Guidelines</Link>
-							<Link href="#">Vendor Success Stories</Link>
-							<Link href="#">Vendor Dashboard</Link>
-							<Link href="#">Vendor Support</Link>
+							<Link href="/for-vendors">List Your Space</Link>
+							<Link href="/for-vendors">Vendor Guidelines</Link>
+							<Link href="/for-vendors">Vendor Success Stories</Link>
+							<Link href="/dashboard/vendor">Vendor Dashboard</Link>
+							<Link href="/for-vendors">Vendor Support</Link>
 						</div>
 						<div className="space-y-2 flex flex-col">
 							<h4 className="font-semibold mb-2">Support</h4>

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Script from "next/script";
 import Sidebar from "../Sidebar";
 // Google Maps types are available globally after loading the Maps JS API
@@ -368,11 +369,11 @@ export default function AddBillboard() {
   return (
     <div className="min-h-screen flex bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
       <Sidebar />
-      <main className="flex-1 flex items-center justify-center relative">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl h-[700px]">
+      <main className="flex-1 p-6 overflow-auto">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 w-full max-w-7xl mx-auto min-h-[calc(100vh-3rem)]">
           {/* Form Section */}
-          <div className="flex flex-col justify-center h-full bg-white rounded-2xl shadow-lg p-10">
-            <div className="mb-2">
+          <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8 h-fit">
+            <div className="mb-4">
               <Link href="/dashboard/vendor" className="text-green-700 hover:underline font-medium flex items-center gap-1">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -380,27 +381,32 @@ export default function AddBillboard() {
                 Back to Dashboard
               </Link>
             </div>
-            <h2 className="text-3xl font-bold text-green-600 mb-6 text-center">Add Billboard</h2>
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <h2 className="text-2xl lg:text-3xl font-bold text-green-600 mb-6 text-center">Add Billboard</h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
               {/* Title Field */}
-              <input 
-                name="title" 
-                value={form.title} 
-                onChange={handleChange} 
-                required 
-                placeholder="Billboard Title" 
-                className="w-full p-3 border border-gray-300 rounded-lg text-black" 
-              />
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Billboard Title</label>
+                <input 
+                  name="title" 
+                  value={form.title} 
+                  onChange={handleChange} 
+                  required 
+                  placeholder="Enter billboard title" 
+                  className="w-full p-3 border border-gray-300 rounded-lg text-black focus:ring-2 focus:ring-green-500 focus:border-transparent" 
+                />
+              </div>
               
               {/* Image Upload Section */}
-              <div className="space-y-3">
-                <label className="block text-sm font-semibold text-gray-700">Billboard Image</label>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4">
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700">Billboard Image</label>
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-green-400 transition-colors">
                   {imagePreview ? (
                     <div className="relative">
-                      <img 
+                      <Image 
                         src={imagePreview} 
                         alt="Preview" 
+                        width={400}
+                        height={128}
                         className="w-full h-32 object-cover rounded-lg"
                       />
                       <button
@@ -412,9 +418,9 @@ export default function AddBillboard() {
                       </button>
                     </div>
                   ) : (
-                    <div className="text-center">
+                    <div className="text-center py-4">
                       <div className="mb-2">
-                        <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                        <svg className="mx-auto h-10 w-10 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                           <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </div>
@@ -437,76 +443,174 @@ export default function AddBillboard() {
                 </div>
               </div>
               
-              <input name="type" value={form.type} onChange={handleChange} required placeholder="Type" className="w-full p-3 border border-gray-300 rounded-lg text-black" />
-              {/* City field auto-filled from address, read-only */}
-              <input
-                name="city"
-                value={form.city}
-                required
-                placeholder="City (auto-filled)"
-                className="w-full p-3 border border-gray-300 rounded-lg text-black bg-gray-100 cursor-not-allowed"
-                autoComplete="off"
-                ref={cityInputRef}
-                readOnly
-              />
-              {/* Address input with Google Maps Places Autocomplete */}
-              <div className="flex gap-2 relative">
-                <div className="flex-1 relative">
-                  <input
-                    name="address"
-                    value={form.address}
-                    onChange={handleChange}
-                    required
-                    placeholder="Landmark Address (Type to search)"
-                    className="w-full p-3 border border-gray-300 rounded-lg text-black"
-                    autoComplete="off"
-                    ref={addressInputRef}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Billboard Type</label>
+                <input 
+                  name="type" 
+                  value={form.type} 
+                  onChange={handleChange} 
+                  required 
+                  placeholder="e.g., Hoarding, Digital Display" 
+                  className="w-full p-3 border border-gray-300 rounded-lg text-black focus:ring-2 focus:ring-green-500 focus:border-transparent" 
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">City</label>
+                <input
+                  name="city"
+                  value={form.city}
+                  required
+                  placeholder="City (auto-filled from address)"
+                  className="w-full p-3 border border-gray-300 rounded-lg text-black bg-gray-50 cursor-not-allowed"
+                  autoComplete="off"
+                  ref={cityInputRef}
+                  readOnly
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Landmark Address</label>
+                <div className="flex gap-2">
+                  <div className="flex-1">
+                    <input
+                      name="address"
+                      value={form.address}
+                      onChange={handleChange}
+                      required
+                      placeholder="Type landmark address to search"
+                      className="w-full p-3 border border-gray-300 rounded-lg text-black focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      autoComplete="off"
+                      ref={addressInputRef}
+                    />
+                  </div>
+                  <button 
+                    type="button" 
+                    onClick={handleAddressSearch} 
+                    disabled={searching} 
+                    className="px-4 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition disabled:opacity-50 whitespace-nowrap"
+                  >
+                    {searching ? "Searching..." : "Get Location"}
+                  </button>
+                </div>
+                {form.longitude && form.latitude && (
+                  <div className="text-green-700 text-sm mt-1">
+                    📍 Coordinates: {parseFloat(form.latitude).toFixed(6)}, {parseFloat(form.longitude).toFixed(6)}
+                  </div>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Pincode</label>
+                <input 
+                  name="pincode" 
+                  value={form.pincode} 
+                  required 
+                  placeholder="Pincode (auto-filled from address)" 
+                  className="w-full p-3 border border-gray-300 rounded-lg text-black bg-gray-50 cursor-not-allowed" 
+                  readOnly 
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Length (ft)</label>
+                  <input 
+                    name="length" 
+                    value={form.length} 
+                    onChange={handleChange} 
+                    required 
+                    placeholder="Length" 
+                    type="number"
+                    className="w-full p-3 border border-gray-300 rounded-lg text-black focus:ring-2 focus:ring-green-500 focus:border-transparent" 
                   />
                 </div>
-                <button type="button" onClick={handleAddressSearch} disabled={searching} className="px-4 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition">
-                  {searching ? "Searching..." : "Get Location"}
-                </button>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Width (ft)</label>
+                  <input 
+                    name="width" 
+                    value={form.width} 
+                    onChange={handleChange} 
+                    required 
+                    placeholder="Width" 
+                    type="number"
+                    className="w-full p-3 border border-gray-300 rounded-lg text-black focus:ring-2 focus:ring-green-500 focus:border-transparent" 
+                  />
+                </div>
               </div>
-              {form.longitude && form.latitude && (
-                <div className="text-green-700 text-sm">Coordinates: {form.latitude}, {form.longitude}</div>
-              )}
-              <input name="pincode" value={form.pincode} required placeholder="Pincode (auto-filled)" className="w-full p-3 border border-gray-300 rounded-lg text-black bg-gray-100 cursor-not-allowed" readOnly />
-              <div className="flex gap-4">
-                <input name="length" value={form.length} onChange={handleChange} required placeholder="Length (ft)" className="flex-1 p-3 border border-gray-300 rounded-lg text-black" />
-                <input name="width" value={form.width} onChange={handleChange} required placeholder="Width (ft)" className="flex-1 p-3 border border-gray-300 rounded-lg text-black" />
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Price per Day (₹)</label>
+                <input 
+                  name="price" 
+                  value={form.price} 
+                  onChange={handleChange} 
+                  required 
+                  placeholder="Enter daily rental price" 
+                  type="number"
+                  className="w-full p-3 border border-gray-300 rounded-lg text-black focus:ring-2 focus:ring-green-500 focus:border-transparent" 
+                />
               </div>
-              <input name="price" value={form.price} onChange={handleChange} required placeholder="Price per day" className="w-full p-3 border border-gray-300 rounded-lg text-black" />
-              <div className="flex gap-4">
-                <select name="status" value={form.status} onChange={handleChange} className="flex-1 p-3 border border-gray-300 rounded-lg text-black">
-                  <option value="active">Active</option>
-                  <option value="inactive">Inactive</option>
-                </select>
-                <select name="available" value={form.available} onChange={handleChange} className="flex-1 p-3 border border-gray-300 rounded-lg text-black">
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
-                </select>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                  <select 
+                    name="status" 
+                    value={form.status} 
+                    onChange={handleChange} 
+                    className="w-full p-3 border border-gray-300 rounded-lg text-black focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  >
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Available</label>
+                  <select 
+                    name="available" 
+                    value={form.available} 
+                    onChange={handleChange} 
+                    className="w-full p-3 border border-gray-300 rounded-lg text-black focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  >
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                  </select>
+                </div>
               </div>
+
               {error && (
-                <div className="w-full flex justify-center">
-                  <span className="text-red-500 text-sm text-center mb-3 px-2 max-w-[90%]" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
-                    {error}
-                  </span>
+                <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+                  <p className="text-red-600 text-sm text-center">{error}</p>
                 </div>
               )}
-              <button type="submit" className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition">Add Billboard</button>
+
+              <button 
+                type="submit" 
+                className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors shadow-md hover:shadow-lg"
+              >
+                Add Billboard
+              </button>
             </form>
           </div>
+
           {/* Google Map Section */}
-          <div className="flex flex-col justify-center h-full">
-            <div ref={mapRef} className="w-full h-full min-h-[400px] rounded-2xl shadow-lg" style={{ minHeight: "600px", borderRadius: "1rem", boxShadow: "0 2px 16px #0001" }} />
-            {/* Load Google Maps JS API with Places library */}
-            <Script
-              src={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places`}
-              strategy="afterInteractive"
-              onLoad={() => setMapLoaded(true)}
+          <div className="bg-white rounded-2xl shadow-lg p-4 h-fit min-h-[500px]">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4 text-center">Location Preview</h3>
+            <div 
+              ref={mapRef} 
+              className="w-full h-[500px] rounded-xl border border-gray-200" 
             />
           </div>
         </div>
+
+        {/* Load Google Maps JS API with Places library */}
+        {/* Load Google Maps JS API with Places library */}
+        <Script
+          src={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places`}
+          strategy="afterInteractive"
+          onLoad={() => setMapLoaded(true)}
+        />
       </main>
     </div>
   );
