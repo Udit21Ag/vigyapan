@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Fuse from "fuse.js";
 import Sidebar from "./Sidebar";
+import { useProfileProtection } from "../../../hooks/useProfileProtection";
 
 const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
 
@@ -21,6 +22,10 @@ type Billboard = {
 
 export default function AdvertiserDashboard() {
     const router = useRouter();
+    
+    // Protect route and check profile completion
+    useProfileProtection();
+    
         // ...existing code...
         const [billboards, setBillboards] = useState<Billboard[]>([]);
     const [loading, setLoading] = useState(true);

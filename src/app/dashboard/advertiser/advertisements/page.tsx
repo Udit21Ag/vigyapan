@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Sidebar from "../Sidebar";
+import { useProfileProtection } from "../../../../hooks/useProfileProtection";
 
 const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
 
@@ -14,6 +15,9 @@ type Advertisement = {
 };
 
 export default function AdvertisementsPage() {
+    // Protect route and check profile completion
+    useProfileProtection();
+    
     const [ads, setAds] = useState<Advertisement[]>([]);
     const [loading, setLoading] = useState(true);
     const [billboardTitles, setBillboardTitles] = useState<Record<string, string>>({});

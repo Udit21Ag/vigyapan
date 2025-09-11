@@ -24,6 +24,7 @@ export default function ForVendorsPage() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("userType");
+    localStorage.removeItem("completed_profile");
     window.location.reload();
   };
 

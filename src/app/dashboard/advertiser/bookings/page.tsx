@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Sidebar from "../Sidebar";
+import { useProfileProtection } from "../../../../hooks/useProfileProtection";
 
 const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
 
@@ -15,6 +16,9 @@ type Booking = {
 };
 
 export default function BookingsPage() {
+    // Protect route and check profile completion
+    useProfileProtection();
+    
     const [bookings, setBookings] = useState<Booking[]>([]);
     const [loading, setLoading] = useState(true);
     const [billboardTitles, setBillboardTitles] = useState<Record<string, string>>({});

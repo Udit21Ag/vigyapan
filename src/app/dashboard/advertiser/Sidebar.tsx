@@ -19,6 +19,7 @@ export default function Sidebar() {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         localStorage.removeItem("userType");
+        localStorage.removeItem("completed_profile");
         window.location.href = "/";
     };
     

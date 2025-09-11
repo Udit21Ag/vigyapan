@@ -5,12 +5,16 @@ import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
 import Sidebar from "../Sidebar";
+import { useProfileProtection } from "../../../../hooks/useProfileProtection";
 // Google Maps types are available globally after loading the Maps JS API
 // No need to import types; use window.google.maps.* directly
 
 const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
 export default function AddBillboard() {
+  // Protect route and check profile completion
+  useProfileProtection();
+  
   const [form, setForm] = useState({
     title: "",
     type: "",

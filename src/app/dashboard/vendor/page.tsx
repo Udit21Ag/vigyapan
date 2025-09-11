@@ -1,7 +1,10 @@
 "use client";
 import Sidebar from "./Sidebar";
+import { useProfileProtection } from "../../../hooks/useProfileProtection";
 
 export default function VendorDashboard() {
+    useProfileProtection();
+    
     return (
         <div className="min-h-screen flex bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
             <Sidebar />

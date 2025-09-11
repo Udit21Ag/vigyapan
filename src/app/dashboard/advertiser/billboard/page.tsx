@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../Sidebar";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
+import { useProfileProtection } from "../../../../hooks/useProfileProtection";
 
 const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
 
@@ -220,6 +221,9 @@ function BillboardContent() {
 	);
 }
 export default function BillboardDetail() {
+	// Protect route and check profile completion
+	useProfileProtection();
+	
 	return (
 		<div className="min-h-screen flex bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
 			<Sidebar />

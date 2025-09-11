@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../Sidebar";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
+import { useProfileProtection } from "../../../../hooks/useProfileProtection";
 
 const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
 
@@ -334,6 +335,9 @@ function BookingRequestsContent() {
 import { Suspense } from "react";
 
 export default function VendorBookingRequests() {
+	// Protect route and check profile completion
+	useProfileProtection();
+	
 	return (
 		<div className="min-h-screen flex bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
 			<Sidebar />

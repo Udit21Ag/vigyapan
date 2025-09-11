@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { useProfileProtection } from "../../../hooks/useProfileProtection";
 
 type Billboard = {
   static_id: string;
@@ -27,6 +28,9 @@ type Billboard = {
 };
 
 export default function BillboardDetailsPage() {
+  // Protect route and check profile completion for booking functionality
+  useProfileProtection();
+  
   const params = useParams();
   const router = useRouter();
   const billboardId = params?.id as string;

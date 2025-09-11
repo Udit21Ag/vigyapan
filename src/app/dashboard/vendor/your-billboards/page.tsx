@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../Sidebar";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useProfileProtection } from "../../../../hooks/useProfileProtection";
 
 const apiUrl = (path: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`;
 
@@ -27,6 +28,9 @@ type Billboard = {
 };
 
 export default function YourBillboards() {
+	// Protect route and check profile completion
+	useProfileProtection();
+	
 	const router = useRouter();
 	const [billboards, setBillboards] = useState<Billboard[]>([]);
 	const [filteredBillboards, setFilteredBillboards] = useState<Billboard[]>([]);

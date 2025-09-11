@@ -29,6 +29,8 @@ export default function CreateAccount() {
 	const handleLogout = () => {
 		localStorage.removeItem("accessToken");
 		localStorage.removeItem("refreshToken");
+		localStorage.removeItem("userType");
+		localStorage.removeItem("completed_profile");
 		window.location.reload();
 	};
 
@@ -51,7 +53,15 @@ export default function CreateAccount() {
 			if (res.ok && data.access) {
 				localStorage.setItem("accessToken", data.access);
 				localStorage.setItem("refreshToken", data.refresh);
-				window.location.href = "/";
+				localStorage.setItem("userType", data.usertype || "");
+				localStorage.setItem("completed_profile", data.completed_profile || "false");
+				
+				// Check if profile is completed
+				if (data.completed_profile === "true" || data.completed_profile === true) {
+					window.location.href = "/";
+				} else {
+					window.location.href = "/complete-profile";
+				}
 			} else {
 				setError("Google login failed");
 			}
@@ -117,7 +127,14 @@ export default function CreateAccount() {
 				localStorage.setItem("accessToken", data.access);
 				localStorage.setItem("refreshToken", data.refresh);
 				localStorage.setItem("userType", role);
-				window.location.href = "/";
+				localStorage.setItem("completed_profile", data.completed_profile || "false");
+				
+				// Check if profile is completed  
+				if (data.completed_profile === "true" || data.completed_profile === true) {
+					window.location.href = "/";
+				} else {
+					window.location.href = "/complete-profile";
+				}
 			} else {
 				setError(data.error || "Account creation failed.");
 			}
