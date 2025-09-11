@@ -32,27 +32,28 @@ export default function ForAdvertisersPage() {
     <div className="font-inter bg-white min-h-screen text-[#111] flex flex-col">
       {/* Header */}
       <header className="w-full border-b border-gray-200 bg-white sticky top-0 z-50">
-        <div className="flex items-center justify-between px-12 py-4 max-w-6xl mx-auto w-full flex-wrap gap-4">
+        <div className="flex items-center justify-between px-4 md:px-12 py-4 max-w-6xl mx-auto w-full flex-wrap gap-4">
           <Link href="/">
             <Image
               src="/vigyapan.png"
               alt="Vigyapan"
               width={160}
               height={60}
-              className="h-[38px] w-auto"
+              className="h-[30px] md:h-[38px] w-auto"
             />
           </Link>
 
-          <nav className="flex gap-9 text-[1.08rem] font-medium">
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex gap-6 xl:gap-9 text-sm xl:text-[1.08rem] font-medium">
             <Link
               href="/cities"
-              className="text-[#222] hover:text-[#1db954]"
+              className="text-[#222] hover:text-[#1db954] transition-colors"
             >
               Find Ad Spaces
             </Link>
             <Link
               href="/#how-it-works"
-              className="text-[#222] hover:text-[#1db954]"
+              className="text-[#222] hover:text-[#1db954] transition-colors"
             >
               How It Works
             </Link>
@@ -60,13 +61,13 @@ export default function ForAdvertisersPage() {
               <>
                 <Link
                   href="/for-vendors"
-                  className="text-[#1db954] font-semibold hover:text-[#159c43]"
+                  className="text-[#1db954] font-semibold hover:text-[#159c43] transition-colors"
                 >
                   For Vendors
                 </Link>
                 <Link
                   href="/dashboard/vendor"
-                  className="text-[#222] hover:text-[#1db954]"
+                  className="text-[#222] hover:text-[#1db954] transition-colors"
                 >
                   Dashboard
                 </Link>
@@ -75,13 +76,13 @@ export default function ForAdvertisersPage() {
               <>
                 <Link
                   href="/for-advertisers"
-                  className="text-[#1db954] font-semibold hover:text-[#159c43]"
+                  className="text-[#1db954] font-semibold hover:text-[#159c43] transition-colors"
                 >
                   For Advertisers
                 </Link>
                 <Link
                   href="/dashboard/advertiser"
-                  className="text-[#222] hover:text-[#1db954]"
+                  className="text-[#222] hover:text-[#1db954] transition-colors"
                 >
                   Dashboard
                 </Link>
@@ -90,13 +91,13 @@ export default function ForAdvertisersPage() {
               <>
                 <Link
                   href="/for-vendors"
-                  className="text-[#222] hover:text-[#1db954]"
+                  className="text-[#222] hover:text-[#1db954] transition-colors"
                 >
                   For Vendors
                 </Link>
                 <Link
                   href="/for-advertisers"
-                  className="text-[#1db954] font-semibold hover:text-[#159c43]"
+                  className="text-[#1db954] font-semibold hover:text-[#159c43] transition-colors"
                 >
                   For Advertisers
                 </Link>
@@ -104,10 +105,10 @@ export default function ForAdvertisersPage() {
             )}
           </nav>
 
-          <div className="flex gap-4">
+          <div className="flex gap-2 md:gap-4">
             {isLoggedIn ? (
               <button
-                className="bg-[#1db954] text-white rounded-full px-6 py-2 font-medium hover:bg-[#159c43] transition"
+                className="bg-[#1db954] text-white rounded-full px-3 py-2 md:px-6 md:py-2 font-medium hover:bg-[#159c43] transition text-sm md:text-base"
                 onClick={handleLogout}
               >
                 Log Out
@@ -116,13 +117,13 @@ export default function ForAdvertisersPage() {
               <>
                 <Link
                   href="/signUp"
-                  className="bg-[#1db954] text-white rounded-full px-6 py-2 font-medium hover:bg-[#159c43] transition"
+                  className="bg-[#1db954] text-white rounded-full px-3 py-2 md:px-6 md:py-2 font-medium hover:bg-[#159c43] transition text-sm md:text-base"
                 >
                   Create Account
                 </Link>
                 <Link
                   href="/signIn"
-                  className="bg-white text-[#222] border border-[#eee] rounded-full px-6 py-2 font-medium hover:shadow-md transition"
+                  className="bg-white text-[#222] border border-[#eee] rounded-full px-3 py-2 md:px-6 md:py-2 font-medium hover:shadow-md transition text-sm md:text-base"
                 >
                   Sign In
                 </Link>
@@ -130,106 +131,170 @@ export default function ForAdvertisersPage() {
             )}
           </div>
         </div>
+        
+        {/* Mobile Navigation */}
+        <div className="lg:hidden bg-white border-t border-gray-100">
+          <nav className="px-4 py-3 flex flex-wrap gap-4 text-sm font-medium">
+            <Link
+              href="/cities"
+              className="text-[#222] hover:text-[#1db954] transition-colors"
+            >
+              Find Spaces
+            </Link>
+            <Link
+              href="/#how-it-works"
+              className="text-[#222] hover:text-[#1db954] transition-colors"
+            >
+              How It Works
+            </Link>
+            {userType === "vendor" ? (
+              <>
+                <Link
+                  href="/for-vendors"
+                  className="text-[#1db954] font-semibold hover:text-[#159c43] transition-colors"
+                >
+                  Vendors
+                </Link>
+                <Link
+                  href="/dashboard/vendor"
+                  className="text-[#222] hover:text-[#1db954] transition-colors"
+                >
+                  Dashboard
+                </Link>
+              </>
+            ) : userType === "advertiser" ? (
+              <>
+                <Link
+                  href="/for-advertisers"
+                  className="text-[#1db954] font-semibold hover:text-[#159c43] transition-colors"
+                >
+                  Advertisers
+                </Link>
+                <Link
+                  href="/dashboard/advertiser"
+                  className="text-[#222] hover:text-[#1db954] transition-colors"
+                >
+                  Dashboard
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/for-vendors"
+                  className="text-[#222] hover:text-[#1db954] transition-colors"
+                >
+                  Vendors
+                </Link>
+                <Link
+                  href="/for-advertisers"
+                  className="text-[#1db954] font-semibold hover:text-[#159c43] transition-colors"
+                >
+                  Advertisers
+                </Link>
+              </>
+            )}
+          </nav>
+        </div>
       </header>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-green-50 to-green-100 py-20 overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+      <section className="relative bg-gradient-to-br from-green-50 to-green-100 py-12 md:py-20 overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10">
           <div>
-            <h1 className="text-5xl font-bold text-[#222] mb-6 leading-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#222] mb-4 md:mb-6 leading-tight">
               Amplify Your Brand with <br />
               <span className="text-[#1db954]">Impactful</span> Outdoor <br />
               Advertising
             </h1>
-            <p className="text-lg text-[#666] mb-8 leading-relaxed">
+            <p className="text-base md:text-lg text-[#666] mb-6 md:mb-8 leading-relaxed">
               Reach your target audience with premium billboard, digital display, and transit 
               advertising spaces across the country.
             </p>
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
               <Link
                 href="/cities"
-                className="bg-[#1db954] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#159c43] transition"
+                className="bg-[#1db954] text-white px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-[#159c43] transition text-center"
               >
                 Find Ad Spaces
               </Link>
-              <button className="border border-gray-300 text-[#222] px-8 py-4 rounded-lg font-semibold hover:bg-gray-50 transition">
+              <button className="border border-gray-300 text-[#222] px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-gray-50 transition">
                 Create Account
               </button>
             </div>
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-8 lg:mt-0">
             <Image
               src="/advertiser-hero-person.png"
               alt="Advertising Professional"
               width={500}
               height={600}
-              className="object-contain rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="object-contain rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 max-w-full h-auto"
             />
           </div>
         </div>
       </section>
 
       {/* Why Advertisers Choose Vigyapan */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-6 md:px-12">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[#222] mb-4">
+      <section className="py-12 md:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-12">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#222] mb-3 md:mb-4">
               Why Advertisers Choose Vigyapan
             </h2>
-            <p className="text-lg text-[#666] max-w-3xl mx-auto">
+            <p className="text-base md:text-lg text-[#666] max-w-3xl mx-auto px-4">
               Our platform offers comprehensive advantages for brands seeking to maximize their 
               outdoor advertising impact.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-[#1db954]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            <div className="text-center p-4 md:p-6">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                <svg className="w-6 h-6 md:w-8 md:h-8 text-[#1db954]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-[#222] mb-4">Targeted Reach</h3>
+              <h3 className="text-lg md:text-xl font-bold text-[#222] mb-3 md:mb-4">Targeted Reach</h3>
               <p className="text-[#666] text-sm leading-relaxed">
                 Connect with your ideal customers using our advanced location-based targeting 
                 and geographic mapping.
               </p>
             </div>
 
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-[#1db954]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="text-center p-4 md:p-6">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                <svg className="w-6 h-6 md:w-8 md:h-8 text-[#1db954]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-[#222] mb-4">Performance Metrics</h3>
+              <h3 className="text-lg md:text-xl font-bold text-[#222] mb-3 md:mb-4">Performance Metrics</h3>
               <p className="text-[#666] text-sm leading-relaxed">
                 Track campaign effectiveness with detailed analytics including impressions, 
                 demographics, and ROI analysis.
               </p>
             </div>
 
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-[#1db954]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="text-center p-4 md:p-6">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                <svg className="w-6 h-6 md:w-8 md:h-8 text-[#1db954]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-[#222] mb-4">Premium Locations</h3>
+              <h3 className="text-lg md:text-xl font-bold text-[#222] mb-3 md:mb-4">Premium Locations</h3>
               <p className="text-[#666] text-sm leading-relaxed">
                 Access high-traffic prime advertising spots in city centers, malls, and major 
                 transit hubs.
               </p>
             </div>
 
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-[#1db954]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="text-center p-4 md:p-6">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                <svg className="w-6 h-6 md:w-8 md:h-8 text-[#1db954]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-[#222] mb-4">Flexible Pricing</h3>
+              <h3 className="text-lg md:text-xl font-bold text-[#222] mb-3 md:mb-4">Flexible Pricing</h3>
               <p className="text-[#666] text-sm leading-relaxed">
                 Transparent pricing with no hidden fees and adaptable pricing based on 
                 campaign duration and scale.

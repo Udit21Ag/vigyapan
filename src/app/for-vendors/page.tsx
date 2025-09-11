@@ -32,27 +32,28 @@ export default function ForVendorsPage() {
     <div className="font-inter bg-white min-h-screen text-[#111] flex flex-col">
       {/* Header */}
       <header className="w-full border-b border-gray-200 bg-white sticky top-0 z-50">
-        <div className="flex items-center justify-between px-12 py-4 max-w-6xl mx-auto w-full flex-wrap gap-4">
+        <div className="flex items-center justify-between px-4 md:px-12 py-4 max-w-6xl mx-auto w-full flex-wrap gap-4">
           <Link href="/">
             <Image
               src="/vigyapan.png"
               alt="Vigyapan"
               width={160}
               height={60}
-              className="h-[38px] w-auto"
+              className="h-[30px] md:h-[38px] w-auto"
             />
           </Link>
 
-          <nav className="flex gap-9 text-[1.08rem] font-medium">
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex gap-6 xl:gap-9 text-sm xl:text-[1.08rem] font-medium">
             <Link
               href="/cities"
-              className="text-[#222] hover:text-[#1db954]"
+              className="text-[#222] hover:text-[#1db954] transition-colors"
             >
               Find Ad Spaces
             </Link>
             <Link
               href="/#how-it-works"
-              className="text-[#222] hover:text-[#1db954]"
+              className="text-[#222] hover:text-[#1db954] transition-colors"
             >
               How It Works
             </Link>
@@ -60,13 +61,13 @@ export default function ForVendorsPage() {
               <>
                 <Link
                   href="/for-vendors"
-                  className="text-[#1db954] font-semibold hover:text-[#159c43]"
+                  className="text-[#1db954] font-semibold hover:text-[#159c43] transition-colors"
                 >
                   For Vendors
                 </Link>
                 <Link
                   href="/dashboard/vendor"
-                  className="text-[#222] hover:text-[#1db954]"
+                  className="text-[#222] hover:text-[#1db954] transition-colors"
                 >
                   Dashboard
                 </Link>
@@ -75,13 +76,13 @@ export default function ForVendorsPage() {
               <>
                 <Link
                   href="/for-advertisers"
-                  className="text-[#1db954] font-semibold hover:text-[#159c43]"
+                  className="text-[#1db954] font-semibold hover:text-[#159c43] transition-colors"
                 >
                   For Advertisers
                 </Link>
                 <Link
                   href="/dashboard/advertiser"
-                  className="text-[#222] hover:text-[#1db954]"
+                  className="text-[#222] hover:text-[#1db954] transition-colors"
                 >
                   Dashboard
                 </Link>
@@ -90,13 +91,13 @@ export default function ForVendorsPage() {
               <>
                 <Link
                   href="/for-vendors"
-                  className="text-[#1db954] font-semibold hover:text-[#159c43]"
+                  className="text-[#1db954] font-semibold hover:text-[#159c43] transition-colors"
                 >
                   For Vendors
                 </Link>
                 <Link
                   href="/for-advertisers"
-                  className="text-[#222] hover:text-[#1db954]"
+                  className="text-[#222] hover:text-[#1db954] transition-colors"
                 >
                   For Advertisers
                 </Link>
@@ -104,10 +105,10 @@ export default function ForVendorsPage() {
             )}
           </nav>
 
-          <div className="flex gap-4">
+          <div className="flex gap-2 md:gap-4">
             {isLoggedIn ? (
               <button
-                className="bg-[#1db954] text-white rounded-full px-6 py-2 font-medium hover:bg-[#159c43] transition"
+                className="bg-[#1db954] text-white rounded-full px-3 py-2 md:px-6 md:py-2 font-medium hover:bg-[#159c43] transition text-sm md:text-base"
                 onClick={handleLogout}
               >
                 Log Out
@@ -116,13 +117,13 @@ export default function ForVendorsPage() {
               <>
                 <Link
                   href="/signUp"
-                  className="bg-[#1db954] text-white rounded-full px-6 py-2 font-medium hover:bg-[#159c43] transition"
+                  className="bg-[#1db954] text-white rounded-full px-3 py-2 md:px-6 md:py-2 font-medium hover:bg-[#159c43] transition text-sm md:text-base"
                 >
                   Create Account
                 </Link>
                 <Link
                   href="/signIn"
-                  className="bg-white text-[#222] border border-[#eee] rounded-full px-6 py-2 font-medium hover:shadow-md transition"
+                  className="bg-white text-[#222] border border-[#eee] rounded-full px-3 py-2 md:px-6 md:py-2 font-medium hover:shadow-md transition text-sm md:text-base"
                 >
                   Sign In
                 </Link>
@@ -130,117 +131,185 @@ export default function ForVendorsPage() {
             )}
           </div>
         </div>
+        
+        {/* Mobile Navigation */}
+        <div className="lg:hidden bg-white border-t border-gray-100">
+          <nav className="px-4 py-3 flex flex-wrap gap-4 text-sm font-medium">
+            <Link
+              href="/cities"
+              className="text-[#222] hover:text-[#1db954] transition-colors"
+            >
+              Find Spaces
+            </Link>
+            <Link
+              href="/#how-it-works"
+              className="text-[#222] hover:text-[#1db954] transition-colors"
+            >
+              How It Works
+            </Link>
+            {userType === "vendor" ? (
+              <>
+                <Link
+                  href="/for-vendors"
+                  className="text-[#1db954] font-semibold hover:text-[#159c43] transition-colors"
+                >
+                  Vendors
+                </Link>
+                <Link
+                  href="/dashboard/vendor"
+                  className="text-[#222] hover:text-[#1db954] transition-colors"
+                >
+                  Dashboard
+                </Link>
+              </>
+            ) : userType === "advertiser" ? (
+              <>
+                <Link
+                  href="/for-advertisers"
+                  className="text-[#1db954] font-semibold hover:text-[#159c43] transition-colors"
+                >
+                  Advertisers
+                </Link>
+                <Link
+                  href="/dashboard/advertiser"
+                  className="text-[#222] hover:text-[#1db954] transition-colors"
+                >
+                  Dashboard
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/for-vendors"
+                  className="text-[#1db954] font-semibold hover:text-[#159c43] transition-colors"
+                >
+                  Vendors
+                </Link>
+                <Link
+                  href="/for-advertisers"
+                  className="text-[#222] hover:text-[#1db954] transition-colors"
+                >
+                  Advertisers
+                </Link>
+              </>
+            )}
+          </nav>
+        </div>
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-green-50 to-green-100 py-20">
-        <div className="max-w-6xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="bg-gradient-to-br from-green-50 to-green-100 py-12 md:py-20">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div>
-            <h1 className="text-5xl font-bold text-[#222] mb-6 leading-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#222] mb-4 md:mb-6 leading-tight">
               Monetize Your Ad <br />
               <span className="text-[#1db954]">Spaces More</span> <br />
               Effectively
             </h1>
-            <p className="text-lg text-[#666] mb-8 leading-relaxed">
+            <p className="text-base md:text-lg text-[#666] mb-6 md:mb-8 leading-relaxed">
               Join thousands of vendors across India who are maximizing their 
               revenue with our state-of-the-art outdoor advertising marketplace.
             </p>
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
               <Link
                 href="/signUp"
-                className="bg-[#1db954] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#159c43] transition"
+                className="bg-[#1db954] text-white px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-[#159c43] transition text-center"
               >
                 Get Started
               </Link>
-              <button className="border border-gray-300 text-[#222] px-8 py-4 rounded-lg font-semibold hover:bg-gray-50 transition">
+              <button className="border border-gray-300 text-[#222] px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-gray-50 transition">
                 Watch Demo
               </button>
             </div>
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-8 lg:mt-0">
             <Image
               src="/hero-phones.png"
               alt="Vigyapan Mobile App"
               width={400}
               height={500}
-              className="object-contain"
+              className="object-contain max-w-full h-auto"
             />
           </div>
         </div>
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-6 md:px-12">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[#222] mb-4">
+      <section className="py-12 md:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-12">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#222] mb-3 md:mb-4">
               Benefits for Ad Space Owners
             </h2>
-            <p className="text-lg text-[#666] max-w-3xl mx-auto">
+            <p className="text-base md:text-lg text-[#666] max-w-3xl mx-auto px-4">
               Our platform helps you maximize earnings and simplify the management of your 
               advertising assets.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            <div className="text-center p-4 md:p-6">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                 <Image
                   src="/icon-list.svg"
                   alt="List Spaces"
-                  width={32}
-                  height={32}
+                  width={24}
+                  height={24}
+                  className="md:w-8 md:h-8"
                 />
               </div>
-              <h3 className="text-xl font-bold text-[#222] mb-4">List Your Spaces</h3>
+              <h3 className="text-lg md:text-xl font-bold text-[#222] mb-3 md:mb-4">List Your Spaces</h3>
               <p className="text-[#666] text-sm leading-relaxed">
                 Easily list and manage all your advertising spaces directly from our 
                 intuitive dashboard.
               </p>
             </div>
 
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="text-center p-4 md:p-6">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                 <Image
                   src="/icon-advertisers.svg"
                   alt="Find Advertisers"
-                  width={32}
-                  height={32}
+                  width={24}
+                  height={24}
+                  className="md:w-8 md:h-8"
                 />
               </div>
-              <h3 className="text-xl font-bold text-[#222] mb-4">Find New Advertisers</h3>
+              <h3 className="text-lg md:text-xl font-bold text-[#222] mb-3 md:mb-4">Find New Advertisers</h3>
               <p className="text-[#666] text-sm leading-relaxed">
                 Connect with thousands of brands and agencies looking for quality 
                 advertising placements.
               </p>
             </div>
 
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="text-center p-4 md:p-6">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                 <Image
                   src="/icon-occupancy.svg"
                   alt="Maximize Occupancy"
-                  width={32}
-                  height={32}
+                  width={24}
+                  height={24}
+                  className="md:w-8 md:h-8"
                 />
               </div>
-              <h3 className="text-xl font-bold text-[#222] mb-4">Maximize Occupancy</h3>
+              <h3 className="text-lg md:text-xl font-bold text-[#222] mb-3 md:mb-4">Maximize Occupancy</h3>
               <p className="text-[#666] text-sm leading-relaxed">
                 Fill rates of over 90% for vendors with our smart matching system and 
                 global reach.
               </p>
             </div>
 
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="text-center p-4 md:p-6">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                 <Image
                   src="/icon-payments.svg"
                   alt="Timely Payments"
-                  width={32}
-                  height={32}
+                  width={24}
+                  height={24}
+                  className="md:w-8 md:h-8"
                 />
               </div>
-              <h3 className="text-xl font-bold text-[#222] mb-4">Timely Payments</h3>
+              <h3 className="text-lg md:text-xl font-bold text-[#222] mb-3 md:mb-4">Timely Payments</h3>
               <p className="text-[#666] text-sm leading-relaxed">
                 Get paid on time, every time with our secure payment processing 
                 platform.
