@@ -131,23 +131,23 @@ export default function AdvertiserDashboard() {
             {/* Sidebar */}
             <Sidebar />
             {/* Main Dashboard Content */}
-            <main className="flex-1 p-8">
+            <main className="flex-1 p-3 md:p-8 overflow-auto">
                 <div className="max-w-7xl mx-auto">
                     {/* Header */}
-                    <div className="mb-8">
-                        <h1 className="text-4xl font-bold text-green-800 mb-2">Billboard Directory</h1>
-                        <p className="text-lg text-gray-600">
+                    <div className="mb-6 md:mb-8">
+                        <h1 className="text-2xl md:text-4xl font-bold text-green-800 mb-2">Billboard Directory</h1>
+                        <p className="text-base md:text-lg text-gray-600 px-2 md:px-0">
                             Browse and book billboards from our extensive network of premium locations
                         </p>
                     </div>
 
                     {/* Stats Overview */}
                     {!loading && billboards.length > 0 && (
-                        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mb-6 md:mb-8">
+                            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 md:p-6">
                                 <div className="flex items-center justify-between">
                                     <div>
-                                        <p className="text-sm font-medium text-gray-600">Total Available</p>
+                                        <p className="text-xs md:text-sm font-medium text-gray-600">Total Available</p>
                                         <p className="text-2xl font-bold text-gray-900">{billboards.length}</p>
                                     </div>
                                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -370,7 +370,7 @@ export default function AdvertiserDashboard() {
                             </div>
 
                             {/* Billboard Cards */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                                 {sortedBillboards.map((billboard, idx) => (
                                     <div
                                         key={billboard.id ? billboard.id : `${billboard.title}-${billboard.city.city_name}-${billboard.type}-${billboard.price}-${idx}`}
@@ -381,11 +381,11 @@ export default function AdvertiserDashboard() {
                                             }
                                         }}
                                     >
-                                        <div className="p-6">
-                                            <div className="flex items-start justify-between mb-4">
+                                        <div className="p-4 md:p-6">
+                                            <div className="flex items-start justify-between mb-3 md:mb-4">
                                                 <div className="flex-1">
-                                                    <h3 className="text-lg font-semibold text-gray-900 mb-2">{billboard.title}</h3>
-                                                    <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
+                                                    <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{billboard.title}</h3>
+                                                    <div className="flex items-center gap-2 text-xs md:text-sm text-gray-600 mb-2">
                                                         <span className="text-gray-400">📍</span>
                                                         <span className="capitalize">{billboard.city.city_name}</span>
                                                     </div>
@@ -401,14 +401,14 @@ export default function AdvertiserDashboard() {
                                                 </div>
                                             </div>
 
-                                            <div className="space-y-3">
+                                            <div className="space-y-2 md:space-y-3">
                                                 <div className="flex justify-between items-center">
-                                                    <span className="text-sm font-medium text-gray-600">Price per day:</span>
-                                                    <span className="text-xl font-bold text-green-600">₹{billboard.price.toLocaleString()}</span>
+                                                    <span className="text-xs md:text-sm font-medium text-gray-600">Price per day:</span>
+                                                    <span className="text-lg md:text-xl font-bold text-green-600">₹{billboard.price.toLocaleString()}</span>
                                                 </div>
 
                                                 <div className="flex justify-between items-center">
-                                                    <span className="text-sm font-medium text-gray-600">Status:</span>
+                                                    <span className="text-xs md:text-sm font-medium text-gray-600">Status:</span>
                                                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                                                         billboard.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
                                                     }`}>
@@ -417,7 +417,7 @@ export default function AdvertiserDashboard() {
                                                 </div>
 
                                                 <div className="flex justify-between items-center">
-                                                    <span className="text-sm font-medium text-gray-600">Availability:</span>
+                                                    <span className="text-xs md:text-sm font-medium text-gray-600">Availability:</span>
                                                     <div className="flex items-center gap-2">
                                                         <div className={`w-2 h-2 rounded-full ${billboard.is_available ? 'bg-green-500' : 'bg-red-500'}`}></div>
                                                         <span className={`text-xs font-medium ${billboard.is_available ? 'text-green-700' : 'text-red-700'}`}>
@@ -427,10 +427,10 @@ export default function AdvertiserDashboard() {
                                                 </div>
                                             </div>
 
-                                            <div className="mt-4 pt-4 border-t border-gray-100">
+                                            <div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-gray-100">
                                                 <div className="flex items-center justify-between">
-                                                    <span className="text-sm text-gray-500">Click to view details</span>
-                                                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <span className="text-xs md:text-sm text-gray-500">Click to view details</span>
+                                                    <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                     </svg>
                                                 </div>

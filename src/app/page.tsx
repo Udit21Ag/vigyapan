@@ -19,6 +19,7 @@ export default function LandingPage() {
 	const [cities, setCities] = useState<CityData[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [logoErrors, setLogoErrors] = useState<{[key: string]: boolean}>({});
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	// Check localStorage only on client
 	useEffect(() => {
@@ -66,19 +67,34 @@ export default function LandingPage() {
 	return (
 		<div className="font-inter bg-[#f8fcfa] min-h-screen text-[#111] flex flex-col">
 			{/* Header */}
-			<header className="w-full border-b-1 pb-5 relative z-10">
-				<div className="flex items-center justify-between px-12 pt-5 max-w-6xl mx-auto w-full flex-wrap gap-4">
+			<header className="w-full border-b-1 pb-3 md:pb-5 relative z-10">
+				<div className="flex items-center justify-between px-4 md:px-12 pt-3 md:pt-5 max-w-6xl mx-auto w-full flex-wrap gap-2 md:gap-4">
 					<Link href="/" className="cursor-pointer">
 						<Image
 							src="/vigyapan.png"
 							alt="Vigyapan"
 							width={160}
 							height={60}
-							className="h-[38px] w-auto"
+							className="h-[30px] md:h-[38px] w-auto"
 						/>
 					</Link>
 
-					<nav className="flex gap-9 text-[1.08rem] font-medium items-center z-10 relative">
+					{/* Mobile menu button */}
+					<button
+						onClick={() => setIsMenuOpen(!isMenuOpen)}
+						className="md:hidden flex items-center justify-center w-8 h-8 text-gray-600"
+					>
+						<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							{isMenuOpen ? (
+								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+							) : (
+								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+							)}
+						</svg>
+					</button>
+
+					{/* Desktop Navigation */}
+					<nav className="hidden md:flex gap-9 text-[1.08rem] font-medium items-center z-10 relative">
 						<Link
 							href="/cities"
 							className="text-[#222] hover:text-[#1db954] transition-colors px-2 py-1"
@@ -139,7 +155,8 @@ export default function LandingPage() {
 						)}
 					</nav>
 
-					<div className="flex gap-4">
+					{/* Desktop Auth Buttons */}
+					<div className="hidden md:flex gap-4">
 						{isLoggedIn ? (
 							<button
 								className="bg-[#1db954] text-white rounded-full px-6 py-2 font-medium hover:bg-[#159c43] transition"
@@ -165,25 +182,131 @@ export default function LandingPage() {
 						)}
 					</div>
 				</div>
+
+				{/* Mobile Menu */}
+				{isMenuOpen && (
+					<div className="md:hidden bg-white border-t border-gray-200 shadow-lg">
+						<nav className="px-4 py-4 space-y-3">
+							<Link
+								href="/cities"
+								className="block text-[#222] hover:text-[#1db954] transition-colors py-2 font-medium"
+								onClick={() => setIsMenuOpen(false)}
+							>
+								Find Ad Spaces
+							</Link>
+							<Link
+								href="#how-it-works"
+								className="block text-[#222] hover:text-[#1db954] transition-colors py-2 font-medium"
+								onClick={() => setIsMenuOpen(false)}
+							>
+								How It Works
+							</Link>
+							{userType === "vendor" ? (
+								<>
+									<Link
+										href="/for-vendors"
+										className="block text-[#1db954] font-semibold hover:text-[#159c43] transition-colors py-2"
+										onClick={() => setIsMenuOpen(false)}
+									>
+										For Vendors
+									</Link>
+									<Link
+										href="/dashboard/vendor"
+										className="block text-[#222] hover:text-[#1db954] transition-colors py-2 font-medium"
+										onClick={() => setIsMenuOpen(false)}
+									>
+										Dashboard
+									</Link>
+								</>
+							) : userType === "advertiser" ? (
+								<>
+									<Link
+										href="/for-advertisers"
+										className="block text-[#1db954] font-semibold hover:text-[#159c43] transition-colors py-2"
+										onClick={() => setIsMenuOpen(false)}
+									>
+										For Advertisers
+									</Link>
+									<Link
+										href="/dashboard/advertiser"
+										className="block text-[#222] hover:text-[#1db954] transition-colors py-2 font-medium"
+										onClick={() => setIsMenuOpen(false)}
+									>
+										Dashboard
+									</Link>
+								</>
+							) : (
+								<>
+									<Link
+										href="/for-vendors"
+										className="block text-[#222] hover:text-[#1db954] transition-colors py-2 font-medium"
+										onClick={() => setIsMenuOpen(false)}
+									>
+										For Vendors
+									</Link>
+									<Link
+										href="/for-advertisers"
+										className="block text-[#1db954] font-semibold hover:text-[#159c43] transition-colors py-2"
+										onClick={() => setIsMenuOpen(false)}
+									>
+										For Advertisers
+									</Link>
+								</>
+							)}
+							
+							{/* Mobile Auth Buttons */}
+							<div className="pt-3 border-t border-gray-200 space-y-2">
+								{isLoggedIn ? (
+									<button
+										className="w-full bg-[#1db954] text-white rounded-full px-6 py-2 font-medium hover:bg-[#159c43] transition"
+										onClick={() => {
+											handleLogout();
+											setIsMenuOpen(false);
+										}}
+									>
+										Log Out
+									</button>
+								) : (
+									<>
+										<Link
+											href="/signUp"
+											className="block w-full text-center bg-[#1db954] text-white rounded-full px-6 py-2 font-medium hover:bg-[#159c43] transition"
+											onClick={() => setIsMenuOpen(false)}
+										>
+											Create Account
+										</Link>
+										<Link
+											href="/signIn"
+											className="block w-full text-center bg-white text-[#222] border border-[#eee] rounded-full px-6 py-2 font-medium hover:shadow-md transition"
+											onClick={() => setIsMenuOpen(false)}
+										>
+											Sign In
+										</Link>
+									</>
+								)}
+							</div>
+						</nav>
+					</div>
+				)}
 			</header>
 
 			{/* Hero Section */}
-			<section className="text-center pt-16 max-w-2xl mx-auto">
-				<h1 className="text-[3.2rem] font-extrabold leading-tight mb-4">
+			<section className="text-center pt-8 md:pt-16 max-w-2xl mx-auto px-4">
+				<h1 className="text-2xl md:text-[3.2rem] font-extrabold leading-tight mb-3 md:mb-4">
 					Amplify Your Brand with
 					<br />
 					<span className="text-[#1db954]">Impactful</span> Outdoor
 					<br />
 					Advertising
 				</h1>
-				<p className="text-lg text-[#444] mb-10">
+				<p className="text-base md:text-lg text-[#444] mb-6 md:mb-10 px-2">
 					Reach your target audience with premium billboard, digital
 					display, and transit advertising spaces across the country.
 				</p>
-				<div className="flex justify-center gap-4 mb-10">
+				<div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4 mb-6 md:mb-10 px-2">
 					<Link
 						href="/cities"
-						className="bg-[#1db954] text-white rounded-3xl px-8 py-3 text-lg font-semibold shadow-md hover:bg-[#159c43] flex items-center gap-2 transition"
+						className="w-full sm:w-auto bg-[#1db954] text-white rounded-3xl px-6 md:px-8 py-3 text-base md:text-lg font-semibold shadow-md hover:bg-[#159c43] flex items-center justify-center gap-2 transition"
 					>
 						Find Ad Spaces <span>&rarr;</span>
 					</Link>
@@ -191,27 +314,27 @@ export default function LandingPage() {
 			</section>
 
 			{/* Features Section */}
-			<section className="max-w-6xl mx-auto w-full px-6 md:px-12 py-16">
-				<div className="text-center mb-16">
-					<h2 className="text-4xl font-bold text-[#222] mb-4">
+			<section className="max-w-6xl mx-auto w-full px-4 md:px-6 lg:px-12 py-8 md:py-16">
+				<div className="text-center mb-8 md:mb-16">
+					<h2 className="text-2xl md:text-4xl font-bold text-[#222] mb-3 md:mb-4">
 						Revolutionizing OOH Advertising in India
 					</h2>
-					<p className="text-lg text-[#666] max-w-3xl mx-auto">
+					<p className="text-base md:text-lg text-[#666] max-w-3xl mx-auto px-2">
 						Our platform connects advertisers with ad space owners across major Indian cities
 						through cutting-edge technology and seamless experiences.
 					</p>
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
 					{/* Feature 1 */}
-					<div className="text-center">
-						<div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-							<svg className="w-8 h-8 text-[#1db954]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<div className="text-center p-4">
+						<div className="w-12 h-12 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+							<svg className="w-6 h-6 md:w-8 md:h-8 text-[#1db954]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
 								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
 							</svg>
 						</div>
-						<h3 className="text-xl font-bold text-[#222] mb-3">Smart Ad Space Discovery</h3>
+						<h3 className="text-lg md:text-xl font-bold text-[#222] mb-2 md:mb-3">Smart Ad Space Discovery</h3>
 						<p className="text-[#666] text-sm leading-relaxed">
 							Find the perfect advertising spaces using AI-powered location
 							targeting and audience matching.
@@ -219,9 +342,9 @@ export default function LandingPage() {
 					</div>
 
 					{/* Feature 2 */}
-					<div className="text-center">
-						<div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-							<svg className="w-8 h-8 text-[#1db954]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<div className="text-center p-4">
+						<div className="w-12 h-12 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+							<svg className="w-6 h-6 md:w-8 md:h-8 text-[#1db954]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
 							</svg>
 						</div>

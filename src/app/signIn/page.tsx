@@ -142,17 +142,17 @@ export default function SignIn() {
 	return (
 		<div className="min-h-screen flex flex-col bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
 			{/* Header */}
-			<header className="flex items-center justify-between px-12 py-4 border-b bg-white shadow-sm">
-				<Link href="/" className="text-2xl font-bold text-green-600">
+			<header className="flex items-center justify-between px-4 md:px-12 py-4 border-b bg-white shadow-sm">
+				<Link href="/" className="text-xl md:text-2xl font-bold text-green-600">
 					<Image
 						src="/vigyapan.png"
 						alt="Vigyapan"
 						width={160}
 						height={60}
-						className="h-[38px] w-auto"
+						className="h-[30px] md:h-[38px] w-auto"
 					/>
 				</Link>
-				<nav className="flex gap-8 text-gray-800 font-medium">
+				<nav className="hidden md:flex gap-8 text-gray-800 font-medium">
 					<Link href="/cities" className="hover:text-green-600">
 						Find Ad Spaces
 					</Link>
@@ -188,7 +188,7 @@ export default function SignIn() {
 						</>
 					)}
 				</nav>
-				<div>
+				<div className="hidden md:block">
 					{isLoggedIn ? (
 						<button
 							onClick={handleLogout}
@@ -208,15 +208,15 @@ export default function SignIn() {
 			</header>
 
 			{/* Main */}
-			<main className="flex flex-col items-center justify-center flex-1 px-4">
+			<main className="flex flex-col items-center justify-center flex-1 px-4 py-6 md:py-8">
 				<form
 					onSubmit={handleSubmit}
-					className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md"
+					className="bg-white p-6 md:p-8 rounded-2xl shadow-lg w-full max-w-md"
 				>
-					<h2 className="text-2xl font-bold text-green-600 mb-2 text-center">
+					<h2 className="text-xl md:text-2xl font-bold text-green-600 mb-2 text-center">
 						Sign In
 					</h2>
-					<p className="text-gray-600 mb-6 text-center text-lg">
+					<p className="text-gray-600 mb-6 text-center text-sm md:text-lg">
 						Welcome back to Vigyapan Market Connect
 					</p>
 
@@ -226,7 +226,7 @@ export default function SignIn() {
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 						required
-						className="mb-3 w-full p-3 border border-gray-400 rounded-lg bg-[#f8fcfa] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-700"
+						className="mb-3 w-full p-3 md:p-4 border border-gray-400 rounded-lg bg-[#f8fcfa] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-700 text-sm md:text-base"
 					/>
 
 					<input
@@ -235,13 +235,13 @@ export default function SignIn() {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						required
-						className="mb-3 w-full p-3 border border-gray-400 rounded-lg bg-[#f8fcfa] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-700"
+						className="mb-4 md:mb-6 w-full p-3 md:p-4 border border-gray-400 rounded-lg bg-[#f8fcfa] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-700 text-sm md:text-base"
 					/>
 
 					{!isLoggedIn && (
 						<button
 							type="submit"
-							className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition"
+							className="w-full bg-green-600 text-white py-3 md:py-4 rounded-lg font-semibold hover:bg-green-700 transition text-sm md:text-base"
 						>
 							Sign In
 						</button>
@@ -276,7 +276,7 @@ export default function SignIn() {
 			</main>
 
 			{/* Footer */}
-			<footer className="text-center py-6 text-gray-600 border-t bg-white">
+			<footer className="text-center py-4 md:py-6 text-gray-600 border-t bg-white text-sm">
 				<p>© 2025 Vigyapan. All rights reserved.</p>
 			</footer>
 		</div>
