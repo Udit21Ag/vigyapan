@@ -140,13 +140,7 @@ export default function SignIn() {
 						localStorage.setItem("refreshToken", data.refresh);
 						localStorage.setItem("userType", data.usertype); // or set dynamically if available
 						localStorage.setItem("completed_profile", data.completed_profile || "false");
-						
-						// Check if profile is completed
-						if (data.completed_profile === "true" || data.completed_profile === true) {
-							window.location.href = "/";
-						} else {
-							window.location.href = "/complete-profile";
-						}
+						window.location.href = "/";
 					} else {
 						setError("Invalid username or password");
 					}

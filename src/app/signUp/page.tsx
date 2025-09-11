@@ -42,10 +42,6 @@ export default function CreateAccount() {
 
 	const handleGoogleLogin = useCallback(async (response: GoogleCredentialResponse) => {
 		try {
-			console.log('🚀 Google OAuth initiated');
-			console.log('🌐 Environment:', process.env.NODE_ENV);
-			console.log('🔗 API URL:', apiUrl("/users/googleLogin/"));
-			
 			const res = await fetch(apiUrl("/users/googleLogin/"), {
 				method: "POST",
 				headers: {
@@ -53,19 +49,8 @@ export default function CreateAccount() {
 				},
 				body: JSON.stringify({ token: response.credential }),
 			});
-			
-			console.log('📡 Response status:', res.status);
-			
-			if (!res.ok) {
-				const errorText = await res.text();
-				console.error('❌ Server error:', res.status, errorText);
-				throw new Error(`Server error: ${res.status}`);
-			}
-			
 			const data = await res.json();
-			console.log('✅ Login successful:', data);
-			
-			if (data.access) {
+			if (res.ok && data.access) {
 				localStorage.setItem("accessToken", data.access);
 				localStorage.setItem("refreshToken", data.refresh);
 				localStorage.setItem("userType", data.usertype || "");
@@ -78,11 +63,9 @@ export default function CreateAccount() {
 					window.location.href = "/complete-profile";
 				}
 			} else {
-				console.error('❌ No access token in response');
 				setError("Google login failed");
 			}
-		} catch (error) {
-			console.error('💥 Google login error:', error);
+		} catch {
 			setError("Server error. Please try again later.");
 		}
 	}, []);
