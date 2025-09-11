@@ -145,14 +145,14 @@ export default function CompleteProfile() {
 			});
 
 			if (response.ok) {
-				// Update localStorage to reflect completed profile
 				localStorage.setItem("completed_profile", "true");
 				
-				// Redirect to appropriate dashboard based on userType
+				localStorage.setItem("userType", userType);
+				
 				if (userType === "vendor") {
-					router.push("/dashboard/vendor");
+					router.push("/for-advertisers");
 				} else {
-					router.push("/dashboard/advertiser");
+					router.push("/for-vendors");
 				}
 			} else {
 				const errorData = await response.json();
