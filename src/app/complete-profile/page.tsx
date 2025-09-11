@@ -150,9 +150,9 @@ export default function CompleteProfile() {
 				localStorage.setItem("userType", userType);
 				
 				if (userType === "vendor") {
-					router.push("/for-advertisers");
+					router.push("/for-vendor");
 				} else {
-					router.push("/for-vendors");
+					router.push("/for-advertisers");
 				}
 			} else {
 				const errorData = await response.json();
