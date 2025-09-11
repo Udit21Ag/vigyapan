@@ -160,9 +160,9 @@ export default function ForAdvertisersPage() {
             <Image
               src="/advertiser-hero-person.png"
               alt="Advertising Professional"
-              width={400}
-              height={500}
-              className="object-contain"
+              width={500}
+              height={600}
+              className="object-contain rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
             />
           </div>
         </div>
@@ -287,7 +287,7 @@ export default function ForAdvertisersPage() {
               </div>
               <div className="relative">
                 <Image
-                  src="/billboard-sample.jpg"
+                  src="/billboard-sample.png"
                   alt="Billboard Advertising"
                   width={600}
                   height={400}
@@ -331,7 +331,7 @@ export default function ForAdvertisersPage() {
               </div>
               <div className="lg:order-1 relative">
                 <Image
-                  src="/digital-display-sample.jpg"
+                  src="/digital-display-sample.png"
                   alt="Digital Display Advertising"
                   width={600}
                   height={400}
@@ -375,7 +375,7 @@ export default function ForAdvertisersPage() {
               </div>
               <div className="relative">
                 <Image
-                  src="/transit-advertising-sample.jpg"
+                  src="/transit-advertising-sample.png"
                   alt="Transit Advertising"
                   width={600}
                   height={400}
@@ -463,16 +463,16 @@ export default function ForAdvertisersPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-8 rounded-xl shadow-sm">
               <Image
-                src="/success-story-1.jpg"
+                src="/success-story-1.png"
                 alt="Success Story 1"
                 width={300}
                 height={200}
                 className="w-full h-40 object-cover rounded-lg mb-6"
               />
-              <h4 className="font-bold text-[#222] mb-3">Swiggy</h4>
+              <h4 className="font-bold text-[#222] mb-3">QuickBite Express</h4>
               <p className="text-[#666] text-sm leading-relaxed mb-4">
-                Increased food delivery by 45% with strategic billboard placements in high-traffic 
-                business districts across major cities.
+                Increased food delivery orders by 30% with strategic billboard placements in high-traffic 
+                residential areas and office districts across 8 major cities.
               </p>
               <Link href="#" className="text-[#1db954] font-semibold text-sm hover:text-[#159c43]">
                 Read More →
@@ -481,16 +481,16 @@ export default function ForAdvertisersPage() {
 
             <div className="bg-white p-8 rounded-xl shadow-sm">
               <Image
-                src="/success-story-2.jpg"
+                src="/success-story-2.png"
                 alt="Success Story 2"
                 width={300}
                 height={200}
                 className="w-full h-40 object-cover rounded-lg mb-6"
               />
-              <h4 className="font-bold text-[#222] mb-3">Myntra</h4>
+              <h4 className="font-bold text-[#222] mb-3">StyleHub Fashion</h4>
               <p className="text-[#666] text-sm leading-relaxed mb-4">
-                Boosted app downloads by 60% through targeted fashion campaign in premium 
-                shopping districts during festival seasons.
+                Boosted online sales by 25% through targeted fashion campaigns in premium 
+                shopping malls and metro stations during festival and wedding seasons.
               </p>
               <Link href="#" className="text-[#1db954] font-semibold text-sm hover:text-[#159c43]">
                 Read More →
@@ -499,16 +499,16 @@ export default function ForAdvertisersPage() {
 
             <div className="bg-white p-8 rounded-xl shadow-sm">
               <Image
-                src="/success-story-3.jpg"
+                src="/success-story-3.png"
                 alt="Success Story 3"
                 width={300}
                 height={200}
                 className="w-full h-40 object-cover rounded-lg mb-6"
               />
-              <h4 className="font-bold text-[#222] mb-3">Puma</h4>
+              <h4 className="font-bold text-[#222] mb-3">EcoTech Solutions</h4>
               <p className="text-[#666] text-sm leading-relaxed mb-4">
-                Dramatically increased footwear insights that helped us position our 
-                advertisements around sports venues and youth-centered locations.
+                Achieved 80% increase in brand awareness for their sustainable energy products 
+                through strategic billboard campaigns near corporate offices and tech hubs.
               </p>
               <Link href="#" className="text-[#1db954] font-semibold text-sm hover:text-[#159c43]">
                 Read More →
