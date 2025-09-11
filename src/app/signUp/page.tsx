@@ -146,70 +146,114 @@ export default function CreateAccount() {
 	return (
 		<div className="min-h-screen flex flex-col bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
 			{/* Header */}
-			<header className="flex items-center justify-between px-12 py-4 border-b bg-white shadow-sm">
-				<Link href="/" className="text-2xl font-bold text-green-600">
+			<header className="flex items-center justify-between px-4 md:px-12 py-4 border-b bg-white shadow-sm">
+				<Link href="/" className="text-xl md:text-2xl font-bold text-green-600">
 					<Image
 						src="/vigyapan.png"
 						alt="Vigyapan"
 						width={160}
 						height={60}
-						className="h-[38px] w-auto"
+						className="h-[30px] md:h-[38px] w-auto"
 					/>
 				</Link>
-				<nav className="flex gap-8 text-gray-800 font-medium">
-					<Link href="/cities" className="hover:text-green-600">
+				
+				{/* Desktop Navigation */}
+				<nav className="hidden lg:flex gap-6 xl:gap-8 text-gray-800 font-medium text-sm xl:text-base">
+					<Link href="/cities" className="hover:text-green-600 transition-colors">
 						Find Ad Spaces
 					</Link>
-					<Link href="/#how-it-works" className="hover:text-green-600">
+					<Link href="/#how-it-works" className="hover:text-green-600 transition-colors">
 						How It Works
 					</Link>
 					{userType === "vendor" ? (
 						<>
-							<Link href="/for-vendors" className="text-green-600 font-semibold hover:text-green-700">
+							<Link href="/for-vendors" className="text-green-600 font-semibold hover:text-green-700 transition-colors">
 								For Vendors
 							</Link>
-							<Link href="/dashboard/vendor" className="hover:text-green-600">
+							<Link href="/dashboard/vendor" className="hover:text-green-600 transition-colors">
 								Dashboard
 							</Link>
 						</>
 					) : userType === "advertiser" ? (
 						<>
-							<Link href="/for-advertisers" className="text-green-600 font-semibold hover:text-green-700">
+							<Link href="/for-advertisers" className="text-green-600 font-semibold hover:text-green-700 transition-colors">
 								For Advertisers
 							</Link>
-							<Link href="/dashboard/advertiser" className="hover:text-green-600">
+							<Link href="/dashboard/advertiser" className="hover:text-green-600 transition-colors">
 								Dashboard
 							</Link>
 						</>
 					) : (
 						<>
-							<Link href="/for-vendors" className="hover:text-green-600">
+							<Link href="/for-vendors" className="hover:text-green-600 transition-colors">
 								For Vendors
 							</Link>
-							<Link href="/for-advertisers" className="hover:text-green-600">
+							<Link href="/for-advertisers" className="hover:text-green-600 transition-colors">
 								For Advertisers
 							</Link>
 						</>
 					)}
 				</nav>
-				<div>
+				
+				{/* Mobile & Desktop Auth Button */}
+				<div className="flex items-center">
 					{isLoggedIn ? (
 						<button
 							onClick={handleLogout}
-							className="px-5 py-2 rounded-full bg-green-600 text-white font-medium hover:bg-green-700 transition"
+							className="px-3 py-2 md:px-5 md:py-2 rounded-full bg-green-600 text-white font-medium hover:bg-green-700 transition text-sm md:text-base"
 						>
 							Log Out
 						</button>
 					) : (
 						<Link
 							href="/signIn"
-							className="px-5 py-2 rounded-md border border-gray-300 text-white font-medium hover:shadow-md transition bg-green-600 hover:bg-green-700"
+							className="px-3 py-2 md:px-5 md:py-2 rounded-md border border-gray-300 text-white font-medium hover:shadow-md transition bg-green-600 hover:bg-green-700 text-sm md:text-base"
 						>
 							Sign In
 						</Link>
 					)}
 				</div>
 			</header>
+
+			{/* Mobile Navigation Menu - Only show if needed */}
+			<div className="lg:hidden bg-white border-b shadow-sm">
+				<nav className="px-4 py-3 flex flex-wrap gap-4 text-gray-800 font-medium text-sm">
+					<Link href="/cities" className="hover:text-green-600 transition-colors">
+						Find Spaces
+					</Link>
+					<Link href="/#how-it-works" className="hover:text-green-600 transition-colors">
+						How It Works
+					</Link>
+					{userType === "vendor" ? (
+						<>
+							<Link href="/for-vendors" className="text-green-600 font-semibold hover:text-green-700 transition-colors">
+								Vendors
+							</Link>
+							<Link href="/dashboard/vendor" className="hover:text-green-600 transition-colors">
+								Dashboard
+							</Link>
+						</>
+					) : userType === "advertiser" ? (
+						<>
+							<Link href="/for-advertisers" className="text-green-600 font-semibold hover:text-green-700 transition-colors">
+								Advertisers
+							</Link>
+							<Link href="/dashboard/advertiser" className="hover:text-green-600 transition-colors">
+								Dashboard
+							</Link>
+						</>
+					) : (
+						<>
+							<Link href="/for-vendors" className="hover:text-green-600 transition-colors">
+								Vendors
+							</Link>
+							<Link href="/for-advertisers" className="hover:text-green-600 transition-colors">
+								Advertisers
+							</Link>
+						</>
+					)}
+				</nav>
+			</div>
 
 			{/* Main */}
 			<main className="flex-grow flex items-center justify-center px-4">
