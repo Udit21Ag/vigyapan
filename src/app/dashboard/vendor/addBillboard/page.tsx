@@ -289,7 +289,7 @@ export default function AddBillboard() {
         if (data.status === "OK" && data.results.length > 0) {
           let city = "";
           let pincode = "";
-          let state = "";
+          //let state = "";
           
           // Extract city, state, and pincode from address components
           if (data.results[0].address_components) {
@@ -300,9 +300,9 @@ export default function AddBillboard() {
               if (comp.types.includes("administrative_area_level_2") && !city) {
                 city = comp.long_name;
               }
-              if (comp.types.includes("administrative_area_level_1")) {
-                state = comp.long_name;
-              }
+              // if (comp.types.includes("administrative_area_level_1")) {
+              //   state = comp.long_name;
+              // }
               if (comp.types.includes("postal_code")) {
                 pincode = comp.long_name;
               }

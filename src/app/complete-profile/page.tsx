@@ -19,7 +19,6 @@ export default function CompleteProfile() {
 	const fileInputRef = useRef<HTMLInputElement | null>(null);
 	const addressInputRef = useRef<HTMLInputElement | null>(null);
 	const [currentStep, setCurrentStep] = useState(1);
-	const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete | null>(null);
 	
 	const [formData, setFormData] = useState({
 		phone: "",
@@ -78,8 +77,6 @@ export default function CompleteProfile() {
 					}
 				}
 			});
-
-			setAutocomplete(autocompleteInstance);
 		}
 	};
 
@@ -162,7 +159,7 @@ export default function CompleteProfile() {
 				setError(errorData.message || "Failed to complete profile. Please try again.");
 			}
 		} catch (error) {
-			setError("Server error. Please try again later.");
+			setError(`Server error. Please try again later. ${error}`);
 		} finally {
 			setIsLoading(false);
 		}
