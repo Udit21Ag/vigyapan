@@ -382,7 +382,7 @@ export default function AdvertiserDashboard() {
                                         className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg transition-all cursor-pointer transform hover:scale-[1.02]"
                                         onClick={() => {
                                             if (billboard.id) {
-                                                router.push(`/dashboard/advertiser/billboard?id=${billboard.id}`);
+                                                router.push(`/billboard/${billboard.id}`);
                                             }
                                         }}
                                     >
