@@ -544,14 +544,25 @@ export default function AddBillboard() {
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-300 mb-2">Billboard Type</label>
-                    <input 
+                    <select 
                       name="type" 
                       value={form.type} 
                       onChange={handleChange} 
                       required 
-                      placeholder="e.g., Digital Display, Traditional Hoarding" 
                       className="w-full p-3 md:p-4 border border-gray-600 rounded-xl text-gray-100 bg-gray-700 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-sm md:text-base" 
-                    />
+                    >
+                      <option value="">Select billboard type</option>
+                      <option value="billboards">Billboards</option>
+                      <option value="wallscapes">Wallscapes</option>
+                      <option value="posters">Posters</option>
+                      <option value="shelters">Shelters</option>
+                      <option value="kiosks">Kiosks</option>
+                      <option value="transit">Transit</option>
+                      <option value="airport">Airport</option>
+                      <option value="digital">Digital</option>
+                      <option value="retail">Retail</option>
+                      <option value="experiential">Experiential</option>
+                    </select>
                   </div>
                 </div>
 
