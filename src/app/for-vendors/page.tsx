@@ -29,9 +29,9 @@ export default function ForVendorsPage() {
   };
 
   return (
-    <div className="font-inter bg-white min-h-screen text-[#111] flex flex-col">
+    <div className="font-inter bg-gradient-to-b from-gray-900 to-gray-800 min-h-screen text-gray-100 flex flex-col">
       {/* Header */}
-      <header className="w-full border-b border-gray-200 bg-white sticky top-0 z-50">
+      <header className="w-full border-b border-gray-800 bg-gray-900 sticky top-0 z-50">
         <div className="flex items-center justify-between px-4 md:px-12 py-4 max-w-6xl mx-auto w-full flex-wrap gap-4">
           <Link href="/">
             <Image
@@ -47,13 +47,13 @@ export default function ForVendorsPage() {
           <nav className="hidden lg:flex gap-6 xl:gap-9 text-sm xl:text-[1.08rem] font-medium">
             <Link
               href="/cities"
-              className="text-[#222] hover:text-[#1db954] transition-colors"
+              className="text-gray-300 hover:text-[#1db954] transition-colors"
             >
               Find Ad Spaces
             </Link>
             <Link
               href="/#how-it-works"
-              className="text-[#222] hover:text-[#1db954] transition-colors"
+              className="text-gray-300 hover:text-[#1db954] transition-colors"
             >
               How It Works
             </Link>
@@ -67,7 +67,7 @@ export default function ForVendorsPage() {
                 </Link>
                 <Link
                   href="/dashboard/vendor"
-                  className="text-[#222] hover:text-[#1db954] transition-colors"
+                  className="text-gray-300 hover:text-[#1db954] transition-colors"
                 >
                   Dashboard
                 </Link>
@@ -82,7 +82,7 @@ export default function ForVendorsPage() {
                 </Link>
                 <Link
                   href="/dashboard/advertiser"
-                  className="text-[#222] hover:text-[#1db954] transition-colors"
+                  className="text-gray-300 hover:text-[#1db954] transition-colors"
                 >
                   Dashboard
                 </Link>
@@ -97,7 +97,7 @@ export default function ForVendorsPage() {
                 </Link>
                 <Link
                   href="/for-advertisers"
-                  className="text-[#222] hover:text-[#1db954] transition-colors"
+                  className="text-gray-300 hover:text-[#1db954] transition-colors"
                 >
                   For Advertisers
                 </Link>
@@ -123,7 +123,7 @@ export default function ForVendorsPage() {
                 </Link>
                 <Link
                   href="/signIn"
-                  className="bg-white text-[#222] border border-[#eee] rounded-full px-3 py-2 md:px-6 md:py-2 font-medium hover:shadow-md transition text-sm md:text-base"
+                  className="bg-gray-800 text-gray-100 border border-gray-700 rounded-full px-3 py-2 md:px-6 md:py-2 font-medium hover:bg-gray-700 transition text-sm md:text-base"
                 >
                   Sign In
                 </Link>
@@ -133,17 +133,17 @@ export default function ForVendorsPage() {
         </div>
         
         {/* Mobile Navigation */}
-        <div className="lg:hidden bg-white border-t border-gray-100">
+        <div className="lg:hidden bg-gray-900 border-t border-gray-800">
           <nav className="px-4 py-3 flex flex-wrap gap-4 text-sm font-medium">
             <Link
               href="/cities"
-              className="text-[#222] hover:text-[#1db954] transition-colors"
+              className="text-gray-300 hover:text-[#1db954] transition-colors"
             >
               Find Spaces
             </Link>
             <Link
               href="/#how-it-works"
-              className="text-[#222] hover:text-[#1db954] transition-colors"
+              className="text-gray-300 hover:text-[#1db954] transition-colors"
             >
               How It Works
             </Link>
@@ -157,7 +157,7 @@ export default function ForVendorsPage() {
                 </Link>
                 <Link
                   href="/dashboard/vendor"
-                  className="text-[#222] hover:text-[#1db954] transition-colors"
+                  className="text-gray-300 hover:text-[#1db954] transition-colors"
                 >
                   Dashboard
                 </Link>
@@ -172,7 +172,7 @@ export default function ForVendorsPage() {
                 </Link>
                 <Link
                   href="/dashboard/advertiser"
-                  className="text-[#222] hover:text-[#1db954] transition-colors"
+                  className="text-gray-300 hover:text-[#1db954] transition-colors"
                 >
                   Dashboard
                 </Link>
@@ -187,7 +187,7 @@ export default function ForVendorsPage() {
                 </Link>
                 <Link
                   href="/for-advertisers"
-                  className="text-[#222] hover:text-[#1db954] transition-colors"
+                  className="text-gray-300 hover:text-[#1db954] transition-colors"
                 >
                   Advertisers
                 </Link>
@@ -198,15 +198,15 @@ export default function ForVendorsPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-green-50 to-green-100 py-12 md:py-20">
+      <section className="bg-gradient-to-br from-gray-800 to-gray-900 py-12 md:py-20">
         <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#222] mb-4 md:mb-6 leading-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight">
               Monetize Your Ad <br />
               <span className="text-[#1db954]">Spaces More</span> <br />
               Effectively
             </h1>
-            <p className="text-base md:text-lg text-[#666] mb-6 md:mb-8 leading-relaxed">
+            <p className="text-base md:text-lg text-gray-300 mb-6 md:mb-8 leading-relaxed">
               Join thousands of vendors across India who are maximizing their 
               revenue with our state-of-the-art outdoor advertising marketplace.
             </p>
@@ -217,7 +217,7 @@ export default function ForVendorsPage() {
               >
                 Get Started
               </Link>
-              <button className="border border-gray-300 text-[#222] px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-gray-50 transition">
+              <button className="border border-gray-600 text-gray-300 px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-gray-800 transition">
                 Watch Demo
               </button>
             </div>
@@ -235,13 +235,13 @@ export default function ForVendorsPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-12 md:py-20 bg-white">
+      <section className="py-12 md:py-20 bg-gray-900">
         <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-12">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#222] mb-3 md:mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 md:mb-4">
               Benefits for Ad Space Owners
             </h2>
-            <p className="text-base md:text-lg text-[#666] max-w-3xl mx-auto px-4">
+            <p className="text-base md:text-lg text-gray-300 max-w-3xl mx-auto px-4">
               Our platform helps you maximize earnings and simplify the management of your 
               advertising assets.
             </p>
@@ -249,7 +249,7 @@ export default function ForVendorsPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             <div className="text-center p-4 md:p-6">
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                 <Image
                   src="/icon-list.svg"
                   alt="List Spaces"
@@ -258,15 +258,15 @@ export default function ForVendorsPage() {
                   className="md:w-8 md:h-8"
                 />
               </div>
-              <h3 className="text-lg md:text-xl font-bold text-[#222] mb-3 md:mb-4">List Your Spaces</h3>
-              <p className="text-[#666] text-sm leading-relaxed">
+              <h3 className="text-lg md:text-xl font-bold text-white mb-3 md:mb-4">List Your Spaces</h3>
+              <p className="text-gray-300 text-sm leading-relaxed">
                 Easily list and manage all your advertising spaces directly from our 
                 intuitive dashboard.
               </p>
             </div>
 
             <div className="text-center p-4 md:p-6">
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                 <Image
                   src="/icon-advertisers.svg"
                   alt="Find Advertisers"
@@ -275,15 +275,15 @@ export default function ForVendorsPage() {
                   className="md:w-8 md:h-8"
                 />
               </div>
-              <h3 className="text-lg md:text-xl font-bold text-[#222] mb-3 md:mb-4">Find New Advertisers</h3>
-              <p className="text-[#666] text-sm leading-relaxed">
+              <h3 className="text-lg md:text-xl font-bold text-white mb-3 md:mb-4">Find New Advertisers</h3>
+              <p className="text-gray-300 text-sm leading-relaxed">
                 Connect with thousands of brands and agencies looking for quality 
                 advertising placements.
               </p>
             </div>
 
             <div className="text-center p-4 md:p-6">
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                 <Image
                   src="/icon-occupancy.svg"
                   alt="Maximize Occupancy"
@@ -292,15 +292,15 @@ export default function ForVendorsPage() {
                   className="md:w-8 md:h-8"
                 />
               </div>
-              <h3 className="text-lg md:text-xl font-bold text-[#222] mb-3 md:mb-4">Maximize Occupancy</h3>
-              <p className="text-[#666] text-sm leading-relaxed">
+              <h3 className="text-lg md:text-xl font-bold text-white mb-3 md:mb-4">Maximize Occupancy</h3>
+              <p className="text-gray-300 text-sm leading-relaxed">
                 Fill rates of over 90% for vendors with our smart matching system and 
                 global reach.
               </p>
             </div>
 
             <div className="text-center p-4 md:p-6">
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                 <Image
                   src="/icon-payments.svg"
                   alt="Timely Payments"
@@ -309,8 +309,8 @@ export default function ForVendorsPage() {
                   className="md:w-8 md:h-8"
                 />
               </div>
-              <h3 className="text-lg md:text-xl font-bold text-[#222] mb-3 md:mb-4">Timely Payments</h3>
-              <p className="text-[#666] text-sm leading-relaxed">
+              <h3 className="text-lg md:text-xl font-bold text-white mb-3 md:mb-4">Timely Payments</h3>
+              <p className="text-gray-300 text-sm leading-relaxed">
                 Get paid on time, every time with our secure payment processing 
                 platform.
               </p>
@@ -320,13 +320,13 @@ export default function ForVendorsPage() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-800">
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[#222] mb-4">
+            <h2 className="text-4xl font-bold text-white mb-4">
               How It Works For Vendors
             </h2>
-            <p className="text-lg text-[#666]">
+            <p className="text-lg text-gray-300">
               Get started in just a few simple steps:
             </p>
           </div>
@@ -336,8 +336,8 @@ export default function ForVendorsPage() {
               <div className="w-20 h-20 bg-[#1db954] rounded-full flex items-center justify-center mx-auto mb-6">
                 <span className="text-white font-bold text-2xl">1</span>
               </div>
-              <h3 className="text-xl font-bold text-[#222] mb-4">Register & List</h3>
-              <p className="text-[#666] leading-relaxed">
+              <h3 className="text-xl font-bold text-white mb-4">Register & List</h3>
+              <p className="text-gray-300 leading-relaxed">
                 Create your vendor account and add your advertising spaces with detailed 
                 specifications.
               </p>
@@ -347,8 +347,8 @@ export default function ForVendorsPage() {
               <div className="w-20 h-20 bg-[#1db954] rounded-full flex items-center justify-center mx-auto mb-6">
                 <span className="text-white font-bold text-2xl">2</span>
               </div>
-              <h3 className="text-xl font-bold text-[#222] mb-4">Set Pricing & Availability</h3>
-              <p className="text-[#666] leading-relaxed">
+              <h3 className="text-xl font-bold text-white mb-4">Set Pricing & Availability</h3>
+              <p className="text-gray-300 leading-relaxed">
                 Define your pricing strategy and mark available dates to attract the right 
                 advertisers.
               </p>
@@ -358,8 +358,8 @@ export default function ForVendorsPage() {
               <div className="w-20 h-20 bg-[#1db954] rounded-full flex items-center justify-center mx-auto mb-6">
                 <span className="text-white font-bold text-2xl">3</span>
               </div>
-              <h3 className="text-xl font-bold text-[#222] mb-4">Accept Bookings & Get Paid</h3>
-              <p className="text-[#666] leading-relaxed">
+              <h3 className="text-xl font-bold text-white mb-4">Accept Bookings & Get Paid</h3>
+              <p className="text-gray-300 leading-relaxed">
                 Review booking requests, approve them quickly, and receive timely payments 
                 through our platform.
               </p>
@@ -369,13 +369,13 @@ export default function ForVendorsPage() {
       </section>
 
       {/* Powerful Tools Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-900">
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[#222] mb-4">
+            <h2 className="text-4xl font-bold text-white mb-4">
               Powerful Tools for Vendors
             </h2>
-            <p className="text-lg text-[#666]">
+            <p className="text-lg text-gray-300">
               Our platform offers comprehensive features to manage your ad inventory effectively
             </p>
           </div>
@@ -383,7 +383,7 @@ export default function ForVendorsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div className="space-y-8">
               <div className="flex gap-4">
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-green-900 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Image
                     src="/icon-analytics.svg"
                     alt="Analytics"
@@ -392,8 +392,8 @@ export default function ForVendorsPage() {
                   />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#222] mb-2">Advanced Analytics Dashboard</h3>
-                  <p className="text-[#666]">
+                  <h3 className="text-xl font-bold text-white mb-2">Advanced Analytics Dashboard</h3>
+                  <p className="text-gray-300">
                     Get real-time insights on your space performance and booking trends for each of your 
                     ad spaces.
                   </p>
@@ -401,7 +401,7 @@ export default function ForVendorsPage() {
               </div>
 
               <div className="flex gap-4">
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-green-900 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Image
                     src="/icon-inventory.svg"
                     alt="Inventory"
@@ -410,8 +410,8 @@ export default function ForVendorsPage() {
                   />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#222] mb-2">Inventory Management</h3>
-                  <p className="text-[#666]">
+                  <h3 className="text-xl font-bold text-white mb-2">Inventory Management</h3>
+                  <p className="text-gray-300">
                     Track availability, manage booking calendars, and upload updated images for each of your 
                     spaces.
                   </p>
@@ -421,7 +421,7 @@ export default function ForVendorsPage() {
 
             <div className="space-y-8">
               <div className="flex gap-4">
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-green-900 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Image
                     src="/icon-verified.svg"
                     alt="Verified"
@@ -430,8 +430,8 @@ export default function ForVendorsPage() {
                   />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#222] mb-2">Verified Advertisers</h3>
-                  <p className="text-[#666]">
+                  <h3 className="text-xl font-bold text-white mb-2">Verified Advertisers</h3>
+                  <p className="text-gray-300">
                     Work with pre-verified advertisers for seamless quality 
                     partnerships.
                   </p>
@@ -439,7 +439,7 @@ export default function ForVendorsPage() {
               </div>
 
               <div className="flex gap-4">
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-green-900 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Image
                     src="/icon-settings.svg"
                     alt="Settings"
@@ -448,8 +448,8 @@ export default function ForVendorsPage() {
                   />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#222] mb-2">Customizable Settings</h3>
-                  <p className="text-[#666]">
+                  <h3 className="text-xl font-bold text-white mb-2">Customizable Settings</h3>
+                  <p className="text-gray-300">
                     Set your preferences, pricing models, and approval workflows 
                     according to your needs.
                   </p>
@@ -461,19 +461,19 @@ export default function ForVendorsPage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-800">
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[#222] mb-4">
+            <h2 className="text-4xl font-bold text-white mb-4">
               What Vendors Say
             </h2>
-            <p className="text-lg text-[#666]">
+            <p className="text-lg text-gray-300">
               Join thousands of satisfied vendors across India
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white p-8 rounded-xl shadow-sm">
+            <div className="bg-gray-900 p-8 rounded-xl shadow-sm border border-gray-700">
               <div className="flex items-center gap-4 mb-6">
                 <Image
                   src="/vendor-avatar-1.jpg"
@@ -483,18 +483,18 @@ export default function ForVendorsPage() {
                   className="rounded-full object-cover"
                 />
                 <div>
-                  <h4 className="font-bold text-[#222]">Rajesh Sharma</h4>
-                  <p className="text-sm text-[#666]">Director, Mumbai Outdoor Media</p>
+                  <h4 className="font-bold text-white">Rajesh Sharma</h4>
+                  <p className="text-sm text-gray-400">Director, Mumbai Outdoor Media</p>
                 </div>
               </div>
-              <p className="text-[#666] leading-relaxed">
+              <p className="text-gray-300 leading-relaxed">
                 &quot;Vigyapan has transformed our business. We&apos;ve increased our occupancy 
                 by 45% since we started using their platform. The advertisers keep us prime 
                 for offering new campaigns.&quot;
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-xl shadow-sm">
+            <div className="bg-gray-900 p-8 rounded-xl shadow-sm border border-gray-700">
               <div className="flex items-center gap-4 mb-6">
                 <Image
                   src="/vendor-avatar-2.jpg"
@@ -504,11 +504,11 @@ export default function ForVendorsPage() {
                   className="rounded-full object-cover"
                 />
                 <div>
-                  <h4 className="font-bold text-[#222]">Priya Verma</h4>
-                  <p className="text-sm text-[#666]">CEO, Delhi Digital Displays</p>
+                  <h4 className="font-bold text-white">Priya Verma</h4>
+                  <p className="text-sm text-gray-400">CEO, Delhi Digital Displays</p>
                 </div>
               </div>
-              <p className="text-[#666] leading-relaxed">
+              <p className="text-gray-300 leading-relaxed">
                 &quot;The platform is intuitive and easy to use. We&apos;ve been able to connect with 
                 national brands and have had Increase in Mumbai. Real customer support team is 
                 exceptional.&quot;
@@ -519,45 +519,45 @@ export default function ForVendorsPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-900">
         <div className="max-w-4xl mx-auto px-6 md:px-12">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[#222] mb-4">
+            <h2 className="text-4xl font-bold text-white mb-4">
               Frequently Asked Questions
             </h2>
-            <p className="text-lg text-[#666]">
+            <p className="text-lg text-gray-300">
               Answers to common questions from our listed vendors
             </p>
           </div>
 
           <div className="space-y-6">
-            <div className="border border-gray-200 rounded-lg p-6">
-              <h3 className="font-bold text-[#222] mb-2">How much does it cost to list my advertising spaces?</h3>
-              <p className="text-[#666]">
+            <div className="border border-gray-700 rounded-lg p-6 bg-gray-800">
+              <h3 className="font-bold text-white mb-2">How much does it cost to list my advertising spaces?</h3>
+              <p className="text-gray-300">
                 No. Listing your inventory is free completely. You only pay a small commission when you receive 
                 a booking. There are no setup costs, monthly fees, or listing fees.
               </p>
             </div>
 
-            <div className="border border-gray-200 rounded-lg p-6">
-              <h3 className="font-bold text-[#222] mb-2">How are payments processed?</h3>
-              <p className="text-[#666]">
+            <div className="border border-gray-700 rounded-lg p-6 bg-gray-800">
+              <h3 className="font-bold text-white mb-2">How are payments processed?</h3>
+              <p className="text-gray-300">
                 We handle all payments through our secure platform. Advertisers pay upfront when they make a booking. 
                 You receive your payment within 48 hours of campaign completion.
               </p>
             </div>
 
-            <div className="border border-gray-200 rounded-lg p-6">
-              <h3 className="font-bold text-[#222] mb-2">Can I set different prices for different seasons or events?</h3>
-              <p className="text-[#666]">
+            <div className="border border-gray-700 rounded-lg p-6 bg-gray-800">
+              <h3 className="font-bold text-white mb-2">Can I set different prices for different seasons or events?</h3>
+              <p className="text-gray-300">
                 Yes. Our platform allows dynamic pricing. You can set different rates based on seasons, events, or demand. 
                 Plus you can update your rates anytime through your vendor portal.
               </p>
             </div>
 
-            <div className="border border-gray-200 rounded-lg p-6">
-              <h3 className="font-bold text-[#222] mb-2">What types of ad spaces can I list?</h3>
-              <p className="text-[#666]">
+            <div className="border border-gray-700 rounded-lg p-6 bg-gray-800">
+              <h3 className="font-bold text-white mb-2">What types of ad spaces can I list?</h3>
+              <p className="text-gray-300">
                 We accept all types of outdoor advertising spaces including billboards, digital displays, transit ads, 
                 mall kiosks, and more. Contact us to learn about our latest inventory categories.
               </p>
@@ -591,17 +591,17 @@ export default function ForVendorsPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-200">
+      <footer className="bg-gray-900 border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 grid grid-cols-1 md:grid-cols-5 gap-12">
           {/* Brand */}
           <div className="md:col-span-2 space-y-4">
-            <h3 className="text-2xl font-bold">Vigyapan</h3>
-            <p className="text-[#555]">
+            <h3 className="text-2xl font-bold text-white">Vigyapan</h3>
+            <p className="text-gray-300">
               The premier marketplace connecting advertisers with
               premium out-of-home and digital advertising spaces
               worldwide.
             </p>
-            <div className="space-y-2 text-sm text-[#444]">
+            <div className="space-y-2 text-sm text-gray-400">
               <div>📍 42 MG Road, Bangalore, Karnataka 560001, India</div>
               <div>✉️ info@vigyapan.com</div>
               <div>📞 +91 8317242108</div>
@@ -628,46 +628,46 @@ export default function ForVendorsPage() {
           {/* Links */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 col-span-3 text-sm">
             <div className="space-y-2 flex flex-col">
-              <h4 className="font-semibold mb-2">Company</h4>
-              <Link href="#">About Us</Link>
-              <Link href="#">Careers</Link>
-              <Link href="#">Press</Link>
-              <Link href="#">Blog</Link>
-              <Link href="#">Contact</Link>
+              <h4 className="font-semibold mb-2 text-white">Company</h4>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">About Us</Link>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">Careers</Link>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">Press</Link>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">Blog</Link>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">Contact</Link>
             </div>
             <div className="space-y-2 flex flex-col">
-              <h4 className="font-semibold mb-2">Advertisers</h4>
-              <Link href="#">How It Works</Link>
-              <Link href="#">Pricing</Link>
-              <Link href="#">Case Studies</Link>
-              <Link href="#">Success Stories</Link>
-              <Link href="#">Resources</Link>
+              <h4 className="font-semibold mb-2 text-white">Advertisers</h4>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">How It Works</Link>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">Pricing</Link>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">Case Studies</Link>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">Success Stories</Link>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">Resources</Link>
             </div>
             <div className="space-y-2 flex flex-col">
-              <h4 className="font-semibold mb-2">Vendors</h4>
-              <Link href="#">List Your Space</Link>
-              <Link href="#">Vendor Guidelines</Link>
-              <Link href="#">Vendor Success Stories</Link>
-              <Link href="#">Vendor Dashboard</Link>
-              <Link href="#">Vendor Support</Link>
+              <h4 className="font-semibold mb-2 text-white">Vendors</h4>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">List Your Space</Link>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">Vendor Guidelines</Link>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">Vendor Success Stories</Link>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">Vendor Dashboard</Link>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">Vendor Support</Link>
             </div>
             <div className="space-y-2 flex flex-col">
-              <h4 className="font-semibold mb-2">Support</h4>
-              <Link href="#">Help Center</Link>
-              <Link href="#">FAQs</Link>
-              <Link href="#">Terms of Service</Link>
-              <Link href="#">Privacy Policy</Link>
-              <Link href="#">Cookie Policy</Link>
+              <h4 className="font-semibold mb-2 text-white">Support</h4>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">Help Center</Link>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">FAQs</Link>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">Terms of Service</Link>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">Privacy Policy</Link>
+              <Link href="#" className="text-gray-300 hover:text-[#1db954] transition-colors">Cookie Policy</Link>
             </div>
           </div>
         </div>
 
         {/* Newsletter */}
-        <div className="border-t border-gray-200">
+        <div className="border-t border-gray-800">
           <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8 flex flex-col md:flex-row justify-evenly items-center">
             <div>
-              <b>Subscribe to our newsletter</b>
-              <p className="text-sm text-[#555]">
+              <b className="text-white">Subscribe to our newsletter</b>
+              <p className="text-sm text-gray-400">
                 Stay updated with the latest in outdoor advertising
               </p>
             </div>
@@ -676,18 +676,18 @@ export default function ForVendorsPage() {
                 type="email"
                 placeholder="Enter your email"
                 required
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1db954]"
+                className="px-4 py-2 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1db954] bg-gray-800 text-gray-100 placeholder-gray-400"
               />
               <button
                 type="submit"
-                className="bg-[#22a745] text-white px-4 py-2 rounded-lg hover:bg-[#1a8c3a] transition"
+                className="bg-[#1db954] text-white px-4 py-2 rounded-lg hover:bg-[#159c43] transition"
               >
                 Subscribe
               </button>
             </form>
           </div>
-          <hr />
-          <div className="text-center py-4 text-sm text-[#7a848c]">
+          <hr className="border-gray-800" />
+          <div className="text-center py-4 text-sm text-gray-400">
             © 2025 Vigyapan. All rights reserved.
           </div>
         </div>

@@ -93,13 +93,13 @@ export default function CityBillboardsPage() {
   const getTypeColor = (type: string) => {
     switch (type.toLowerCase()) {
       case 'digital':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-blue-900 text-blue-400';
       case 'traditional':
-        return 'bg-green-100 text-green-800';
+        return 'bg-green-900 text-green-400';
       case 'led':
-        return 'bg-purple-100 text-purple-800';
+        return 'bg-purple-900 text-purple-400';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-700 text-gray-300';
     }
   };
 
@@ -125,9 +125,9 @@ export default function CityBillboardsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fcfa] font-inter">
+    <div className="min-h-screen bg-gray-900 font-inter">
       {/* Header */}
-      <header className="w-full border-b-1 pb-5 bg-white">
+      <header className="w-full border-b border-gray-700 pb-5 bg-gray-900">
         <div className="flex items-center justify-between px-12 pt-5 max-w-6xl mx-auto w-full flex-wrap gap-4">
           <Link href="/">
             <Image
@@ -151,19 +151,19 @@ export default function CityBillboardsPage() {
       <main className="max-w-6xl mx-auto px-6 md:px-12 py-12">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-[#222] mb-2 capitalize">
+          <h1 className="text-4xl font-bold text-gray-100 mb-2 capitalize">
             {loading && !cityDisplayName ? 'Loading...' : `Billboards in ${cityDisplayName || 'City'}`}
           </h1>
-          <p className="text-lg text-[#666]">
+          <p className="text-lg text-gray-300">
             {loading ? 'Loading...' : `${totalCount} billboard${totalCount !== 1 ? 's' : ''} available`}
           </p>
         </div>
 
         {/* Error State */}
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-6 mb-8">
-            <h3 className="text-lg font-semibold text-red-800 mb-2">Error</h3>
-            <p className="text-red-700">{error}</p>
+          <div className="bg-red-900 border border-red-700 rounded-lg p-6 mb-8">
+            <h3 className="text-lg font-semibold text-red-400 mb-2">Error</h3>
+            <p className="text-red-300">{error}</p>
             <button
               onClick={() => window.location.reload()}
               className="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
@@ -178,10 +178,10 @@ export default function CityBillboardsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(6)].map((_, i) => (
               <div key={i} className="animate-pulse">
-                <div className="bg-gray-200 h-48 rounded-xl mb-4"></div>
-                <div className="bg-gray-200 h-4 rounded mb-2"></div>
-                <div className="bg-gray-200 h-3 rounded w-2/3 mb-2"></div>
-                <div className="bg-gray-200 h-3 rounded w-1/3"></div>
+                <div className="bg-gray-700 h-48 rounded-xl mb-4"></div>
+                <div className="bg-gray-700 h-4 rounded mb-2"></div>
+                <div className="bg-gray-700 h-3 rounded w-2/3 mb-2"></div>
+                <div className="bg-gray-700 h-3 rounded w-1/3"></div>
               </div>
             ))}
           </div>
@@ -192,10 +192,10 @@ export default function CityBillboardsPage() {
               {billboards.map((billboard) => (
                 <div
                   key={billboard.static_id}
-                  className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow"
+                  className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 overflow-hidden hover:shadow-lg transition-shadow"
                 >
                   {/* Billboard Image */}
-                  <div className="h-48 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center relative overflow-hidden">
+                  <div className="h-48 bg-gradient-to-br from-gray-800 to-gray-700 flex items-center justify-center relative overflow-hidden">
                     {billboard.photo ? (
                       <Image
                         src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${billboard.photo}`}
@@ -212,13 +212,13 @@ export default function CityBillboardsPage() {
                   {/* Billboard Info */}
                   <div className="p-6">
                     <div className="flex items-start justify-between mb-3">
-                      <h3 className="text-xl font-semibold text-[#222]">{billboard.title}</h3>
+                      <h3 className="text-xl font-semibold text-gray-100">{billboard.title}</h3>
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(billboard.type)}`}>
                         {billboard.type}
                       </span>
                     </div>
                     
-                    <p className="text-[#666] text-sm mb-3 line-clamp-2">
+                    <p className="text-gray-300 text-sm mb-3 line-clamp-2">
                       {billboard.address}
                     </p>
                     
@@ -262,7 +262,7 @@ export default function CityBillboardsPage() {
                       </button>
                     ) : (
                       <button 
-                        className="w-full py-2 px-4 rounded-lg font-medium transition bg-gray-200 text-gray-500 cursor-not-allowed"
+                        className="w-full py-2 px-4 rounded-lg font-medium transition bg-gray-700 text-gray-400 cursor-not-allowed"
                         disabled
                       >
                         Unavailable
@@ -277,8 +277,8 @@ export default function CityBillboardsPage() {
             {billboards.length === 0 && !loading && (
               <div className="text-center py-12">
                 <div className="text-6xl mb-4">🚫</div>
-                <h3 className="text-xl font-semibold text-[#222] mb-2">No billboards found</h3>
-                <p className="text-[#666] mb-4">
+                <h3 className="text-xl font-semibold text-gray-100 mb-2">No billboards found</h3>
+                <p className="text-gray-300 mb-4">
                   There are currently no billboards available in {cityDisplayName || 'this city'}.
                 </p>
                 <Link
@@ -293,7 +293,7 @@ export default function CityBillboardsPage() {
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="flex items-center justify-between mt-8">
-                <div className="text-sm text-[#666]">
+                <div className="text-sm text-gray-300">
                   Showing {((currentPage - 1) * pageSize) + 1} to {Math.min(currentPage * pageSize, totalCount)} of {totalCount} results
                 </div>
                 
@@ -301,7 +301,7 @@ export default function CityBillboardsPage() {
                   <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className="px-3 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                    className="px-3 py-2 text-sm border border-gray-600 rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition text-gray-300"
                   >
                     Previous
                   </button>
@@ -315,8 +315,8 @@ export default function CityBillboardsPage() {
                         item === currentPage
                           ? 'bg-[#1db954] text-white border-[#1db954]'
                           : typeof item === 'number'
-                          ? 'border-gray-300 hover:bg-gray-50'
-                          : 'border-transparent cursor-default'
+                          ? 'border-gray-600 hover:bg-gray-700 text-gray-300'
+                          : 'border-transparent cursor-default text-gray-500'
                       }`}
                     >
                       {item}
@@ -326,7 +326,7 @@ export default function CityBillboardsPage() {
                   <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className="px-3 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                    className="px-3 py-2 text-sm border border-gray-600 rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition text-gray-300"
                   >
                     Next
                   </button>

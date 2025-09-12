@@ -63,17 +63,17 @@ function BillboardContent() {
 	}, [staticId]);
 
 	if (error) {
-		return <div className="flex justify-center items-center min-h-screen text-red-600 font-semibold">{error}</div>;
+		return <div className="flex justify-center items-center min-h-screen text-red-400 font-semibold">{error}</div>;
 	}
 	if (!billboard) {
-		return <div className="flex justify-center items-center min-h-screen text-lg">Loading...</div>;
+		return <div className="flex justify-center items-center min-h-screen text-lg text-gray-200">Loading...</div>;
 	}
 
 	return (
 		<div className="w-full flex flex-row gap-10 px-10 py-12">
 			{/* Left: Map and Photo */}
 			<div className="w-1/2 flex flex-col items-center space-y-6">
-				<div className="mt-2 rounded-lg overflow-hidden border border-green-200 shadow w-full">
+				<div className="mt-2 rounded-lg overflow-hidden border border-gray-700 shadow w-full">
 					<iframe
 						title="Google Map"
 						width="100%"
@@ -87,7 +87,7 @@ function BillboardContent() {
 				
 				{/* Billboard Photo */}
 				{billboard.photo && (
-					<div className="w-full rounded-lg overflow-hidden border border-green-200 shadow">
+					<div className="w-full rounded-lg overflow-hidden border border-gray-700 shadow">
 						<Image
 							src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${billboard.photo}`}
 							alt={billboard.title}
@@ -98,10 +98,10 @@ function BillboardContent() {
 					</div>
 				)}
 				{showBooking && (
-					<div className="mt-8 p-6 bg-blue-50 rounded-xl shadow flex flex-col gap-6 items-center w-full max-w-xl">
+					<div className="mt-8 p-6 bg-gray-800 rounded-xl shadow flex flex-col gap-6 items-center w-full max-w-xl border border-gray-700">
 						<div className="w-full flex flex-col md:flex-row gap-6">
 							<div className="flex-1 flex flex-col gap-2">
-								<label className="font-semibold text-blue-700">Start Date</label>
+								<label className="font-semibold text-blue-300">Start Date</label>
 								<input
 									type="date"
 									value={startDate}
@@ -110,11 +110,11 @@ function BillboardContent() {
 										setStartDate(e.target.value);
 										setDateError("");
 									}}
-									className="border border-blue-300 rounded-lg px-3 py-2 text-black"
+									className="border border-gray-600 rounded-lg px-3 py-2 text-gray-100 bg-gray-700 focus:border-blue-400 focus:outline-none"
 								/>
 							</div>
 							<div className="flex-1 flex flex-col gap-2">
-								<label className="font-semibold text-blue-700">End Date</label>
+								<label className="font-semibold text-blue-300">End Date</label>
 								<input
 									type="date"
 									value={endDate}
@@ -123,7 +123,7 @@ function BillboardContent() {
 										setEndDate(e.target.value);
 										setDateError("");
 									}}
-									className="border border-blue-300 rounded-lg px-3 py-2 text-black"
+									className="border border-gray-600 rounded-lg px-3 py-2 text-gray-100 bg-gray-700 focus:border-blue-400 focus:outline-none"
 								/>
 							</div>
 						</div>
@@ -167,45 +167,45 @@ function BillboardContent() {
 							Confirm Request
 						</button>
 						{dateError && (
-							<div className="mt-2 text-red-600 text-sm font-semibold">{dateError}</div>
+							<div className="mt-2 text-red-400 text-sm font-semibold">{dateError}</div>
 						)}
 					</div>
 				)}
 				{bookingConfirmed && (
-					<div className="mt-6 p-4 bg-green-50 rounded-xl text-green-700 text-center font-semibold shadow">
+					<div className="mt-6 p-4 bg-gray-800 border border-green-500 rounded-xl text-green-300 text-center font-semibold shadow">
 						Booking Requested from {startDate} to {endDate}!
 					</div>
 				)}
 			</div>
 			{/* Right: Details */}
-			<div className="w-1/2 space-y-6 text-[1.15rem] text-gray-900">
-				<h1 className="text-4xl font-extrabold text-green-800 mb-8 tracking-tight">Billboard Details</h1>
-				<div className="flex justify-between items-center py-2 border-b border-gray-100">
-					<span className="font-semibold text-green-700">Title:</span>
+			<div className="w-1/2 space-y-6 text-[1.15rem] text-gray-200">
+				<h1 className="text-4xl font-extrabold text-gray-100 mb-8 tracking-tight">Billboard Details</h1>
+				<div className="flex justify-between items-center py-2 border-b border-gray-700">
+					<span className="font-semibold text-green-400">Title:</span>
 					<span>{billboard.title}</span>
 				</div>
-				<div className="flex justify-between items-center py-2 border-b border-gray-100">
-					<span className="font-semibold text-green-700">City:</span>
+				<div className="flex justify-between items-center py-2 border-b border-gray-700">
+					<span className="font-semibold text-green-400">City:</span>
 					<span>{billboard.city.city_name}</span>
 				</div>
-				<div className="flex justify-between items-center py-2 border-b border-gray-100">
-					<span className="font-semibold text-green-700">Type:</span>
+				<div className="flex justify-between items-center py-2 border-b border-gray-700">
+					<span className="font-semibold text-green-400">Type:</span>
 					<span>{billboard.type}</span>
 				</div>
-				<div className="flex justify-between items-center py-2 border-b border-gray-100">
-					<span className="font-semibold text-green-700">Price:</span>
+				<div className="flex justify-between items-center py-2 border-b border-gray-700">
+					<span className="font-semibold text-green-400">Price:</span>
 					<span className="font-bold">₹{billboard.price}</span>
 				</div>
-				<div className="flex justify-between items-center py-2 border-b border-gray-100">
-					<span className="font-semibold text-green-700">Status:</span>
+				<div className="flex justify-between items-center py-2 border-b border-gray-700">
+					<span className="font-semibold text-green-400">Status:</span>
 					<span>{String(billboard.status)}</span>
 				</div>
-				<div className="flex justify-between items-center py-2 border-b border-gray-100">
-					<span className="font-semibold text-green-700">Available:</span>
+				<div className="flex justify-between items-center py-2 border-b border-gray-700">
+					<span className="font-semibold text-green-400">Available:</span>
 					<span>{billboard.is_available ? "Yes" : "No"}</span>
 				</div>
-				<div className="flex justify-between items-center py-2 border-b border-gray-100">
-					<span className="font-semibold text-green-700">Dimensions:</span>
+				<div className="flex justify-between items-center py-2 border-b border-gray-700">
+					<span className="font-semibold text-green-400">Dimensions:</span>
 					<span>{billboard.dimensionLen} x {billboard.dimensionWid} ft</span>
 				</div>
 				<div className="flex gap-4 mt-10">
@@ -225,10 +225,10 @@ export default function BillboardDetail() {
 	useProfileProtection();
 	
 	return (
-		<div className="min-h-screen flex bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
+		<div className="min-h-screen flex bg-gradient-to-b from-gray-900 to-gray-800">
 			<Sidebar />
 			<main className="flex-1 flex items-center justify-center">
-				<React.Suspense fallback={<div className="flex justify-center items-center min-h-screen text-lg">Loading...</div>}>
+				<React.Suspense fallback={<div className="flex justify-center items-center min-h-screen text-lg text-gray-200">Loading...</div>}>
 					<BillboardContent />
 				</React.Suspense>
 			</main>

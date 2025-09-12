@@ -88,7 +88,7 @@ export default function SignIn() {
 									callback: handleGoogleLogin,
 								});
 								window.google.accounts.id.renderButton(googleBtnRef.current, {
-									theme: "outline",
+									theme: "filled_black",
 									size: "large",
 									text: "continue_with",
 									shape: "pill",
@@ -110,7 +110,7 @@ export default function SignIn() {
 							callback: handleGoogleLogin,
 						});
 						window.google.accounts.id.renderButton(googleBtnRef.current, {
-							theme: "outline",
+							theme: "filled_black",
 							size: "large",
 							text: "continue_with",
 							shape: "pill",
@@ -150,10 +150,10 @@ export default function SignIn() {
 	};
 
 	return (
-		<div className="min-h-screen flex flex-col bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
+		<div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-900 to-gray-800">
 			{/* Header */}
-			<header className="flex items-center justify-between px-4 md:px-12 py-4 border-b bg-white shadow-sm">
-				<Link href="/" className="text-xl md:text-2xl font-bold text-green-600">
+			<header className="flex items-center justify-between px-4 md:px-12 py-4 border-b border-gray-800 bg-gray-900 shadow-sm">
+				<Link href="/" className="text-xl md:text-2xl font-bold text-[#1db954]">
 					<Image
 						src="/vigyapan.png"
 						alt="Vigyapan"
@@ -162,37 +162,37 @@ export default function SignIn() {
 						className="h-[30px] md:h-[38px] w-auto"
 					/>
 				</Link>
-				<nav className="hidden md:flex gap-8 text-gray-800 font-medium">
-					<Link href="/cities" className="hover:text-green-600">
+				<nav className="hidden md:flex gap-8 text-gray-300 font-medium">
+					<Link href="/cities" className="hover:text-[#1db954] transition-colors">
 						Find Ad Spaces
 					</Link>
-					<Link href="/#how-it-works" className="hover:text-green-600">
+					<Link href="/#how-it-works" className="hover:text-[#1db954] transition-colors">
 						How It Works
 					</Link>
 					{userType === "vendor" ? (
 						<>
-							<Link href="/for-vendors" className="text-green-600 font-semibold hover:text-green-700">
+							<Link href="/for-vendors" className="text-[#1db954] font-semibold hover:text-green-700 transition-colors">
 								For Vendors
 							</Link>
-							<Link href="/dashboard/vendor" className="hover:text-green-600">
+							<Link href="/dashboard/vendor" className="hover:text-[#1db954] transition-colors">
 								Dashboard
 							</Link>
 						</>
 					) : userType === "advertiser" ? (
 						<>
-							<Link href="/for-advertisers" className="text-green-600 font-semibold hover:text-green-700">
+							<Link href="/for-advertisers" className="text-[#1db954] font-semibold hover:text-green-700 transition-colors">
 								For Advertisers
 							</Link>
-							<Link href="/dashboard/advertiser" className="hover:text-green-600">
+							<Link href="/dashboard/advertiser" className="hover:text-[#1db954] transition-colors">
 								Dashboard
 							</Link>
 						</>
 					) : (
 						<>
-							<Link href="/for-vendors" className="hover:text-green-600">
+							<Link href="/for-vendors" className="hover:text-[#1db954] transition-colors">
 								For Vendors
 							</Link>
-							<Link href="/for-advertisers" className="hover:text-green-600">
+							<Link href="/for-advertisers" className="hover:text-[#1db954] transition-colors">
 								For Advertisers
 							</Link>
 						</>
@@ -202,14 +202,14 @@ export default function SignIn() {
 					{isLoggedIn ? (
 						<button
 							onClick={handleLogout}
-							className="px-5 py-2 rounded-full bg-green-600 text-white font-medium hover:bg-green-700 transition"
+							className="px-5 py-2 rounded-full bg-[#1db954] text-white font-medium hover:bg-[#159c43] transition"
 						>
 							Log Out
 						</button>
 					) : (
 						<Link
 							href="/signUp"
-							className="px-5 py-2 rounded-md border border-gray-300 text-white font-medium hover:shadow-md transition bg-green-600 hover:bg-green-700"
+							className="px-5 py-2 rounded-md border border-gray-700 text-white font-medium hover:shadow-md transition bg-[#1db954] hover:bg-[#159c43]"
 						>
 							Sign Up
 						</Link>
@@ -218,15 +218,15 @@ export default function SignIn() {
 			</header>
 
 			{/* Main */}
-			<main className="flex flex-col items-center justify-center flex-1 px-4 py-6 md:py-8">
+			<main className="flex flex-col items-center justify-center flex-1 px-4 py-6 md:py-8 bg-gray-900">
 				<form
 					onSubmit={handleSubmit}
-					className="bg-white p-6 md:p-8 rounded-2xl shadow-lg w-full max-w-md"
+					className="bg-gray-800 p-6 md:p-8 rounded-2xl shadow-lg w-full max-w-md border border-gray-700"
 				>
-					<h2 className="text-xl md:text-2xl font-bold text-green-600 mb-2 text-center">
+					<h2 className="text-xl md:text-2xl font-bold text-white mb-2 text-center">
 						Sign In
 					</h2>
-					<p className="text-gray-600 mb-6 text-center text-sm md:text-lg">
+					<p className="text-gray-300 mb-6 text-center text-sm md:text-lg">
 						Welcome back to Vigyapan Market Connect
 					</p>
 
@@ -236,7 +236,7 @@ export default function SignIn() {
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 						required
-						className="mb-3 w-full p-3 md:p-4 border border-gray-400 rounded-lg bg-[#f8fcfa] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-700 text-sm md:text-base"
+						className="mb-3 w-full p-3 md:p-4 border border-gray-700 rounded-lg bg-gray-900 text-gray-100 placeholder-gray-400 focus:outline-none focus:border-[#1db954] text-sm md:text-base"
 					/>
 
 					<input
@@ -245,36 +245,36 @@ export default function SignIn() {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						required
-						className="mb-4 md:mb-6 w-full p-3 md:p-4 border border-gray-400 rounded-lg bg-[#f8fcfa] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-700 text-sm md:text-base"
+						className="mb-4 md:mb-6 w-full p-3 md:p-4 border border-gray-700 rounded-lg bg-gray-900 text-gray-100 placeholder-gray-400 focus:outline-none focus:border-[#1db954] text-sm md:text-base"
 					/>
 
 					{!isLoggedIn && (
 						<button
 							type="submit"
-							className="w-full bg-green-600 text-white py-3 md:py-4 rounded-lg font-semibold hover:bg-green-700 transition text-sm md:text-base"
+							className="w-full bg-[#1db954] text-white py-3 md:py-4 rounded-lg font-semibold hover:bg-[#159c43] transition text-sm md:text-base"
 						>
 							Sign In
 						</button>
 					)}
 
 					{error && (
-						<div className="mt-2 text-red-500 text-sm text-center">
+						<div className="mt-2 text-red-300 text-sm text-center">
 							{error}
 						</div>
 					)}
 
-					<p className="text-center mt-4 text-gray-600">
-						Don’t have an account?{" "}
+					<p className="text-center mt-4 text-gray-300">
+						Don&apos;t have an account?{" "}
 						<Link
 							href="/signUp"
-							className="text-green-600 hover:underline"
+							className="text-[#1db954] hover:underline"
 						>
 							Create Account
 						</Link>
 					</p>
 
 					<div className="mt-6">
-						<span className="block text-center text-gray-500 text-sm mb-2">
+						<span className="block text-center text-gray-300 text-sm mb-2">
 							Or continue with
 						</span>
 						<div
@@ -286,7 +286,7 @@ export default function SignIn() {
 			</main>
 
 			{/* Footer */}
-			<footer className="text-center py-4 md:py-6 text-gray-600 border-t bg-white text-sm">
+			<footer className="text-center py-4 md:py-6 text-gray-400 border-t border-gray-800 bg-gray-900 text-sm">
 				<p>© 2025 Vigyapan. All rights reserved.</p>
 			</footer>
 		</div>

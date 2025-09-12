@@ -137,21 +137,21 @@ export default function BillboardDetailsPage() {
   const getTypeColor = (type: string) => {
     switch (type.toLowerCase()) {
       case 'digital':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-blue-900 text-blue-400';
       case 'traditional':
-        return 'bg-green-100 text-green-800';
+        return 'bg-green-900 text-green-400';
       case 'led':
-        return 'bg-purple-100 text-purple-800';
+        return 'bg-purple-900 text-purple-400';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-700 text-gray-300';
     }
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#f8fcfa] font-inter">
+      <div className="min-h-screen bg-gray-900 font-inter">
         {/* Header */}
-        <header className="w-full border-b-1 pb-5 bg-white">
+        <header className="w-full border-b border-gray-700 pb-5 bg-gray-900">
           <div className="flex items-center justify-between px-12 pt-5 max-w-6xl mx-auto w-full flex-wrap gap-4">
             <Link href="/">
               <Image
@@ -180,9 +180,9 @@ export default function BillboardDetailsPage() {
 
   if (error || !billboard) {
     return (
-      <div className="min-h-screen bg-[#f8fcfa] font-inter">
+      <div className="min-h-screen bg-gray-900 font-inter">
         {/* Header */}
-        <header className="w-full border-b-1 pb-5 bg-white">
+        <header className="w-full border-b border-gray-700 pb-5 bg-gray-900">
           <div className="flex items-center justify-between px-12 pt-5 max-w-6xl mx-auto w-full flex-wrap gap-4">
             <Link href="/">
               <Image
@@ -205,8 +205,8 @@ export default function BillboardDetailsPage() {
         <div className="flex justify-center items-center min-h-[50vh]">
           <div className="text-center">
             <div className="text-6xl mb-4">❌</div>
-            <h2 className="text-2xl font-bold text-[#222] mb-2">Billboard Not Found</h2>
-            <p className="text-[#666] mb-4">{error || 'The billboard you are looking for does not exist.'}</p>
+            <h2 className="text-2xl font-bold text-gray-100 mb-2">Billboard Not Found</h2>
+            <p className="text-gray-300 mb-4">{error || 'The billboard you are looking for does not exist.'}</p>
             <button
               onClick={() => router.back()}
               className="bg-[#1db954] text-white px-6 py-2 rounded-full font-medium hover:bg-[#159c43] transition"
@@ -220,9 +220,9 @@ export default function BillboardDetailsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f8fcfa] font-inter">
+    <div className="min-h-screen bg-gray-900 font-inter">
       {/* Header */}
-      <header className="w-full border-b-1 pb-5 bg-white">
+      <header className="w-full border-b border-gray-700 pb-5 bg-gray-900">
         <div className="flex items-center justify-between px-12 pt-5 max-w-6xl mx-auto w-full flex-wrap gap-4">
           <Link href="/">
             <Image
@@ -248,7 +248,7 @@ export default function BillboardDetailsPage() {
           {/* Left Column - Image and Map */}
           <div className="space-y-6">
             {/* Billboard Image */}
-            <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden">
+            <div className="aspect-video bg-gradient-to-br from-gray-800 to-gray-700 rounded-xl overflow-hidden">
               {billboard.photo ? (
                 <Image
                   src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${billboard.photo}`}
@@ -266,7 +266,7 @@ export default function BillboardDetailsPage() {
 
             {/* Map */}
             {billboard.latitude && billboard.longitude && (
-              <div className="rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+              <div className="rounded-xl overflow-hidden border border-gray-700 shadow-sm">
                 <iframe
                   title="Billboard Location"
                   width="100%"
@@ -285,57 +285,57 @@ export default function BillboardDetailsPage() {
             {/* Billboard Info */}
             <div>
               <div className="flex items-start justify-between mb-4">
-                <h1 className="text-4xl font-bold text-[#222]">{billboard.title}</h1>
+                <h1 className="text-4xl font-bold text-gray-100">{billboard.title}</h1>
                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${getTypeColor(billboard.type)}`}>
                   {billboard.type}
                 </span>
               </div>
               
-              <p className="text-lg text-[#666] mb-6">{billboard.address}</p>
+              <p className="text-lg text-gray-300 mb-6">{billboard.address}</p>
               
               <div className="space-y-4">
-                <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                  <span className="font-semibold text-[#666]">City</span>
-                  <span className="text-[#222] capitalize">{billboard.city.city_name}</span>
+                <div className="flex justify-between items-center py-3 border-b border-gray-700">
+                  <span className="font-semibold text-gray-300">City</span>
+                  <span className="text-gray-100 capitalize">{billboard.city.city_name}</span>
                 </div>
                 
-                <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                  <span className="font-semibold text-[#666]">Price</span>
+                <div className="flex justify-between items-center py-3 border-b border-gray-700">
+                  <span className="font-semibold text-gray-300">Price</span>
                   <span className="text-2xl font-bold text-[#1db954]">₹{billboard.price}/day</span>
                 </div>
                 
                 {billboard.dimensionLen && billboard.dimensionWid && (
-                  <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                    <span className="font-semibold text-[#666]">Dimensions</span>
-                    <span className="text-[#222]">{billboard.dimensionLen} x {billboard.dimensionWid} ft</span>
+                  <div className="flex justify-between items-center py-3 border-b border-gray-700">
+                    <span className="font-semibold text-gray-300">Dimensions</span>
+                    <span className="text-gray-100">{billboard.dimensionLen} x {billboard.dimensionWid} ft</span>
                   </div>
                 )}
                 
-                <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                  <span className="font-semibold text-[#666]">Status</span>
+                <div className="flex justify-between items-center py-3 border-b border-gray-700">
+                  <span className="font-semibold text-gray-300">Status</span>
                   <div className="flex items-center gap-2">
                     <div className={`w-2 h-2 rounded-full ${billboard.is_available ? 'bg-green-500' : 'bg-red-500'}`}></div>
-                    <span className={`text-sm font-medium ${billboard.is_available ? 'text-green-700' : 'text-red-700'}`}>
+                    <span className={`text-sm font-medium ${billboard.is_available ? 'text-green-400' : 'text-red-400'}`}>
                       {billboard.is_available ? 'Available' : 'Not Available'}
                     </span>
                   </div>
                 </div>
 
                 {billboard.vendor && (
-                  <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                    <span className="font-semibold text-[#666]">Vendor</span>
-                    <span className="text-[#222]">{billboard.vendor.name}</span>
+                  <div className="flex justify-between items-center py-3 border-b border-gray-700">
+                    <span className="font-semibold text-gray-300">Vendor</span>
+                    <span className="text-gray-100">{billboard.vendor.name}</span>
                   </div>
                 )}
               </div>
             </div>
 
             {/* Booking Section */}
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-              <h3 className="text-xl font-bold text-[#222] mb-4">Book this Billboard</h3>
+            <div className="bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-700">
+              <h3 className="text-xl font-bold text-gray-100 mb-4">Book this Billboard</h3>
               
               {bookingConfirmed ? (
-                <div className="p-4 bg-green-50 rounded-lg text-green-700 text-center font-semibold">
+                <div className="p-4 bg-green-900 rounded-lg text-green-400 text-center font-semibold">
                   🎉 Booking Request Submitted!
                   <p className="text-sm mt-1">Your booking request from {startDate} to {endDate} has been sent to the vendor.</p>
                 </div>
@@ -354,7 +354,7 @@ export default function BillboardDetailsPage() {
                       className={`w-full py-3 px-6 rounded-lg font-medium transition ${
                         billboard.is_available 
                           ? 'bg-[#1db954] text-white hover:bg-[#159c43]' 
-                          : 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                          : 'bg-gray-700 text-gray-400 cursor-not-allowed'
                       }`}
                     >
                       {!isLoggedIn ? 'Sign In to Book' : billboard.is_available ? 'Book Now' : 'Not Available'}
@@ -363,7 +363,7 @@ export default function BillboardDetailsPage() {
                     <div className="space-y-4">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-semibold text-[#666] mb-2">Start Date</label>
+                          <label className="block text-sm font-semibold text-gray-300 mb-2">Start Date</label>
                           <input
                             type="date"
                             value={startDate}
@@ -372,11 +372,11 @@ export default function BillboardDetailsPage() {
                               setStartDate(e.target.value);
                               setDateError("");
                             }}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-[#1db954] focus:border-transparent"
+                            className="w-full border border-gray-600 rounded-lg px-3 py-2 text-gray-100 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-[#1db954] focus:border-transparent"
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-semibold text-[#666] mb-2">End Date</label>
+                          <label className="block text-sm font-semibold text-gray-300 mb-2">End Date</label>
                           <input
                             type="date"
                             value={endDate}
@@ -385,19 +385,19 @@ export default function BillboardDetailsPage() {
                               setEndDate(e.target.value);
                               setDateError("");
                             }}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-[#1db954] focus:border-transparent"
+                            className="w-full border border-gray-600 rounded-lg px-3 py-2 text-gray-100 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-[#1db954] focus:border-transparent"
                           />
                         </div>
                       </div>
                       
                       {dateError && (
-                        <p className="text-red-600 text-sm">{dateError}</p>
+                        <p className="text-red-400 text-sm">{dateError}</p>
                       )}
                       
                       <div className="flex gap-3">
                         <button
                           onClick={() => setShowBooking(false)}
-                          className="flex-1 py-2 px-4 border border-gray-300 rounded-lg text-[#666] hover:bg-gray-50 transition"
+                          className="flex-1 py-2 px-4 border border-gray-600 rounded-lg text-gray-300 hover:bg-gray-700 transition"
                         >
                           Cancel
                         </button>

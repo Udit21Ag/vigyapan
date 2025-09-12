@@ -85,9 +85,9 @@ function BookingRequestsContent() {
 		return (
 			<div className="max-w-6xl mx-auto p-8">
 				<div className="text-center py-16">
-					<div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-600 mx-auto mb-6"></div>
-					<h3 className="text-xl font-semibold text-gray-700 mb-2">Loading Booking Requests</h3>
-					<p className="text-gray-500">Please wait while we fetch your booking requests...</p>
+					<div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-400 mx-auto mb-6"></div>
+					<h3 className="text-xl font-semibold text-gray-100 mb-2">Loading Booking Requests</h3>
+					<p className="text-gray-300">Please wait while we fetch your booking requests...</p>
 				</div>
 			</div>
 		);
@@ -97,8 +97,8 @@ function BookingRequestsContent() {
 			<div className="max-w-6xl mx-auto p-8">
 				<div className="text-center py-16">
 					<div className="text-6xl mb-6">⚠️</div>
-					<h3 className="text-2xl font-bold text-red-600 mb-4">Error Loading Booking Requests</h3>
-					<p className="text-gray-600 mb-6 max-w-md mx-auto">{error}</p>
+					<h3 className="text-2xl font-bold text-red-400 mb-4">Error Loading Booking Requests</h3>
+					<p className="text-gray-300 mb-6 max-w-md mx-auto">{error}</p>
 					<button
 						onClick={() => window.location.reload()}
 						className="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition transform hover:scale-105"
@@ -114,13 +114,13 @@ function BookingRequestsContent() {
 			<div className="max-w-6xl mx-auto p-8">
 				<div className="text-center py-16">
 					<div className="text-8xl mb-6">📋</div>
-					<h3 className="text-2xl font-bold text-gray-700 mb-4">No Booking Requests Yet</h3>
-					<p className="text-gray-500 mb-6 max-w-md mx-auto">
+					<h3 className="text-2xl font-bold text-gray-100 mb-4">No Booking Requests Yet</h3>
+					<p className="text-gray-300 mb-6 max-w-md mx-auto">
 						You haven&apos;t received any booking requests yet. When advertisers book your billboards, they&apos;ll appear here.
 					</p>
-					<div className="bg-blue-50 border border-blue-200 rounded-lg p-6 max-w-lg mx-auto">
-						<h4 className="font-semibold text-blue-800 mb-2">💡 Tip</h4>
-						<p className="text-blue-700 text-sm">
+					<div className="bg-blue-900 border border-blue-700 rounded-lg p-6 max-w-lg mx-auto">
+						<h4 className="font-semibold text-blue-400 mb-2">💡 Tip</h4>
+						<p className="text-blue-300 text-sm">
 							Make sure your billboards are marked as available and have competitive pricing to attract more bookings.
 						</p>
 					</div>
@@ -144,29 +144,29 @@ function BookingRequestsContent() {
 		<div className="max-w-6xl mx-auto p-8">
 			{/* Header */}
 			<div className="mb-8">
-				<h1 className="text-4xl font-bold text-green-800 mb-2">Booking Requests</h1>
-				<p className="text-lg text-gray-600">
+				<h1 className="text-4xl font-bold text-green-400 mb-2">Booking Requests</h1>
+				<p className="text-lg text-gray-300">
 					Manage and respond to billboard booking requests from advertisers
 				</p>
 			</div>
 
 			{/* Stats Cards */}
 			<div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-				<div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+				<div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
 					<div className="flex items-center justify-between">
 						<div>
-							<p className="text-sm font-medium text-gray-600">Total Requests</p>
-							<p className="text-2xl font-bold text-gray-900">{bookingsData.count}</p>
+							<p className="text-sm font-medium text-gray-300">Total Requests</p>
+							<p className="text-2xl font-bold text-gray-100">{bookingsData.count}</p>
 						</div>
 						<div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
 							<span className="text-2xl">📋</span>
 						</div>
 					</div>
 				</div>
-				<div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+				<div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
 					<div className="flex items-center justify-between">
 						<div>
-							<p className="text-sm font-medium text-gray-600">Pending</p>
+							<p className="text-sm font-medium text-gray-300">Pending</p>
 							<p className="text-2xl font-bold text-yellow-600">
 								{filteredBookings.filter(b => b.status === 'pending').length}
 							</p>
@@ -176,10 +176,10 @@ function BookingRequestsContent() {
 						</div>
 					</div>
 				</div>
-				<div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+				<div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
 					<div className="flex items-center justify-between">
 						<div>
-							<p className="text-sm font-medium text-gray-600">Confirmed</p>
+							<p className="text-sm font-medium text-gray-300">Confirmed</p>
 							<p className="text-2xl font-bold text-green-600">
 								{filteredBookings.filter(b => b.status === 'confirmed').length}
 							</p>
@@ -189,10 +189,10 @@ function BookingRequestsContent() {
 						</div>
 					</div>
 				</div>
-				<div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+				<div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
 					<div className="flex items-center justify-between">
 						<div>
-							<p className="text-sm font-medium text-gray-600">Active</p>
+							<p className="text-sm font-medium text-gray-300">Active</p>
 							<p className="text-2xl font-bold text-blue-600">
 								{filteredBookings.filter(b => b.is_active).length}
 							</p>
@@ -205,15 +205,15 @@ function BookingRequestsContent() {
 			</div>
 
 			{/* Filters */}
-			<div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
-				<h3 className="text-lg font-semibold text-gray-900 mb-4">Filters & Sorting</h3>
+			<div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6 mb-8">
+				<h3 className="text-lg font-semibold text-gray-100 mb-4">Filters & Sorting</h3>
 				<div className="flex flex-wrap gap-6 items-center">
 					<div className="flex items-center gap-2">
-						<label className="font-medium text-gray-700">Status:</label>
+						<label className="font-medium text-gray-300">Status:</label>
 						<select
 							value={statusFilter}
 							onChange={e => setStatusFilter(e.target.value)}
-							className="border border-gray-300 rounded-lg px-4 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
+							className="border border-gray-600 rounded-lg px-4 py-2 text-gray-100 bg-gray-700 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
 						>
 							<option value="all">All Status</option>
 							<option value="pending">Pending</option>
@@ -222,11 +222,11 @@ function BookingRequestsContent() {
 						</select>
 					</div>
 					<div className="flex items-center gap-2">
-						<label className="font-medium text-gray-700">Sort by:</label>
+						<label className="font-medium text-gray-300">Sort by:</label>
 						<select
 							value={sortOrder}
 							onChange={e => setSortOrder(e.target.value)}
-							className="border border-gray-300 rounded-lg px-4 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
+							className="border border-gray-600 rounded-lg px-4 py-2 text-gray-100 bg-gray-700 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
 						>
 							<option value="latest">Latest First</option>
 							<option value="oldest">Oldest First</option>
@@ -240,14 +240,14 @@ function BookingRequestsContent() {
 				{filteredBookings.map((booking, idx) => (
 					<div
 						key={booking.static_id}
-						className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all cursor-pointer"
+						className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 hover:shadow-md transition-all cursor-pointer"
 						onClick={() => router.push(`/dashboard/vendor/booking-requests/details/${booking.static_id}`)}
 					>
 						<div className="p-6">
 							<div className="flex items-start justify-between">
 								<div className="flex-1">
 									<div className="flex items-center gap-3 mb-3">
-										<h3 className="text-xl font-semibold text-gray-900">
+										<h3 className="text-xl font-semibold text-gray-100">
 											{titles[idx] || 'Loading...'}
 										</h3>
 										<span className={`px-3 py-1 rounded-full text-sm font-medium ${
@@ -264,16 +264,16 @@ function BookingRequestsContent() {
 											</span>
 										)}
 									</div>
-									<div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-600">
+									<div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-300">
 										<div>
 											<span className="font-medium">Request Date:</span>
-											<p className="text-gray-900 mt-1">
+											<p className="text-gray-100 mt-1">
 												{new Date(booking.created_at).toLocaleDateString()}
 											</p>
 										</div>
 										<div>
 											<span className="font-medium">Request Time:</span>
-											<p className="text-gray-900 mt-1">
+											<p className="text-gray-100 mt-1">
 												{new Date(booking.created_at).toLocaleTimeString()}
 											</p>
 										</div>
@@ -318,7 +318,7 @@ function BookingRequestsContent() {
 								className={`px-4 py-2 rounded-lg font-medium transition ${
 									bookingsData.current_page === i + 1 
 										? "bg-green-600 text-white shadow-md" 
-										: "bg-white text-green-600 border border-gray-200 hover:bg-green-50"
+										: "bg-gray-800 text-green-400 border border-gray-600 hover:bg-gray-700"
 								}`}
 								onClick={() => router.push(`/dashboard/vendor/booking-requests?page=${i + 1}`)}
 							>
@@ -339,15 +339,15 @@ export default function VendorBookingRequests() {
 	useProfileProtection();
 	
 	return (
-		<div className="min-h-screen flex bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
+		<div className="min-h-screen flex bg-gradient-to-b from-gray-900 to-gray-800">
 			<Sidebar />
 			<main className="flex-1 p-8">
 				<Suspense fallback={
 					<div className="max-w-6xl mx-auto p-8">
 						<div className="text-center py-16">
-							<div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-600 mx-auto mb-6"></div>
-							<h3 className="text-xl font-semibold text-gray-700 mb-2">Loading</h3>
-							<p className="text-gray-500">Please wait...</p>
+							<div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-400 mx-auto mb-6"></div>
+							<h3 className="text-xl font-semibold text-gray-100 mb-2">Loading</h3>
+							<p className="text-gray-300">Please wait...</p>
 						</div>
 					</div>
 				}>

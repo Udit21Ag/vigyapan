@@ -176,16 +176,16 @@ export default function CompleteProfile() {
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
 								</svg>
 							</div>
-							<h2 className="text-3xl font-bold text-gray-900 mb-3">Choose Your Role</h2>
-							<p className="text-gray-600 text-lg">Tell us how you plan to use Vigyapan</p>
+							<h2 className="text-3xl font-bold text-gray-100 mb-3">Choose Your Role</h2>
+							<p className="text-gray-300 text-lg">Tell us how you plan to use Vigyapan</p>
 						</div>
 
 						{existingUserType && existingUserType !== "null" && existingUserType !== "" ? (
-							<div className="bg-gradient-to-r from-green-50 to-blue-50 border-2 border-green-200 rounded-2xl p-6 text-center">
-								<span className="text-gray-800 font-bold text-2xl">
+							<div className="bg-gradient-to-r from-green-900 to-blue-900 border-2 border-green-700 rounded-2xl p-6 text-center">
+								<span className="text-gray-100 font-bold text-2xl">
 									{existingUserType === "vendor" ? "Vendor" : "Advertiser"}
 								</span>
-								<span className="text-sm text-gray-600 block mt-1">(Already selected)</span>
+								<span className="text-sm text-gray-300 block mt-1">(Already selected)</span>
 							</div>
 						) : (
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -195,7 +195,7 @@ export default function CompleteProfile() {
 									className={`p-8 rounded-2xl border-3 font-bold text-xl transition-all duration-300 ${
 										userType === "vendor"
 											? "bg-gradient-to-br from-green-600 to-green-700 border-green-600 text-white shadow-2xl transform scale-105"
-											: "bg-white border-gray-300 text-gray-800 hover:border-green-500 hover:bg-green-50 hover:text-green-700 hover:shadow-lg"
+											: "bg-gray-700 border-gray-600 text-gray-100 hover:border-green-500 hover:bg-green-900 hover:text-green-100 hover:shadow-lg"
 									}`}
 								>
 									<div className="text-center">
@@ -212,7 +212,7 @@ export default function CompleteProfile() {
 									className={`p-8 rounded-2xl border-3 font-bold text-xl transition-all duration-300 ${
 										userType === "advertiser"
 											? "bg-gradient-to-br from-green-600 to-green-700 border-green-600 text-white shadow-2xl transform scale-105"
-											: "bg-white border-gray-300 text-gray-800 hover:border-green-500 hover:bg-green-50 hover:text-green-700 hover:shadow-lg"
+											: "bg-gray-700 border-gray-600 text-gray-100 hover:border-green-500 hover:bg-green-900 hover:text-green-100 hover:shadow-lg"
 									}`}
 								>
 									<div className="text-center">
@@ -237,14 +237,14 @@ export default function CompleteProfile() {
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 002 2h2a1 1 0 011 1v6.5M6 20.5A2.5 2.5 0 018.5 18h7a2.5 2.5 0 012.5 2.5v0A2.5 2.5 0 0115.5 23h-7A2.5 2.5 0 016 20.5v0z" />
 								</svg>
 							</div>
-							<h2 className="text-3xl font-bold text-gray-900 mb-3">Contact Information</h2>
-							<p className="text-gray-600 text-lg">We need your contact details and company information</p>
+							<h2 className="text-3xl font-bold text-gray-100 mb-3">Contact Information</h2>
+							<p className="text-gray-300 text-lg">We need your contact details and company information</p>
 						</div>
 
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 							{/* Phone */}
 							<div>
-								<label className="block text-sm font-semibold text-gray-800 mb-3">
+								<label className="block text-sm font-semibold text-gray-300 mb-3">
 									Phone Number
 								</label>
 								<div className="relative">
@@ -254,7 +254,7 @@ export default function CompleteProfile() {
 										required
 										value={formData.phone}
 										onChange={handleInputChange}
-										className="w-full px-4 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-gray-900 placeholder-gray-600 bg-white dark-placeholder"
+										className="w-full px-4 py-4 border-2 border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-gray-100 placeholder-gray-400 bg-gray-700"
 										placeholder="Enter your phone number"
 									/>
 									<div className="absolute inset-y-0 right-0 flex items-center pr-4">
@@ -267,7 +267,7 @@ export default function CompleteProfile() {
 
 							{/* Company */}
 							<div>
-								<label className="block text-sm font-semibold text-gray-800 mb-3">
+								<label className="block text-sm font-semibold text-gray-300 mb-3">
 									Company Name
 								</label>
 								<div className="relative">
@@ -277,7 +277,7 @@ export default function CompleteProfile() {
 										required
 										value={formData.company}
 										onChange={handleInputChange}
-										className="w-full px-4 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-gray-900 placeholder-gray-600 bg-white dark-placeholder"
+										className="w-full px-4 py-4 border-2 border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-gray-100 placeholder-gray-400 bg-gray-700"
 										placeholder="Enter your company name"
 									/>
 									<div className="absolute inset-y-0 right-0 flex items-center pr-4">
@@ -301,14 +301,14 @@ export default function CompleteProfile() {
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
 								</svg>
 							</div>
-							<h2 className="text-3xl font-bold text-gray-900 mb-3">Location & Photo</h2>
-							<p className="text-gray-600 text-lg">Tell us your address and upload a profile photo</p>
+							<h2 className="text-3xl font-bold text-gray-100 mb-3">Location & Photo</h2>
+							<p className="text-gray-300 text-lg">Tell us your address and upload a profile photo</p>
 						</div>
 
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 							{/* Address with Google Places */}
 							<div>
-								<label className="block text-sm font-semibold text-gray-800 mb-3">
+								<label className="block text-sm font-semibold text-gray-300 mb-3">
 									Address
 								</label>
 								<div className="relative">
@@ -319,7 +319,7 @@ export default function CompleteProfile() {
 										required
 										value={formData.address}
 										onChange={handleInputChange}
-										className="w-full px-4 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-gray-900 placeholder-gray-600 bg-white dark-placeholder"
+										className="w-full px-4 py-4 border-2 border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-gray-100 placeholder-gray-400 bg-gray-700"
 										placeholder="Start typing your address..."
 									/>
 									<div className="absolute inset-y-0 right-0 flex items-center pr-4">
@@ -333,7 +333,7 @@ export default function CompleteProfile() {
 
 							{/* Pincode */}
 							<div>
-								<label className="block text-sm font-semibold text-gray-800 mb-3">
+								<label className="block text-sm font-semibold text-gray-300 mb-3">
 									Pincode
 								</label>
 								<div className="relative">
@@ -343,7 +343,7 @@ export default function CompleteProfile() {
 										required
 										value={formData.pincode}
 										onChange={handleInputChange}
-										className="w-full px-4 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-gray-900 placeholder-gray-600 bg-white dark-placeholder"
+										className="w-full px-4 py-4 border-2 border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-gray-100 placeholder-gray-400 bg-gray-700"
 										placeholder="Enter your area pincode"
 									/>
 									<div className="absolute inset-y-0 right-0 flex items-center pr-4">
@@ -357,7 +357,7 @@ export default function CompleteProfile() {
 
 						{/* Photo Upload */}
 						<div>
-							<label className="block text-sm font-semibold text-gray-800 mb-3">
+							<label className="block text-sm font-semibold text-gray-300 mb-3">
 								Profile Photo (Optional)
 							</label>
 							<input
@@ -370,10 +370,10 @@ export default function CompleteProfile() {
 							<button
 								type="button"
 								onClick={() => fileInputRef.current?.click()}
-								className="w-full px-6 py-6 border-2 border-dashed border-gray-300 rounded-xl text-gray-800 hover:border-green-500 hover:bg-green-50 transition-all duration-200 flex items-center justify-center gap-4 bg-white"
+								className="w-full px-6 py-6 border-2 border-dashed border-gray-600 rounded-xl text-gray-300 hover:border-green-500 hover:bg-gray-700 transition-all duration-200 flex items-center justify-center gap-4 bg-gray-800"
 							>
-								<div className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full">
-									<svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<div className="flex items-center justify-center w-12 h-12 bg-gray-700 rounded-full">
+									<svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
 									</svg>
 								</div>
@@ -391,7 +391,7 @@ export default function CompleteProfile() {
 	};
 
 	return (
-		<div className="min-h-screen bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee] flex flex-col">
+		<div className="min-h-screen bg-gray-900 flex flex-col">
 			{/* Google Maps Script */}
 			<Script
 				src={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places`}
@@ -399,7 +399,7 @@ export default function CompleteProfile() {
 			/>
 
 			{/* Header */}
-			<header className="flex items-center justify-between px-4 md:px-12 py-6 border-b bg-white/80 backdrop-blur-sm shadow-sm">
+			<header className="flex items-center justify-between px-4 md:px-12 py-6 border-b border-gray-700 bg-gray-800/80 backdrop-blur-sm shadow-sm">
 				<Link href="/" className="text-xl md:text-2xl font-bold text-green-600">
 					<Image
 						src="/vigyapan.png"
@@ -409,13 +409,13 @@ export default function CompleteProfile() {
 						className="h-[30px] md:h-[38px] w-auto"
 					/>
 				</Link>
-				<div className="text-sm font-medium text-gray-700 bg-green-50 px-3 py-1 rounded-full">
+				<div className="text-sm font-medium text-gray-300 bg-gray-700 px-3 py-1 rounded-full">
 					Step {currentStep} of 3
 				</div>
 			</header>
 
 			{/* Progress Bar */}
-			<div className="w-full bg-gray-200 h-2">
+			<div className="w-full bg-gray-700 h-2">
 				<div 
 					className="bg-gradient-to-r from-green-500 to-green-600 h-2 transition-all duration-500"
 					style={{ width: `${(currentStep / 3) * 100}%` }}
@@ -424,10 +424,10 @@ export default function CompleteProfile() {
 
 			{/* Main Content */}
 			<main className="flex-1 flex items-center justify-center p-4 md:p-8">
-				<div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-8 md:p-12 w-full max-w-4xl">
+				<div className="bg-gray-800 rounded-3xl shadow-2xl border border-gray-700 p-8 md:p-12 w-full max-w-4xl">
 					{error && (
-						<div className="bg-red-50 border border-red-200 text-red-800 px-5 py-4 rounded-xl mb-6 flex items-start gap-3">
-							<svg className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<div className="bg-red-900 border border-red-700 text-red-400 px-5 py-4 rounded-xl mb-6 flex items-start gap-3">
+							<svg className="w-5 h-5 text-red-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
 							</svg>
 							<span className="font-medium">{error}</span>
@@ -438,12 +438,12 @@ export default function CompleteProfile() {
 						{renderStep()}
 
 						{/* Navigation Buttons */}
-						<div className="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
+						<div className="flex justify-between items-center mt-8 pt-6 border-t border-gray-700">
 							<button
 								type="button"
 								onClick={prevStep}
 								disabled={currentStep === 1}
-								className="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-xl hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+								className="px-6 py-3 bg-gray-700 text-gray-300 font-semibold rounded-xl hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
 							>
 								Previous
 							</button>
@@ -487,7 +487,7 @@ export default function CompleteProfile() {
 			</main>
 
 			{/* Footer */}
-			<footer className="text-center py-4 text-gray-600 border-t bg-white text-sm">
+			<footer className="text-center py-4 text-gray-400 border-t border-gray-700 bg-gray-800 text-sm">
 				<p>© 2025 Vigyapan. All rights reserved.</p>
 			</footer>
 		</div>

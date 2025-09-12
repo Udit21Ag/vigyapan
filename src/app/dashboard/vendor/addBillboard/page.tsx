@@ -495,70 +495,70 @@ export default function AddBillboard() {
   };
 
   return (
-    <div className="min-h-screen flex bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
+    <div className="min-h-screen flex bg-gradient-to-b from-gray-900 to-gray-800">
       <Sidebar />
       {/* Main content with responsive padding and margin for mobile */}
       <main className="flex-1 p-3 md:p-6 overflow-auto md:ml-0">
         <div className="max-w-5xl mx-auto">
           {/* Header Section */}
           <div className="mb-6 md:mb-8">
-            <Link href="/dashboard/vendor" className="text-green-700 hover:underline font-medium flex items-center gap-2 mb-4 text-sm md:text-base">
+            <Link href="/dashboard/vendor" className="text-green-400 hover:text-green-300 hover:underline font-medium flex items-center gap-2 mb-4 text-sm md:text-base">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 md:w-5 md:h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
               </svg>
               Back to Dashboard
             </Link>
             <div className="text-center">
-              <h1 className="text-2xl md:text-4xl font-bold text-green-700 mb-2 md:mb-3">Add New Billboard</h1>
-              <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-2">
+              <h1 className="text-2xl md:text-4xl font-bold text-gray-100 mb-2 md:mb-3">Add New Billboard</h1>
+              <p className="text-base md:text-lg text-gray-300 max-w-2xl mx-auto px-2">
                 Create a new billboard listing with detailed information and precise location mapping
               </p>
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-4 md:p-8">
+          <div className="bg-gray-800 rounded-2xl shadow-lg border border-gray-700 p-4 md:p-8">
             <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
               {/* Basic Information Section */}
               <div className="space-y-4 md:space-y-6">
-                <div className="border-b border-gray-200 pb-3 md:pb-4">
-                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 flex items-center gap-2 md:gap-3">
-                    <div className="w-6 h-6 md:w-8 md:h-8 bg-green-100 rounded-full flex items-center justify-center">
-                      <span className="text-green-600 font-bold text-xs md:text-sm">1</span>
+                <div className="border-b border-gray-600 pb-3 md:pb-4">
+                  <h2 className="text-xl md:text-2xl font-bold text-gray-100 flex items-center gap-2 md:gap-3">
+                    <div className="w-6 h-6 md:w-8 md:h-8 bg-green-900 rounded-full flex items-center justify-center">
+                      <span className="text-green-400 font-bold text-xs md:text-sm">1</span>
                     </div>
                     Basic Information
                   </h2>
-                  <p className="text-gray-600 mt-2 text-sm md:text-base">Tell us about your billboard</p>
+                  <p className="text-gray-300 mt-2 text-sm md:text-base">Tell us about your billboard</p>
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Billboard Title</label>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">Billboard Title</label>
                     <input 
                       name="title" 
                       value={form.title} 
                       onChange={handleChange} 
                       required 
                       placeholder="Enter descriptive billboard title" 
-                      className="w-full p-3 md:p-4 border border-gray-300 rounded-xl text-gray-900 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-sm md:text-base" 
+                      className="w-full p-3 md:p-4 border border-gray-600 rounded-xl text-gray-100 bg-gray-700 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-sm md:text-base" 
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Billboard Type</label>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">Billboard Type</label>
                     <input 
                       name="type" 
                       value={form.type} 
                       onChange={handleChange} 
                       required 
                       placeholder="e.g., Digital Display, Traditional Hoarding" 
-                      className="w-full p-3 md:p-4 border border-gray-300 rounded-xl text-gray-900 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-sm md:text-base" 
+                      className="w-full p-3 md:p-4 border border-gray-600 rounded-xl text-gray-100 bg-gray-700 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-sm md:text-base" 
                     />
                   </div>
                 </div>
 
                 {/* Image Upload Section */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Billboard Image</label>
-                  <div className="border-2 border-dashed border-gray-300 rounded-xl p-4 md:p-6 hover:border-green-400 transition-colors duration-200 bg-gray-50 hover:bg-green-50">
+                  <label className="block text-sm font-semibold text-gray-300 mb-2">Billboard Image</label>
+                  <div className="border-2 border-dashed border-gray-600 rounded-xl p-4 md:p-6 hover:border-green-400 transition-colors duration-200 bg-gray-700 hover:bg-gray-600">
                     {imagePreview ? (
                       <div className="relative">
                         <Image 
@@ -584,10 +584,10 @@ export default function AddBillboard() {
                           </svg>
                         </div>
                         <label className="cursor-pointer">
-                          <span className="text-base md:text-lg font-medium text-gray-700 hover:text-green-600 transition">
+                          <span className="text-base md:text-lg font-medium text-gray-300 hover:text-green-400 transition">
                             Click to upload billboard image
                           </span>
-                          <span className="block text-xs md:text-sm text-gray-500 mt-2">
+                          <span className="block text-xs md:text-sm text-gray-400 mt-2">
                             PNG, JPG, GIF up to 5MB • Recommended: 1200x400px
                           </span>
                           <input
@@ -605,18 +605,18 @@ export default function AddBillboard() {
 
               {/* Location & Address Section */}
               <div className="space-y-4 md:space-y-6">
-                <div className="border-b border-gray-200 pb-3 md:pb-4">
-                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 flex items-center gap-2 md:gap-3">
-                    <div className="w-6 h-6 md:w-8 md:h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                      <span className="text-blue-600 font-bold text-xs md:text-sm">2</span>
+                <div className="border-b border-gray-600 pb-3 md:pb-4">
+                  <h2 className="text-xl md:text-2xl font-bold text-gray-100 flex items-center gap-2 md:gap-3">
+                    <div className="w-6 h-6 md:w-8 md:h-8 bg-blue-900 rounded-full flex items-center justify-center">
+                      <span className="text-blue-400 font-bold text-xs md:text-sm">2</span>
                     </div>
                     Location & Address
                   </h2>
-                  <p className="text-gray-600 mt-2 text-sm md:text-base">Set the precise location of your billboard</p>
+                  <p className="text-gray-300 mt-2 text-sm md:text-base">Set the precise location of your billboard</p>
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Search Landmark Address</label>
+                  <label className="block text-sm font-semibold text-gray-300 mb-2">Search Landmark Address</label>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <div className="flex-1">
                       <input
@@ -625,7 +625,7 @@ export default function AddBillboard() {
                         onChange={handleChange}
                         required
                         placeholder="Type landmark address to search"
-                        className="w-full p-3 md:p-4 border border-gray-300 rounded-xl text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-sm md:text-base"
+                        className="w-full p-3 md:p-4 border border-gray-600 rounded-xl text-gray-100 bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-sm md:text-base"
                         autoComplete="off"
                         ref={addressInputRef}
                       />
@@ -650,14 +650,14 @@ export default function AddBillboard() {
                     </button>
                   </div>
                   {form.longitude && form.latitude && (
-                    <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
-                      <div className="flex items-center gap-2 text-green-700">
+                    <div className="mt-3 p-3 bg-green-900 border border-green-700 rounded-lg">
+                      <div className="flex items-center gap-2 text-green-400">
                         <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <span className="font-medium text-sm md:text-base">Location Found!</span>
                       </div>
-                      <div className="text-xs md:text-sm text-green-600 mt-1">
+                      <div className="text-xs md:text-sm text-green-300 mt-1">
                         📍 Coordinates: {parseFloat(form.latitude).toFixed(6)}, {parseFloat(form.longitude).toFixed(6)}
                       </div>
                     </div>
@@ -666,26 +666,26 @@ export default function AddBillboard() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">City</label>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">City</label>
                     <input
                       name="city"
                       value={form.city}
                       required
                       placeholder="Auto-filled from address selection"
-                      className="w-full p-3 md:p-4 border border-gray-300 rounded-xl text-gray-900 bg-gray-50 cursor-not-allowed text-sm md:text-base"
+                      className="w-full p-3 md:p-4 border border-gray-600 rounded-xl text-gray-100 bg-gray-700 bg-gray-600 cursor-not-allowed text-sm md:text-base"
                       autoComplete="off"
                       ref={cityInputRef}
                       readOnly
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Pincode</label>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">Pincode</label>
                     <input 
                       name="pincode" 
                       value={form.pincode} 
                       required 
                       placeholder="Auto-filled from address selection" 
-                      className="w-full p-3 md:p-4 border border-gray-300 rounded-xl text-gray-900 bg-gray-50 cursor-not-allowed text-sm md:text-base" 
+                      className="w-full p-3 md:p-4 border border-gray-600 rounded-xl text-gray-100 bg-gray-700 bg-gray-600 cursor-not-allowed text-sm md:text-base" 
                       readOnly 
                     />
                   </div>
@@ -693,19 +693,19 @@ export default function AddBillboard() {
 
                 {/* Interactive Map */}
                 <div className="space-y-3">
-                  <h3 className="text-base md:text-lg font-semibold text-gray-800 flex items-center gap-2">
-                    <svg className="w-4 h-4 md:w-5 md:h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <h3 className="text-base md:text-lg font-semibold text-gray-200 flex items-center gap-2">
+                    <svg className="w-4 h-4 md:w-5 md:h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m0 0L9 7" />
                     </svg>
                     Interactive Location Map
                   </h3>
-                  <div className="border border-gray-300 rounded-xl overflow-hidden shadow-md">
+                  <div className="border border-gray-600 rounded-xl overflow-hidden shadow-md">
                     <div 
                       ref={mapRef} 
                       className="w-full h-64 md:h-96" 
                     />
                   </div>
-                  <p className="text-xs md:text-sm text-gray-600 bg-blue-50 p-3 rounded-lg">
+                  <p className="text-xs md:text-sm text-gray-300 bg-blue-900 p-3 rounded-lg">
                     💡 <strong>Tip:</strong> You can drag the marker on the map to fine-tune the exact location of your billboard.
                   </p>
                 </div>
@@ -713,19 +713,19 @@ export default function AddBillboard() {
 
               {/* Specifications Section */}
               <div className="space-y-4 md:space-y-6">
-                <div className="border-b border-gray-200 pb-3 md:pb-4">
-                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 flex items-center gap-2 md:gap-3">
-                    <div className="w-6 h-6 md:w-8 md:h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                      <span className="text-purple-600 font-bold text-xs md:text-sm">3</span>
+                <div className="border-b border-gray-600 pb-3 md:pb-4">
+                  <h2 className="text-xl md:text-2xl font-bold text-gray-100 flex items-center gap-2 md:gap-3">
+                    <div className="w-6 h-6 md:w-8 md:h-8 bg-purple-900 rounded-full flex items-center justify-center">
+                      <span className="text-purple-400 font-bold text-xs md:text-sm">3</span>
                     </div>
                     Billboard Specifications
                   </h2>
-                  <p className="text-gray-600 mt-2 text-sm md:text-base">Provide technical details and pricing information</p>
+                  <p className="text-gray-300 mt-2 text-sm md:text-base">Provide technical details and pricing information</p>
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Length (feet)</label>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">Length (feet)</label>
                     <input 
                       name="length" 
                       value={form.length} 
@@ -734,11 +734,11 @@ export default function AddBillboard() {
                       placeholder="Enter length in feet" 
                       type="number"
                       step="0.1"
-                      className="w-full p-3 md:p-4 border border-gray-300 rounded-xl text-gray-900 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-sm md:text-base" 
+                      className="w-full p-3 md:p-4 border border-gray-600 rounded-xl text-gray-100 bg-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-sm md:text-base" 
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Width (feet)</label>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">Width (feet)</label>
                     <input 
                       name="width" 
                       value={form.width} 
@@ -747,16 +747,16 @@ export default function AddBillboard() {
                       placeholder="Enter width in feet" 
                       type="number"
                       step="0.1"
-                      className="w-full p-3 md:p-4 border border-gray-300 rounded-xl text-gray-900 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-sm md:text-base" 
+                      className="w-full p-3 md:p-4 border border-gray-600 rounded-xl text-gray-100 bg-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-sm md:text-base" 
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Daily Rental Price (₹)</label>
+                  <label className="block text-sm font-semibold text-gray-300 mb-2">Daily Rental Price (₹)</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 md:pl-4 flex items-center pointer-events-none">
-                      <span className="text-gray-500 text-base md:text-lg">₹</span>
+                      <span className="text-gray-400 text-base md:text-lg">₹</span>
                     </div>
                     <input 
                       name="price" 
@@ -767,31 +767,31 @@ export default function AddBillboard() {
                       type="number"
                       min="0"
                       step="1"
-                      className="w-full pl-8 md:pl-10 pr-3 md:pr-4 py-3 md:py-4 border border-gray-300 rounded-xl text-gray-900 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-sm md:text-base" 
+                      className="w-full pl-8 md:pl-10 pr-3 md:pr-4 py-3 md:py-4 border border-gray-600 rounded-xl text-gray-100 bg-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-sm md:text-base" 
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Status</label>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">Status</label>
                     <select 
                       name="status" 
                       value={form.status} 
                       onChange={handleChange} 
-                      className="w-full p-3 md:p-4 border border-gray-300 rounded-xl text-gray-900 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-sm md:text-base"
+                      className="w-full p-3 md:p-4 border border-gray-600 rounded-xl text-gray-100 bg-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-sm md:text-base"
                     >
                       <option value="active">Active</option>
                       <option value="inactive">Inactive</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Availability</label>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">Availability</label>
                     <select 
                       name="available" 
                       value={form.available} 
                       onChange={handleChange} 
-                      className="w-full p-3 md:p-4 border border-gray-300 rounded-xl text-gray-900 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-sm md:text-base"
+                      className="w-full p-3 md:p-4 border border-gray-600 rounded-xl text-gray-100 bg-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-sm md:text-base"
                     >
                       <option value="yes">Available for Booking</option>
                       <option value="no">Currently Booked</option>
@@ -802,18 +802,18 @@ export default function AddBillboard() {
 
               {/* Error Display */}
               {error && (
-                <div className="bg-red-50 border border-red-200 rounded-xl p-3 md:p-4">
+                <div className="bg-red-900 border border-red-700 rounded-xl p-3 md:p-4">
                   <div className="flex items-center gap-2 md:gap-3">
-                    <svg className="w-5 h-5 md:w-6 md:h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 md:w-6 md:h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <p className="text-red-700 font-medium text-sm md:text-base">{error}</p>
+                    <p className="text-red-300 font-medium text-sm md:text-base">{error}</p>
                   </div>
                 </div>
               )}
 
               {/* Submit Button */}
-              <div className="text-center pt-4 md:pt-6 border-t border-gray-200">
+              <div className="text-center pt-4 md:pt-6 border-t border-gray-600">
                 <button 
                   type="submit" 
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 md:gap-3 bg-gradient-to-r from-green-600 to-green-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm md:text-base"

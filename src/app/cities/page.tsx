@@ -50,26 +50,26 @@ export default function CitiesPage() {
   // Generate gradient colors
   const getGradientClass = (index: number) => {
     const gradients = [
-      "from-red-100 to-red-200",
-      "from-blue-100 to-blue-200", 
-      "from-green-100 to-green-200",
-      "from-yellow-100 to-orange-200",
-      "from-purple-100 to-pink-200",
-      "from-indigo-100 to-indigo-200",
-      "from-teal-100 to-teal-200",
-      "from-orange-100 to-orange-200",
-      "from-pink-100 to-pink-200",
-      "from-gray-100 to-gray-200",
-      "from-amber-100 to-amber-200",
-      "from-slate-100 to-slate-200"
+      "from-red-900 to-red-800",
+      "from-blue-900 to-blue-800", 
+      "from-green-900 to-green-800",
+      "from-yellow-900 to-orange-800",
+      "from-purple-900 to-pink-800",
+      "from-indigo-900 to-indigo-800",
+      "from-teal-900 to-teal-800",
+      "from-orange-900 to-orange-800",
+      "from-pink-900 to-pink-800",
+      "from-gray-800 to-gray-700",
+      "from-amber-900 to-amber-800",
+      "from-slate-800 to-slate-700"
     ];
     return gradients[index % gradients.length];
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fcfa] font-inter">
+    <div className="min-h-screen bg-gray-900 font-inter">
       {/* Header */}
-      <header className="w-full border-b-1 pb-5 bg-white">
+      <header className="w-full border-b border-gray-700 pb-5 bg-gray-900">
         <div className="flex items-center justify-between px-12 pt-5 max-w-6xl mx-auto w-full flex-wrap gap-4">
           <Link href="/">
             <Image
@@ -93,8 +93,8 @@ export default function CitiesPage() {
       <main className="max-w-6xl mx-auto px-6 md:px-12 py-12">
         {/* Page Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-[#222] mb-4">All Cities</h1>
-          <p className="text-lg text-[#666] mb-8">
+          <h1 className="text-4xl font-bold text-gray-100 mb-4">All Cities</h1>
+          <p className="text-lg text-gray-300 mb-8">
             Discover billboard advertising opportunities across India&apos;s major cities
           </p>
           
@@ -105,7 +105,7 @@ export default function CitiesPage() {
               placeholder="Search cities..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-3 pl-12 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#1db954] focus:border-transparent text-[#222]"
+              className="w-full px-4 py-3 pl-12 border border-gray-600 rounded-full focus:outline-none focus:ring-2 focus:ring-[#1db954] focus:border-transparent text-gray-100 bg-gray-800 placeholder-gray-400"
             />
             <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
               <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -117,7 +117,7 @@ export default function CitiesPage() {
 
         {/* Results Count */}
         <div className="mb-6">
-          <p className="text-[#666]">
+          <p className="text-gray-300">
             {loading ? "Loading..." : `${filteredCities.length} ${filteredCities.length === 1 ? 'city' : 'cities'} found`}
             {searchQuery && ` for "${searchQuery}"`}
           </p>
@@ -128,9 +128,9 @@ export default function CitiesPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="animate-pulse">
-                <div className="bg-gray-200 h-48 rounded-2xl mb-3"></div>
-                <div className="bg-gray-200 h-4 rounded mb-2"></div>
-                <div className="bg-gray-200 h-3 rounded w-2/3"></div>
+                <div className="bg-gray-700 h-48 rounded-2xl mb-3"></div>
+                <div className="bg-gray-700 h-4 rounded mb-2"></div>
+                <div className="bg-gray-700 h-3 rounded w-2/3"></div>
               </div>
             ))}
           </div>
@@ -177,10 +177,10 @@ export default function CitiesPage() {
                       </div>
                     )}
                   </div>
-                  <h3 className="font-semibold text-lg text-[#222] group-hover:text-[#1db954] transition-colors capitalize">
+                  <h3 className="font-semibold text-lg text-gray-100 group-hover:text-[#1db954] transition-colors capitalize">
                     {city.city_name.city}
                   </h3>
-                  <p className="text-sm text-black">
+                  <p className="text-sm text-gray-300">
                     {city.billboardCount} advertising space{city.billboardCount !== 1 ? 's' : ''} available
                   </p>
                 </div>
@@ -191,8 +191,8 @@ export default function CitiesPage() {
             {filteredCities.length === 0 && !loading && (
               <div className="text-center py-12">
                 <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-xl font-semibold text-[#222] mb-2">No cities found</h3>
-                <p className="text-[#666] mb-4">
+                <h3 className="text-xl font-semibold text-gray-100 mb-2">No cities found</h3>
+                <p className="text-gray-300 mb-4">
                   Try adjusting your search terms or browse all available cities.
                 </p>
                 <button

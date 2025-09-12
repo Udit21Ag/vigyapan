@@ -73,44 +73,44 @@ function BookingDetailContent() {
   }, [id]);
 
   if (loading) {
-    return <div className="flex justify-center items-center min-h-screen text-lg">Loading...</div>;
+    return <div className="flex justify-center items-center min-h-screen text-lg text-gray-100">Loading...</div>;
   }
   if (error) {
-    return <div className="flex justify-center items-center min-h-screen text-red-600 text-lg">{error}</div>;
+    return <div className="flex justify-center items-center min-h-screen text-red-400 text-lg">{error}</div>;
   }
   if (!booking) {
-    return <div className="flex justify-center items-center min-h-screen text-lg">No details found.</div>;
+    return <div className="flex justify-center items-center min-h-screen text-lg text-gray-100">No details found.</div>;
   }
 
   return (
-    <div className="max-w-full w-[70vw] mx-auto p-10 bg-white rounded-2xl shadow border border-green-100">
-      <h1 className="text-3xl font-bold mb-8 text-black">Booking Details</h1>
-      <div className="space-y-4 text-lg text-black">
-        <div className="flex justify-between items-center py-2 border-b border-gray-100">
+    <div className="max-w-full w-[70vw] mx-auto p-10 bg-gray-800 rounded-2xl shadow border border-gray-700">
+      <h1 className="text-3xl font-bold mb-8 text-gray-100">Booking Details</h1>
+      <div className="space-y-4 text-lg text-gray-100">
+        <div className="flex justify-between items-center py-2 border-b border-gray-600">
           <span className="font-semibold">Billboard Title:</span>
           <span>{booking.title}</span>
         </div>
-        <div className="flex justify-between items-center py-2 border-b border-gray-100">
+        <div className="flex justify-between items-center py-2 border-b border-gray-600">
           <span className="font-semibold">Status:</span>
           <span>{booking.status}</span>
         </div>
-        <div className="flex justify-between items-center py-2 border-b border-gray-100">
+        <div className="flex justify-between items-center py-2 border-b border-gray-600">
           <span className="font-semibold">Start Date:</span>
           <span>{booking.start_date}</span>
         </div>
-        <div className="flex justify-between items-center py-2 border-b border-gray-100">
+        <div className="flex justify-between items-center py-2 border-b border-gray-600">
           <span className="font-semibold">End Date:</span>
           <span>{booking.end_date}</span>
         </div>
-        <div className="flex justify-between items-center py-2 border-b border-gray-100">
+        <div className="flex justify-between items-center py-2 border-b border-gray-600">
           <span className="font-semibold">Total Duration:</span>
           <span>{getDuration(booking.start_date, booking.end_date)}</span>
         </div>
-        <div className="flex justify-between items-center py-2 border-b border-gray-100">
+        <div className="flex justify-between items-center py-2 border-b border-gray-600">
           <span className="font-semibold">Booking Creation Date:</span>
           <span>{new Date(booking.created_at).toLocaleString()}</span>
         </div>
-        <div className="flex justify-between items-center py-2 border-b border-gray-100">
+        <div className="flex justify-between items-center py-2 border-b border-gray-600">
           <span className="font-semibold">Is Active:</span>
           <span>{booking.is_active ? "Yes" : "No"}</span>
         </div>
@@ -172,7 +172,7 @@ export default function VendorBookingDetail() {
   useProfileProtection();
   
   return (
-    <div className="min-h-screen flex bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
+    <div className="min-h-screen flex bg-gradient-to-b from-gray-900 to-gray-800">
       <Sidebar />
       <main className="flex-1 flex items-center justify-center">
         <BookingDetailContent />

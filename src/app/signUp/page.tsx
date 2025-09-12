@@ -87,7 +87,7 @@ export default function CreateAccount() {
 					callback: handleGoogleLogin,
 				});
 				googleAccounts.id.renderButton(googleBtnRef.current, {
-					theme: "outline",
+					theme: "filled_black",
 					size: "large",
 					text: "continue_with",
 					shape: "pill",
@@ -144,10 +144,10 @@ export default function CreateAccount() {
 	};
 
 	return (
-		<div className="min-h-screen flex flex-col bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
+		<div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-900 to-gray-800">
 			{/* Header */}
-			<header className="flex items-center justify-between px-4 md:px-12 py-4 border-b bg-white shadow-sm">
-				<Link href="/" className="text-xl md:text-2xl font-bold text-green-600">
+			<header className="flex items-center justify-between px-4 md:px-12 py-4 border-b border-gray-800 bg-gray-900 shadow-sm">
+				<Link href="/" className="text-xl md:text-2xl font-bold text-[#1db954]">
 					<Image
 						src="/vigyapan.png"
 						alt="Vigyapan"
@@ -158,37 +158,37 @@ export default function CreateAccount() {
 				</Link>
 				
 				{/* Desktop Navigation */}
-				<nav className="hidden lg:flex gap-6 xl:gap-8 text-gray-800 font-medium text-sm xl:text-base">
-					<Link href="/cities" className="hover:text-green-600 transition-colors">
+				<nav className="hidden lg:flex gap-6 xl:gap-8 text-gray-300 font-medium text-sm xl:text-base">
+					<Link href="/cities" className="hover:text-[#1db954] transition-colors">
 						Find Ad Spaces
 					</Link>
-					<Link href="/#how-it-works" className="hover:text-green-600 transition-colors">
+					<Link href="/#how-it-works" className="hover:text-[#1db954] transition-colors">
 						How It Works
 					</Link>
 					{userType === "vendor" ? (
 						<>
-							<Link href="/for-vendors" className="text-green-600 font-semibold hover:text-green-700 transition-colors">
+							<Link href="/for-vendors" className="text-[#1db954] font-semibold hover:text-green-700 transition-colors">
 								For Vendors
 							</Link>
-							<Link href="/dashboard/vendor" className="hover:text-green-600 transition-colors">
+							<Link href="/dashboard/vendor" className="hover:text-[#1db954] transition-colors">
 								Dashboard
 							</Link>
 						</>
 					) : userType === "advertiser" ? (
 						<>
-							<Link href="/for-advertisers" className="text-green-600 font-semibold hover:text-green-700 transition-colors">
+							<Link href="/for-advertisers" className="text-[#1db954] font-semibold hover:text-green-700 transition-colors">
 								For Advertisers
 							</Link>
-							<Link href="/dashboard/advertiser" className="hover:text-green-600 transition-colors">
+							<Link href="/dashboard/advertiser" className="hover:text-[#1db954] transition-colors">
 								Dashboard
 							</Link>
 						</>
 					) : (
 						<>
-							<Link href="/for-vendors" className="hover:text-green-600 transition-colors">
+							<Link href="/for-vendors" className="hover:text-[#1db954] transition-colors">
 								For Vendors
 							</Link>
-							<Link href="/for-advertisers" className="hover:text-green-600 transition-colors">
+							<Link href="/for-advertisers" className="hover:text-[#1db954] transition-colors">
 								For Advertisers
 							</Link>
 						</>
@@ -200,14 +200,14 @@ export default function CreateAccount() {
 					{isLoggedIn ? (
 						<button
 							onClick={handleLogout}
-							className="px-3 py-2 md:px-5 md:py-2 rounded-full bg-green-600 text-white font-medium hover:bg-green-700 transition text-sm md:text-base"
+							className="px-3 py-2 md:px-5 md:py-2 rounded-full bg-[#1db954] text-white font-medium hover:bg-[#159c43] transition text-sm md:text-base"
 						>
 							Log Out
 						</button>
 					) : (
 						<Link
 							href="/signIn"
-							className="px-3 py-2 md:px-5 md:py-2 rounded-md border border-gray-300 text-white font-medium hover:shadow-md transition bg-green-600 hover:bg-green-700 text-sm md:text-base"
+							className="px-3 py-2 md:px-5 md:py-2 rounded-md border border-gray-700 text-white font-medium hover:shadow-md transition bg-[#1db954] hover:bg-[#159c43] text-sm md:text-base"
 						>
 							Sign In
 						</Link>
@@ -216,38 +216,38 @@ export default function CreateAccount() {
 			</header>
 
 			{/* Mobile Navigation Menu - Only show if needed */}
-			<div className="lg:hidden bg-white border-b shadow-sm">
-				<nav className="px-4 py-3 flex flex-wrap gap-4 text-gray-800 font-medium text-sm">
-					<Link href="/cities" className="hover:text-green-600 transition-colors">
+			<div className="lg:hidden bg-gray-900 border-b border-gray-800 shadow-sm">
+				<nav className="px-4 py-3 flex flex-wrap gap-4 text-gray-300 font-medium text-sm">
+					<Link href="/cities" className="hover:text-[#1db954] transition-colors">
 						Find Spaces
 					</Link>
-					<Link href="/#how-it-works" className="hover:text-green-600 transition-colors">
+					<Link href="/#how-it-works" className="hover:text-[#1db954] transition-colors">
 						How It Works
 					</Link>
 					{userType === "vendor" ? (
 						<>
-							<Link href="/for-vendors" className="text-green-600 font-semibold hover:text-green-700 transition-colors">
+							<Link href="/for-vendors" className="text-[#1db954] font-semibold hover:text-green-700 transition-colors">
 								Vendors
 							</Link>
-							<Link href="/dashboard/vendor" className="hover:text-green-600 transition-colors">
+							<Link href="/dashboard/vendor" className="hover:text-[#1db954] transition-colors">
 								Dashboard
 							</Link>
 						</>
 					) : userType === "advertiser" ? (
 						<>
-							<Link href="/for-advertisers" className="text-green-600 font-semibold hover:text-green-700 transition-colors">
+							<Link href="/for-advertisers" className="text-[#1db954] font-semibold hover:text-green-700 transition-colors">
 								Advertisers
 							</Link>
-							<Link href="/dashboard/advertiser" className="hover:text-green-600 transition-colors">
+							<Link href="/dashboard/advertiser" className="hover:text-[#1db954] transition-colors">
 								Dashboard
 							</Link>
 						</>
 					) : (
 						<>
-							<Link href="/for-vendors" className="hover:text-green-600 transition-colors">
+							<Link href="/for-vendors" className="hover:text-[#1db954] transition-colors">
 								Vendors
 							</Link>
-							<Link href="/for-advertisers" className="hover:text-green-600 transition-colors">
+							<Link href="/for-advertisers" className="hover:text-[#1db954] transition-colors">
 								Advertisers
 							</Link>
 						</>
@@ -256,15 +256,15 @@ export default function CreateAccount() {
 			</div>
 
 			{/* Main */}
-			<main className="flex-grow flex items-center justify-center px-4">
+			<main className="flex-grow flex items-center justify-center px-4 bg-gray-900">
 				<form
 					onSubmit={handleSubmit}
-					className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-lg"
+					className="bg-gray-800 shadow-lg rounded-2xl p-8 w-full max-w-lg border border-gray-700"
 				>
-					<h2 className="text-xl font-bold text-gray-900 mb-1">
+					<h2 className="text-xl font-bold text-white mb-1">
 						Create Your Account
 					</h2>
-					<p className="text-gray-700 mb-6">
+					<p className="text-gray-300 mb-6">
 						Join the premier OOH advertising marketplace
 					</p>
 
@@ -275,8 +275,8 @@ export default function CreateAccount() {
 							onClick={() => setRole("advertiser")}
 							className={`flex-1 py-2 rounded-md border font-medium transition ${
 								role === "advertiser"
-									? "bg-green-100 border-green-500 text-green-600"
-									: "bg-[#f8fcfa] border-gray-300 text-gray-900 hover:bg-green-50"
+									? "bg-green-900 border-[#1db954] text-[#1db954]"
+									: "bg-gray-900 border-gray-700 text-gray-300 hover:bg-green-900"
 							}`}
 						>
 							Advertiser
@@ -286,8 +286,8 @@ export default function CreateAccount() {
 							onClick={() => setRole("vendor")}
 							className={`flex-1 py-2 rounded-md border font-medium transition ${
 								role === "vendor"
-									? "bg-green-100 border-green-500 text-green-600"
-									: "bg-[#f8fcfa] border-gray-300 text-gray-900 hover:bg-green-50"
+									? "bg-green-900 border-[#1db954] text-[#1db954]"
+									: "bg-gray-900 border-gray-700 text-gray-300 hover:bg-green-900"
 							}`}
 						>
 							Vendor
@@ -301,7 +301,7 @@ export default function CreateAccount() {
 						value={form.username}
 						onChange={handleChange}
 						required
-						className="mb-3 w-full p-3 border border-gray-400 rounded-lg bg-[#f8fcfa] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-700"
+						className="mb-3 w-full p-3 border border-gray-700 rounded-lg bg-gray-900 text-gray-100 placeholder-gray-400 focus:outline-none focus:border-[#1db954]"
 					/>
 					<input
 						name="email"
@@ -310,7 +310,7 @@ export default function CreateAccount() {
 						value={form.email}
 						onChange={handleChange}
 						required
-						className="mb-3 w-full p-3 border border-gray-400 rounded-lg bg-[#f8fcfa] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-700"
+						className="mb-3 w-full p-3 border border-gray-700 rounded-lg bg-gray-900 text-gray-100 placeholder-gray-400 focus:outline-none focus:border-[#1db954]"
 					/>
 					<input
 						name="password"
@@ -319,7 +319,7 @@ export default function CreateAccount() {
 						value={form.password}
 						onChange={handleChange}
 						required
-						className="mb-3 w-full p-3 border border-gray-400 rounded-lg bg-[#f8fcfa] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-700"
+						className="mb-3 w-full p-3 border border-gray-700 rounded-lg bg-gray-900 text-gray-100 placeholder-gray-400 focus:outline-none focus:border-[#1db954]"
 					/>
 					<input
 						name="confirm"
@@ -328,14 +328,14 @@ export default function CreateAccount() {
 						value={form.confirm}
 						onChange={handleChange}
 						required
-						className="mb-4 w-full p-3 border border-gray-400 rounded-lg bg-[#f8fcfa] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-700"
+						className="mb-4 w-full p-3 border border-gray-700 rounded-lg bg-gray-900 text-gray-100 placeholder-gray-400 focus:outline-none focus:border-[#1db954]"
 					/>
 
 					{/* Submit Button */}
 					{!isLoggedIn && (
 						<button
 							type="submit"
-							className="w-full bg-green-600 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-green-700 transition"
+							className="w-full bg-[#1db954] text-white font-semibold py-3 rounded-lg shadow-md hover:bg-[#159c43] transition"
 						>
 							Create Account
 						</button>
@@ -343,18 +343,18 @@ export default function CreateAccount() {
 
 					{/* Error Message */}
 					{error && (
-						<div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-							<p className="text-red-700 text-sm text-center">{error}</p>
+						<div className="mt-4 p-3 bg-red-900 border border-red-700 rounded-lg">
+							<p className="text-red-300 text-sm text-center">{error}</p>
 						</div>
 					)}
 
 					{/* Already have account */}
 					{!isLoggedIn && (
-						<p className="mt-3 text-center text-sm text-gray-900">
+						<p className="mt-3 text-center text-sm text-gray-300">
 							Already have an account?{" "}
 							<a
 								href="/signIn"
-								className="text-green-600 font-medium"
+								className="text-[#1db954] font-medium"
 							>
 								Sign In
 							</a>
@@ -363,7 +363,7 @@ export default function CreateAccount() {
 
 					{/* Google Login */}
 					<div className="mt-5 text-center">
-						<span className="text-gray-700">Or continue with</span>
+						<span className="text-gray-300">Or continue with</span>
 						<div
 							ref={googleBtnRef}
 							className="flex justify-center mt-2"
@@ -373,7 +373,7 @@ export default function CreateAccount() {
 			</main>
 
 			{/* Footer */}
-			<footer className="text-center py-6 text-gray-600 border-t bg-white">
+			<footer className="text-center py-6 text-gray-400 border-t border-gray-800 bg-gray-900">
 				<p>© 2025 Vigyapan. All rights reserved.</p>
 			</footer>
 		</div>

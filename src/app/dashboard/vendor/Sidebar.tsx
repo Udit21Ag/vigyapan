@@ -20,7 +20,7 @@ export default function Sidebar() {
             {/* Mobile hamburger button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="md:hidden fixed top-4 left-4 z-50 bg-green-700 text-white p-2 rounded-lg shadow-lg"
+                className="md:hidden fixed top-4 left-4 z-50 bg-gray-800 text-white p-2 rounded-lg shadow-lg border border-gray-600"
             >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     {isOpen ? (
@@ -42,12 +42,12 @@ export default function Sidebar() {
             {/* Sidebar */}
             <aside className={`
                 fixed md:static inset-y-0 left-0 z-40 
-                w-64 bg-green-700 text-white flex flex-col py-8 px-6 shadow-lg 
+                w-64 bg-gray-900 text-white flex flex-col py-8 px-6 shadow-lg border-r border-gray-700
                 md:rounded-r-3xl min-h-screen
                 transform transition-transform duration-300 ease-in-out
                 ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
             `}>
-                <h2 className="text-xl md:text-2xl font-bold mb-8 text-center mt-8 md:mt-0">Vendor Panel</h2>
+                <h2 className="text-xl md:text-2xl font-bold mb-8 text-center mt-8 md:mt-0 text-green-400">Vendor Panel</h2>
                 <nav className="flex flex-col gap-4 md:gap-6">
                     {SIDEBAR_LINKS.map(({ href, label }) => (
                         <Link
@@ -56,8 +56,8 @@ export default function Sidebar() {
                             onClick={() => setIsOpen(false)}
                             className={`py-3 px-4 rounded-lg font-semibold transition text-sm md:text-base ${
                                 pathname === href 
-                                    ? "bg-white text-green-700 border border-white shadow-md" 
-                                    : "bg-green-600 text-white hover:bg-green-800"
+                                    ? "bg-green-600 text-white border border-green-500 shadow-md" 
+                                    : "bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-green-400 border border-gray-700"
                             }`}
                         >
                             {label}

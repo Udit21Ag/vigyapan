@@ -96,13 +96,13 @@ export default function YourBillboards() {
 	const getTypeColor = (type: string) => {
 		switch (type.toLowerCase()) {
 			case 'digital':
-				return 'bg-blue-100 text-blue-800';
+				return 'bg-blue-900 text-blue-400';
 			case 'traditional':
-				return 'bg-green-100 text-green-800';
+				return 'bg-green-900 text-green-400';
 			case 'led':
-				return 'bg-purple-100 text-purple-800';
+				return 'bg-purple-900 text-purple-400';
 			default:
-				return 'bg-gray-100 text-gray-800';
+				return 'bg-gray-700 text-gray-300';
 		}
 	};
 
@@ -112,12 +112,12 @@ export default function YourBillboards() {
 
 	if (loading) {
 		return (
-			<div className="min-h-screen flex bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
+			<div className="min-h-screen flex bg-gradient-to-b from-gray-900 to-gray-800">
 				<Sidebar />
 				<main className="flex-1 flex items-center justify-center">
 					<div className="flex flex-col items-center gap-4">
-						<div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-600"></div>
-						<p className="text-lg text-gray-600">Loading your billboards...</p>
+						<div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-400"></div>
+						<p className="text-lg text-gray-300">Loading your billboards...</p>
 					</div>
 				</main>
 			</div>
@@ -126,13 +126,13 @@ export default function YourBillboards() {
 
 	if (error) {
 		return (
-			<div className="min-h-screen flex bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
+			<div className="min-h-screen flex bg-gradient-to-b from-gray-900 to-gray-800">
 				<Sidebar />
 				<main className="flex-1 flex items-center justify-center">
 					<div className="text-center">
 						<div className="text-6xl mb-4">❌</div>
-						<h2 className="text-2xl font-bold text-red-600 mb-2">Error</h2>
-						<p className="text-lg text-gray-600 mb-4">{error}</p>
+						<h2 className="text-2xl font-bold text-red-400 mb-2">Error</h2>
+						<p className="text-lg text-gray-300 mb-4">{error}</p>
 						<button
 							onClick={() => window.location.reload()}
 							className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition"
@@ -146,13 +146,13 @@ export default function YourBillboards() {
 	}
 
 	return (
-		<div className="min-h-screen flex bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
+		<div className="min-h-screen flex bg-gradient-to-b from-gray-900 to-gray-800">
 			<Sidebar />
 			<main className="flex-1 p-8">
 				<div className="max-w-6xl mx-auto">
 					<div className="mb-8">
-						<h1 className="text-4xl font-bold text-green-800 mb-2">Your Billboards</h1>
-						<p className="text-lg text-gray-600 mb-6">
+						<h1 className="text-4xl font-bold text-green-400 mb-2">Your Billboards</h1>
+						<p className="text-lg text-gray-300 mb-6">
 							Manage and view details of your billboard listings
 						</p>
 						
@@ -168,7 +168,7 @@ export default function YourBillboards() {
 								placeholder="Search by city, location, or title..."
 								value={searchQuery}
 								onChange={(e) => setSearchQuery(e.target.value)}
-								className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-black"
+								className="w-full pl-10 pr-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors bg-gray-700 text-gray-100 placeholder-gray-400"
 							/>
 						</div>
 					</div>
@@ -176,8 +176,8 @@ export default function YourBillboards() {
 					{billboards.length === 0 ? (
 						<div className="text-center py-12">
 							<div className="text-6xl mb-4">📺</div>
-							<h3 className="text-xl font-semibold text-gray-700 mb-2">No Billboards Found</h3>
-							<p className="text-gray-600 mb-6">
+							<h3 className="text-xl font-semibold text-gray-100 mb-2">No Billboards Found</h3>
+							<p className="text-gray-300 mb-6">
 								You haven&apos;t added any billboards yet. Start by adding your first billboard.
 							</p>
 							<button
@@ -190,8 +190,8 @@ export default function YourBillboards() {
 					) : filteredBillboards.length === 0 ? (
 						<div className="text-center py-12">
 							<div className="text-6xl mb-4">🔍</div>
-							<h3 className="text-xl font-semibold text-gray-700 mb-2">No Results Found</h3>
-							<p className="text-gray-600 mb-6">
+							<h3 className="text-xl font-semibold text-gray-100 mb-2">No Results Found</h3>
+							<p className="text-gray-300 mb-6">
 								No billboards match your search criteria. Try adjusting your search terms.
 							</p>
 							<button
@@ -206,7 +206,7 @@ export default function YourBillboards() {
 							{/* Results Count */}
 							{searchQuery && (
 								<div className="mb-6">
-									<p className="text-gray-600">
+									<p className="text-gray-300">
 										Showing {filteredBillboards.length} of {billboards.length} billboard{billboards.length !== 1 ? "s" : ""}
 									</p>
 								</div>
@@ -217,10 +217,10 @@ export default function YourBillboards() {
 								<div
 									key={billboard.static_id}
 									onClick={() => handleBillboardClick(billboard.static_id)}
-									className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-all cursor-pointer transform hover:scale-[1.02]"
+									className="bg-gray-800 rounded-xl shadow-md border border-gray-700 overflow-hidden hover:shadow-lg transition-all cursor-pointer transform hover:scale-[1.02]"
 								>
 									{/* Billboard Photo */}
-									<div className="h-48 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center relative overflow-hidden">
+									<div className="h-48 bg-gradient-to-br from-gray-700 to-gray-600 flex items-center justify-center relative overflow-hidden">
 										{billboard.photo ? (
 											<Image
 												src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${billboard.photo}`}
@@ -237,21 +237,21 @@ export default function YourBillboards() {
 									{/* Billboard Info */}
 									<div className="p-6">
 										<div className="flex items-start justify-between mb-3">
-											<h3 className="text-xl font-semibold text-gray-800 line-clamp-1">{billboard.title}</h3>
+											<h3 className="text-xl font-semibold text-gray-100 line-clamp-1">{billboard.title}</h3>
 											<span className={`px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(billboard.type)}`}>
 												{billboard.type}
 											</span>
 										</div>
 										
-										<p className="text-gray-600 text-sm mb-3 line-clamp-2">
+										<p className="text-gray-300 text-sm mb-3 line-clamp-2">
 											{billboard.address}
 										</p>
 										
 										<div className="flex items-center justify-between mb-4">
-											<div className="text-xl font-bold text-green-600">
+											<div className="text-xl font-bold text-green-400">
 												₹{billboard.price}/day
 											</div>
-											<div className="text-sm text-gray-500 capitalize">
+											<div className="text-sm text-gray-400 capitalize">
 												{getCityName(billboard.city)}
 											</div>
 										</div>
@@ -259,12 +259,12 @@ export default function YourBillboards() {
 										<div className="flex items-center justify-between">
 											<div className="flex items-center gap-2">
 												<div className={`w-2 h-2 rounded-full ${billboard.is_available ? 'bg-green-500' : 'bg-red-500'}`}></div>
-												<span className={`text-xs font-medium ${billboard.is_available ? 'text-green-700' : 'text-red-700'}`}>
+												<span className={`text-xs font-medium ${billboard.is_available ? 'text-green-400' : 'text-red-400'}`}>
 													{billboard.is_available ? 'Available' : 'Not Available'}
 												</span>
 											</div>
 											<span className={`px-2 py-1 rounded text-xs font-medium ${
-												billboard.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+												billboard.status === 'active' ? 'bg-green-900 text-green-400' : 'bg-gray-700 text-gray-300'
 											}`}>
 												{billboard.status}
 											</span>

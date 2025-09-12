@@ -132,7 +132,7 @@ export default function AdvertiserDashboard() {
     };
 
     return (
-        <div className="min-h-screen flex bg-gradient-to-b from-[#f8fcfa] to-[#e6f7ee]">
+        <div className="min-h-screen flex bg-gradient-to-b from-gray-900 to-gray-800">
             {/* Sidebar */}
             <Sidebar />
             {/* Main Dashboard Content */}
@@ -140,8 +140,8 @@ export default function AdvertiserDashboard() {
                 <div className="max-w-7xl mx-auto">
                     {/* Header */}
                     <div className="mb-6 md:mb-8">
-                        <h1 className="text-2xl md:text-4xl font-bold text-green-800 mb-2">Billboard Directory</h1>
-                        <p className="text-base md:text-lg text-gray-600 px-2 md:px-0">
+                        <h1 className="text-2xl md:text-4xl font-bold text-gray-100 mb-2">Billboard Directory</h1>
+                        <p className="text-base md:text-lg text-gray-300 px-2 md:px-0">
                             Browse and book billboards from our extensive network of premium locations
                         </p>
                     </div>
@@ -149,52 +149,52 @@ export default function AdvertiserDashboard() {
                     {/* Stats Overview */}
                     {!loading && billboards.length > 0 && (
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mb-6 md:mb-8">
-                            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 md:p-6">
+                            <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-4 md:p-6">
                                 <div className="flex items-center justify-between">
                                     <div>
-                                        <p className="text-xs md:text-sm font-medium text-gray-600">Total Available</p>
-                                        <p className="text-2xl font-bold text-gray-900">{billboards.length}</p>
+                                        <p className="text-xs md:text-sm font-medium text-gray-400">Total Available</p>
+                                        <p className="text-2xl font-bold text-gray-100">{billboards.length}</p>
                                     </div>
-                                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <div className="w-12 h-12 bg-gray-700 rounded-lg flex items-center justify-center">
                                         <span className="text-2xl">📺</span>
                                     </div>
                                 </div>
                             </div>
-                            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                            <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
                                 <div className="flex items-center justify-between">
                                     <div>
-                                        <p className="text-sm font-medium text-gray-600">Active Billboards</p>
-                                        <p className="text-2xl font-bold text-green-600">
+                                        <p className="text-sm font-medium text-gray-400">Active Billboards</p>
+                                        <p className="text-2xl font-bold text-green-500">
                                             {billboards.filter(b => b.status === 'active').length}
                                         </p>
                                     </div>
-                                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                    <div className="w-12 h-12 bg-gray-700 rounded-lg flex items-center justify-center">
                                         <span className="text-2xl">✅</span>
                                     </div>
                                 </div>
                             </div>
-                            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                            <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
                                 <div className="flex items-center justify-between">
                                     <div>
-                                        <p className="text-sm font-medium text-gray-600">Available Now</p>
-                                        <p className="text-2xl font-bold text-blue-600">
+                                        <p className="text-sm font-medium text-gray-400">Available Now</p>
+                                        <p className="text-2xl font-bold text-blue-400">
                                             {billboards.filter(b => b.is_available).length}
                                         </p>
                                     </div>
-                                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <div className="w-12 h-12 bg-gray-700 rounded-lg flex items-center justify-center">
                                         <span className="text-2xl">🚀</span>
                                     </div>
                                 </div>
                             </div>
-                            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                            <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
                                 <div className="flex items-center justify-between">
                                     <div>
-                                        <p className="text-sm font-medium text-gray-600">Cities</p>
-                                        <p className="text-2xl font-bold text-purple-600">
+                                        <p className="text-sm font-medium text-gray-400">Cities</p>
+                                        <p className="text-2xl font-bold text-purple-400">
                                             {new Set(billboards.map(b => b.city.city_name)).size}
                                         </p>
                                     </div>
-                                    <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                                    <div className="w-12 h-12 bg-gray-700 rounded-lg flex items-center justify-center">
                                         <span className="text-2xl">🏙️</span>
                                     </div>
                                 </div>
@@ -203,15 +203,15 @@ export default function AdvertiserDashboard() {
                     )}
 
                     {/* Advanced Filters */}
-                    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-4">Search & Filter Billboards</h3>
+                    <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6 mb-8">
+                        <h3 className="text-lg font-semibold text-gray-100 mb-4">Search & Filter Billboards</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
                             {/* City Search with Fuzzy Search */}
                             <div className="relative">
-                                <label className="block text-sm font-medium text-gray-700 mb-1">City/State</label>
+                                <label className="block text-sm font-medium text-gray-300 mb-1">City/State</label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg className="h-5 w-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                         </svg>
@@ -222,18 +222,18 @@ export default function AdvertiserDashboard() {
                                         value={citySearch}
                                         onChange={e => setCitySearch(e.target.value)}
                                         placeholder="Search city or state..."
-                                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-black"
+                                        className="w-full pl-10 pr-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-gray-100 bg-gray-700 placeholder-gray-400"
                                     />
                                 </div>
                                 {citySearch && (
-                                    <div className="absolute z-10 w-full bg-white border border-gray-200 rounded-lg shadow-lg mt-1 max-h-48 overflow-y-auto">
+                                    <div className="absolute z-10 w-full bg-gray-700 border border-gray-600 rounded-lg shadow-lg mt-1 max-h-48 overflow-y-auto">
                                         {filteredCities.length === 0 ? (
-                                            <div className="px-4 py-3 text-gray-500 text-sm">No cities found</div>
+                                            <div className="px-4 py-3 text-gray-400 text-sm">No cities found</div>
                                         ) : (
                                             filteredCities.map(city => (
                                                 <div
                                                     key={city}
-                                                    className="px-4 py-3 hover:bg-green-50 cursor-pointer text-gray-900 border-b border-gray-100 last:border-b-0"
+                                                    className="px-4 py-3 hover:bg-gray-600 cursor-pointer text-gray-200 border-b border-gray-600 last:border-b-0"
                                                     onClick={() => {
                                                         setFilters(f => ({ ...f, city }));
                                                         setCitySearch("");
@@ -252,38 +252,38 @@ export default function AdvertiserDashboard() {
 
                             {/* Billboard Type */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Billboard Type</label>
+                                <label className="block text-sm font-medium text-gray-300 mb-1">Billboard Type</label>
                                 <input
                                     type="text"
                                     name="type"
                                     value={filters.type}
                                     onChange={handleFilterChange}
                                     placeholder="e.g., Digital, LED, Traditional"
-                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-black"
+                                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-gray-100 bg-gray-700 placeholder-gray-400"
                                 />
                             </div>
 
                             {/* Max Price */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Max Price (₹)</label>
+                                <label className="block text-sm font-medium text-gray-300 mb-1">Max Price (₹)</label>
                                 <input
                                     type="number"
                                     name="price"
                                     value={filters.price}
                                     onChange={handleFilterChange}
                                     placeholder="Enter maximum price"
-                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-black"
+                                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-gray-100 bg-gray-700 placeholder-gray-400"
                                 />
                             </div>
 
                             {/* Sort by Price */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Sort by Price</label>
+                                <label className="block text-sm font-medium text-gray-300 mb-1">Sort by Price</label>
                                 <select
                                     name="orderBy"
                                     value={orderBy}
                                     onChange={e => setOrderBy(e.target.value)}
-                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-black"
+                                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-gray-100 bg-gray-700"
                                 >
                                     <option value="">Default Order</option>
                                     <option value="min-max">Price: Low to High</option>
@@ -295,12 +295,12 @@ export default function AdvertiserDashboard() {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             {/* Status Filter */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                                <label className="block text-sm font-medium text-gray-300 mb-1">Status</label>
                                 <select
                                     name="status"
                                     value={filters.status}
                                     onChange={handleFilterChange}
-                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-black"
+                                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-gray-100 bg-gray-700"
                                 >
                                     <option value="">All Status</option>
                                     <option value="active">Active</option>
@@ -310,12 +310,12 @@ export default function AdvertiserDashboard() {
 
                             {/* Availability Filter */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Availability</label>
+                                <label className="block text-sm font-medium text-gray-300 mb-1">Availability</label>
                                 <select
                                     name="is_available"
                                     value={filters.is_available}
                                     onChange={handleFilterChange}
-                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-black"
+                                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors text-gray-100 bg-gray-700"
                                 >
                                     <option value="">All Billboards</option>
                                     <option value="true">Available for Booking</option>
@@ -328,7 +328,7 @@ export default function AdvertiserDashboard() {
                                 <button
                                     type="button"
                                     onClick={clearFilters}
-                                    className="w-full px-4 py-3 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition border border-gray-300"
+                                    className="w-full px-4 py-3 bg-gray-700 text-gray-300 rounded-lg font-medium hover:bg-gray-600 transition border border-gray-600"
                                 >
                                     Clear All Filters
                                 </button>
@@ -339,15 +339,15 @@ export default function AdvertiserDashboard() {
                     {/* Results */}
                     {loading ? (
                         <div className="text-center py-16">
-                            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-600 mx-auto mb-6"></div>
-                            <h3 className="text-xl font-semibold text-gray-700 mb-2">Loading Billboards</h3>
-                            <p className="text-gray-500">Searching for the best billboard options...</p>
+                            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-500 mx-auto mb-6"></div>
+                            <h3 className="text-xl font-semibold text-gray-200 mb-2">Loading Billboards</h3>
+                            <p className="text-gray-400">Searching for the best billboard options...</p>
                         </div>
                     ) : billboards.length === 0 ? (
                         <div className="text-center py-16">
                             <div className="text-8xl mb-6">📊</div>
-                            <h3 className="text-2xl font-bold text-gray-700 mb-4">No Billboards Found</h3>
-                            <p className="text-gray-500 mb-6 max-w-md mx-auto">
+                            <h3 className="text-2xl font-bold text-gray-200 mb-4">No Billboards Found</h3>
+                            <p className="text-gray-400 mb-6 max-w-md mx-auto">
                                 {Object.values(filters).some(f => f) 
                                     ? "No billboards match your current filters. Try adjusting your search criteria."
                                     : "There are no billboards available at the moment. Please check back later."
@@ -366,7 +366,7 @@ export default function AdvertiserDashboard() {
                         <>
                             {/* Results Count */}
                             <div className="mb-6">
-                                <p className="text-gray-600">
+                                <p className="text-gray-300">
                                     Showing <span className="font-semibold">{sortedBillboards.length}</span> billboard{sortedBillboards.length !== 1 ? 's' : ''} 
                                     {Object.values(filters).some(f => f) && (
                                         <span className="ml-1">matching your criteria</span>
@@ -379,7 +379,7 @@ export default function AdvertiserDashboard() {
                                 {sortedBillboards.map((billboard, idx) => (
                                     <div
                                         key={billboard.id ? billboard.id : `${billboard.title}-${billboard.city.city_name}-${billboard.type}-${billboard.price}-${idx}`}
-                                        className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg transition-all cursor-pointer transform hover:scale-[1.02]"
+                                        className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 hover:shadow-lg transition-all cursor-pointer transform hover:scale-[1.02]"
                                         onClick={() => {
                                             if (billboard.id) {
                                                 router.push(`/billboard/${billboard.id}`);
@@ -389,17 +389,17 @@ export default function AdvertiserDashboard() {
                                         <div className="p-4 md:p-6">
                                             <div className="flex items-start justify-between mb-3 md:mb-4">
                                                 <div className="flex-1">
-                                                    <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{billboard.title}</h3>
-                                                    <div className="flex items-center gap-2 text-xs md:text-sm text-gray-600 mb-2">
-                                                        <span className="text-gray-400">📍</span>
+                                                    <h3 className="text-base md:text-lg font-semibold text-gray-100 mb-2 line-clamp-2">{billboard.title}</h3>
+                                                    <div className="flex items-center gap-2 text-xs md:text-sm text-gray-400 mb-2">
+                                                        <span className="text-gray-500">📍</span>
                                                         <span className="capitalize">{billboard.city.city_name}</span>
                                                     </div>
                                                 </div>
                                                 <div className="flex flex-col items-end gap-2">
                                                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                                        billboard.type.toLowerCase() === 'digital' ? 'bg-blue-100 text-blue-800' :
-                                                        billboard.type.toLowerCase() === 'led' ? 'bg-purple-100 text-purple-800' :
-                                                        'bg-green-100 text-green-800'
+                                                        billboard.type.toLowerCase() === 'digital' ? 'bg-blue-900 text-blue-300' :
+                                                        billboard.type.toLowerCase() === 'led' ? 'bg-purple-900 text-purple-300' :
+                                                        'bg-green-900 text-green-300'
                                                     }`}>
                                                         {billboard.type}
                                                     </span>
@@ -408,34 +408,34 @@ export default function AdvertiserDashboard() {
 
                                             <div className="space-y-2 md:space-y-3">
                                                 <div className="flex justify-between items-center">
-                                                    <span className="text-xs md:text-sm font-medium text-gray-600">Price per day:</span>
-                                                    <span className="text-lg md:text-xl font-bold text-green-600">₹{billboard.price.toLocaleString()}</span>
+                                                    <span className="text-xs md:text-sm font-medium text-gray-400">Price per day:</span>
+                                                    <span className="text-lg md:text-xl font-bold text-green-500">₹{billboard.price.toLocaleString()}</span>
                                                 </div>
 
                                                 <div className="flex justify-between items-center">
-                                                    <span className="text-xs md:text-sm font-medium text-gray-600">Status:</span>
+                                                    <span className="text-xs md:text-sm font-medium text-gray-400">Status:</span>
                                                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                                        billboard.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                                                        billboard.status === 'active' ? 'bg-green-900 text-green-300' : 'bg-gray-700 text-gray-300'
                                                     }`}>
                                                         {billboard.status}
                                                     </span>
                                                 </div>
 
                                                 <div className="flex justify-between items-center">
-                                                    <span className="text-xs md:text-sm font-medium text-gray-600">Availability:</span>
+                                                    <span className="text-xs md:text-sm font-medium text-gray-400">Availability:</span>
                                                     <div className="flex items-center gap-2">
                                                         <div className={`w-2 h-2 rounded-full ${billboard.is_available ? 'bg-green-500' : 'bg-red-500'}`}></div>
-                                                        <span className={`text-xs font-medium ${billboard.is_available ? 'text-green-700' : 'text-red-700'}`}>
+                                                        <span className={`text-xs font-medium ${billboard.is_available ? 'text-green-400' : 'text-red-400'}`}>
                                                             {billboard.is_available ? 'Available' : 'Booked'}
                                                         </span>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-gray-100">
+                                            <div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-gray-700">
                                                 <div className="flex items-center justify-between">
                                                     <span className="text-xs md:text-sm text-gray-500">Click to view details</span>
-                                                    <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                     </svg>
                                                 </div>
@@ -449,7 +449,7 @@ export default function AdvertiserDashboard() {
                             {totalPages > 1 && (
                                 <div className="flex justify-center items-center gap-2 mt-8">
                                     <button
-                                        className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                                        className="px-4 py-2 rounded-lg border border-gray-600 text-gray-300 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
                                         onClick={() => setPage(page - 1)}
                                         disabled={page <= 1}
                                     >
@@ -462,7 +462,7 @@ export default function AdvertiserDashboard() {
                                                 className={`px-4 py-2 rounded-lg font-medium transition ${
                                                     p === page 
                                                         ? 'bg-green-600 text-white shadow-md' 
-                                                        : 'bg-white text-green-600 border border-gray-200 hover:bg-green-50'
+                                                        : 'bg-gray-800 text-green-400 border border-gray-600 hover:bg-gray-700'
                                                 }`}
                                                 onClick={() => setPage(p)}
                                             >
@@ -471,7 +471,7 @@ export default function AdvertiserDashboard() {
                                         ))}
                                     </div>
                                     <button
-                                        className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                                        className="px-4 py-2 rounded-lg border border-gray-600 text-gray-300 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
                                         onClick={() => setPage(page + 1)}
                                         disabled={page >= totalPages}
                                     >
