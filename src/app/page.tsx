@@ -720,11 +720,10 @@ export default function LandingPage() {
 						</p>
 						<div className="space-y-2 text-sm text-gray-300">
 							<div>
-								📍 42 MG Road, Bangalore, Karnataka 560001,
-								India
+								📍 Sector 11, Dwarka, New Delhi, India
 							</div>
-							<div>✉️ info@vigyapan.com</div>
-							<div>📞 +91 8317242108</div>
+							<div>✉️ vigyapan.ooh@gmail.com</div>
+							<div>📞 +91 9930033630</div>
 							<div>⏰ Mon-Fri: 10AM-7PM (IST)</div>
 						</div>
 						<div className="flex gap-4 pt-4">

@@ -601,12 +601,14 @@ export default function ForVendorsPage() {
               premium out-of-home and digital advertising spaces
               worldwide.
             </p>
-            <div className="space-y-2 text-sm text-gray-400">
-              <div>📍 42 MG Road, Bangalore, Karnataka 560001, India</div>
-              <div>✉️ info@vigyapan.com</div>
-              <div>📞 +91 8317242108</div>
-              <div>⏰ Mon-Fri: 10AM-7PM (IST)</div>
-            </div>
+						<div className="space-y-2 text-sm text-gray-400">
+							<div>
+								📍 Sector 11, Dwarka, New Delhi, India
+							</div>
+							<div>✉️ vigyapan.ooh@gmail.com</div>
+							<div>📞 +91 9930033630</div>
+							<div>⏰ Mon-Fri: 10AM-7PM (IST)</div>
+						</div>
             <div className="flex gap-4 pt-4">
               <Image
                 src="/Download_on_the_App_Store_Badge.svg"
