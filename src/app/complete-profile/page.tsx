@@ -16,7 +16,6 @@ export default function CompleteProfile() {
 	const [existingUserType, setExistingUserType] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState("");
-	const fileInputRef = useRef<HTMLInputElement | null>(null);
 	const addressInputRef = useRef<HTMLInputElement | null>(null);
 	const [currentStep, setCurrentStep] = useState(1);
 	
@@ -24,8 +23,7 @@ export default function CompleteProfile() {
 		phone: "",
 		address: "",
 		company: "",
-		pincode: "",
-		photo: null as File | null
+		pincode: ""
 	});
 
 	useEffect(() => {
@@ -86,11 +84,6 @@ export default function CompleteProfile() {
 		setError(""); // Clear error when user types
 	};
 
-	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const file = e.target.files?.[0] || null;
-		setFormData(prev => ({ ...prev, photo: file }));
-	};
-
 	const nextStep = () => {
 		if (currentStep < 3) setCurrentStep(currentStep + 1);
 	};
@@ -131,9 +124,6 @@ export default function CompleteProfile() {
 			formDataToSend.append("address", formData.address);
 			formDataToSend.append("company", formData.company);
 			formDataToSend.append("pincode", formData.pincode);
-			if (formData.photo) {
-				formDataToSend.append("photo", formData.photo);
-			}
 
 			const token = localStorage.getItem("accessToken");
 			const response = await fetch(apiUrl("/users/profile/complete/"), {
@@ -301,8 +291,8 @@ export default function CompleteProfile() {
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
 								</svg>
 							</div>
-							<h2 className="text-3xl font-bold text-gray-100 mb-3">Location & Photo</h2>
-							<p className="text-gray-300 text-lg">Tell us your address and upload a profile photo</p>
+							<h2 className="text-3xl font-bold text-gray-100 mb-3">Location Details</h2>
+							<p className="text-gray-300 text-lg">Please provide your address information</p>
 						</div>
 
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -353,34 +343,6 @@ export default function CompleteProfile() {
 									</div>
 								</div>
 							</div>
-						</div>
-
-						{/* Photo Upload */}
-						<div>
-							<label className="block text-sm font-semibold text-gray-300 mb-3">
-								Profile Photo (Optional)
-							</label>
-							<input
-								type="file"
-								ref={fileInputRef}
-								accept="image/*"
-								onChange={handleFileChange}
-								className="hidden"
-							/>
-							<button
-								type="button"
-								onClick={() => fileInputRef.current?.click()}
-								className="w-full px-6 py-6 border-2 border-dashed border-gray-600 rounded-xl text-gray-300 hover:border-green-500 hover:bg-gray-700 transition-all duration-200 flex items-center justify-center gap-4 bg-gray-800"
-							>
-								<div className="flex items-center justify-center w-12 h-12 bg-gray-700 rounded-full">
-									<svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-									</svg>
-								</div>
-								<span className="font-medium text-lg">
-									{formData.photo ? formData.photo.name : "Choose Profile Photo"}
-								</span>
-							</button>
 						</div>
 					</div>
 				);
